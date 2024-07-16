@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'lokasi',
+        'username'
     ];
 
     /**
@@ -43,5 +45,18 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function posyanduBalita()
+    {
+        return $this->hasMany(PosyanduBalita::class, 'id_user');
+    }
+    public function posyanduLansia()
+    {
+        return $this->hasMany(PosyanduBalita::class, 'id_user');
+    }
+    public function posyanduRemaja()
+    {
+        return $this->hasMany(PosyanduBalita::class, 'id_user');
     }
 }
