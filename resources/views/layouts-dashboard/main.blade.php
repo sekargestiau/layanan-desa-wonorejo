@@ -4,8 +4,8 @@
       @include('layouts-dashboard.head')
       <title>@yield('title')</title>
     </head>
-    <body class="jtAJHOc7mn7b4IKRO59D _1jTZ8KXRZul60S6czNi">
-      @include('layouts-dashboard.navbar')
+    <body >
+      {{-- @include('layouts-dashboard.navbar') --}}
       @include('layouts-dashboard.sidebar')
       
       <main>
