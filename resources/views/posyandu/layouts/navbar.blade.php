@@ -10,8 +10,8 @@
           <svg id="toggleSidebarMobileClose" class="YIUegm7fh_CpJbivTu6B MnxxlQlR1H0xJuMEE8Yr" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
         <a href="https://flowbite.com/application-ui/demo/" class="YRrCJSr_j5nopfm4duUc YcuQRAYEep0W4L0BFDfG">
-          <img src="https://flowbite.com/application-ui/demo/images/logo.svg" class="R9nujHypnXyuHrBww9QK mWvJQyBFgwNGEt0h7bSP" alt="FlowBite Logo">
-          <span class="_rCfAafI7lqYALljdSxM q1oXbofRCOhVhOSB8tiU yM_AorRf2jSON3pDsdrz BHrWGjM1Iab_fAz0_91H OyABRrnTV_kvHV7dJ0uE">Flowbite</span>
+          <img src="assets/img/logo_wonorejo.png" class="R9nujHypnXyuHrBww9QK mWvJQyBFgwNGEt0h7bSP" alt="Logo Wonorejo">
+          <span class="_rCfAafI7lqYALljdSxM q1oXbofRCOhVhOSB8tiU yM_AorRf2jSON3pDsdrz BHrWGjM1Iab_fAz0_91H OyABRrnTV_kvHV7dJ0uE">Layanan Desa Wonorejo</span>
         </a>
         <form action="#" method="GET" class="_SmdlCf6eUKB_V9S5IDj Yv6MasvLpkmInnA0LqbC wA_epBjW1krEYDpD4skr">
           <label for="topbar-search" class="_DVAfiyo21kM68EUVzEQ">Search</label>

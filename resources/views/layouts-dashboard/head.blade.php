@@ -4,7 +4,7 @@
 <meta name="author" content="Themesberg">
 <meta name="generator" content="Hugo 0.88.1">
 
-<title>Tailwind CSS Dashboard - Flowbite</title>
+<title>Layanan Desa Wonorejo</title>
 
 <link rel="canonical" href="https://flowbite.com/application-ui/demo/">
 
@@ -15,9 +15,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://flowbite.com/application-ui/demo/app.css">
 <link rel="apple-touch-icon" sizes="180x180" href="https://flowbite.com/application-ui/demo/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://flowbite.com/application-ui/demo/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://flowbite.com/application-ui/demo/favicon-16x16.png">
-<link rel="icon" type="image/png" href="https://flowbite.com/application-ui/demo/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo_wonorejo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo_wonorejo.png">
+<link rel="icon" type="image/png" href="assets/img/logo_wonorejo.png">
 <link rel="manifest" href="https://flowbite.com/application-ui/demo/site.webmanifest">
 <link rel="mask-icon" href="https://flowbite.com/application-ui/demo/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#ffffff">
@@ -36,7 +36,7 @@
 <meta property="og:description" content="Get started with a premium admin dashboard layout built with Tailwind CSS and Flowbite featuring 21 example pages including charts, kanban board, mailing system, and more.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://flowbite.com/application-ui/demo/images/og-image.jpg">
-<meta property="og:image:type" content="image/png">
+<meta property="og:image:type" content="assets/img/logo_wonorejo.png">
 
 
 

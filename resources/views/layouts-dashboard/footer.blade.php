@@ -35,7 +35,7 @@
     </div>
 </footer>
 <p class="_doGzYmWP2_jIjPyHtlc c8dCx6gnV43hTOLV6ks5 ijrOHNoSVGATsWYKl4Id PeR2JZ9BZHYIH8Ea3F36">
-    © 2019-2022 <a href="https://flowbite.com/" class="oJZU4OQzzfXeLbF7UKZ_" target="_blank">Flowbite.com</a>. All rights reserved.
+    © 2019-2022 <a href="https://flowbite.com/" class="oJZU4OQzzfXeLbF7UKZ_" target="_blank">Layanan Desa Wonorejo</a>. All rights reserved.
 </p>
    
   </div>

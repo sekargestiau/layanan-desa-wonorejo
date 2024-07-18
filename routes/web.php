@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/posyandu', function () {
+Route::get('/', function () {
     return view('posyandu.index');
 });
 
