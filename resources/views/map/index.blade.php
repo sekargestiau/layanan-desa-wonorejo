@@ -46,7 +46,9 @@
                 {{-- text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 --}}
                 Lihat Peta
             </a>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d3954.5481390364284!2d110.88585821052176!3d-7.62404354235974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e0!4m3!3m2!1d-7.6260559!2d110.8878391!4m3!3m2!1d-7.6221347999999995!2d110.88917579999999!5e0!3m2!1sen!2sid!4v1721229371425!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            
+            {{-- <iframe src="https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d3954.5481390364284!2d110.88585821052176!3d-7.62404354235974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e0!4m3!3m2!1d-7.6260559!2d110.8878391!4m3!3m2!1d-7.6221347999999995!2d110.88917579999999!5e0!3m2!1sen!2sid!4v1721229371425!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
         </div>
     </section>
 </body>
