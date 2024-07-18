@@ -21,7 +21,7 @@ class PosyanduRemaja extends Model
         'rw',
         'berat_badan',
         'tinggi_badan',
-        'lingkar_kepala',
+        'tensi_darah',
         'tanggal',
         'keterangan_lain',
         'id_user',

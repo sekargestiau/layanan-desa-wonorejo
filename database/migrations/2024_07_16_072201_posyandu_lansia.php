@@ -15,18 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->integer('umur_tahun');
-            $table->integer('umur_bulan');
             $table->integer('rt');
             $table->integer('rw');
             $table->float('berat_badan');
-            $table->float('tinggi_badan');
-            $table->float('lingkar_kepala');
+            $table->float('tensi_darah');
             $table->date('tanggal');
             $table->string('keterangan_lain');
-            $table->unsignedBigInteger('id_user');
             $table->timestamps();
-
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('CASCADE');
 
         });
     }
