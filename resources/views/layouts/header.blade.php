@@ -8,7 +8,7 @@
             </button>
             <a href="#" class="flex ml-2 md:mr-24">
               <img src="assets/img/logo_wonorejo.png" class="h-8 mr-3" alt="FlowBite Logo" />
-              <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Layanan Desa Wonorejo</span>
+              <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Posyandu Desa Wonorejo</span>
             </a>
             <form action="#" method="GET" class="hidden lg:block lg:pl-3.5">
               <label for="topbar-search" class="sr-only">Search</label>
