@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/posyandu', function () {
+    return view('posyandu.index');
 });
 
 Route::get('/peta', function(){

@@ -4,7 +4,7 @@
 <meta name="author" content="Themesberg">
 <meta name="generator" content="Hugo 0.88.1">
 
-<title>Layanan Desa Wonorejo</title>
+<title>Tailwind CSS Dashboard - Flowbite</title>
 
 <link rel="canonical" href="https://flowbite.com/application-ui/demo/">
 
@@ -36,7 +36,7 @@
 <meta property="og:description" content="Get started with a premium admin dashboard layout built with Tailwind CSS and Flowbite featuring 21 example pages including charts, kanban board, mailing system, and more.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://flowbite.com/application-ui/demo/images/og-image.jpg">
-<meta property="og:image:type" content="resources/img/png">
+<meta property="og:image:type" content="image/png">
 
 
 
