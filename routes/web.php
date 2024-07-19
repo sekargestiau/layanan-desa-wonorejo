@@ -21,6 +21,21 @@ Route::group(['prefix' => 'peta'], function () {
     });
 });
 
+// Route Posyandu
+Route::group(['prefix' => 'posyandu'], function () {
+    Route::get('/balita', function () {
+        $title = 'Posyandu Desa Wonorejo';
+        return view('posyandu.balita.index', compact('title'));
+    });
+    Route::get('/remaja', function () {
+        $title = 'Posyandu Desa Wonorejo';
+        return view('posyandu.remaja.index', compact('title'));
+    });
+    Route::get('/lansia', function () {
+        $title = 'Posyandu Desa Wonorejo';
+        return view('posyandu.lansia.index', compact('title'));
+    });
+});
 
 Route::get('/agenda', function () {
     $title = 'Map';
