@@ -13,6 +13,6 @@ Route::get('/peta', function(){
 });
 
 Route::get('/agenda', function(){
-    $title = 'Map';
+    $title = 'Agenda';
     return view('agenda.index', compact('title'));
 });
