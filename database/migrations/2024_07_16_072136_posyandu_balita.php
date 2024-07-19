@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('berat_badan');
             $table->float('tinggi_badan');
             $table->float('lingkar_kepala');
+            $table->float('lingkar_lengan');
             $table->date('tanggal');
             $table->string('keterangan_lain');
             $table->timestamps();
