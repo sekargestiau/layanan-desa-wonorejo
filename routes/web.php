@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PosyanduController;
+
 
 Route::get('/', function () {
     $title = 'Map';
@@ -23,13 +25,16 @@ Route::group(['prefix' => 'peta'], function () {
 
 // Route Posyandu
 Route::group(['prefix' => 'posyandu'], function () {
-    Route::get('/balita', function () {
+    Route::get('/balita', [PosyanduController::class, 'index_balita']);
+    Route::get('/remaja', [PosyanduController::class, 'index_remaja']);
+    Route::get('/lansia', [PosyanduController::class, 'index_lansia']);
+    Route::get('/balita/create', [PosyanduController::class, 'create_balita']);
+    Route::get('/remaja/create', [PosyanduController::class, 'create_remaja']);
+    Route::get('/lansia/create', [PosyanduController::class, 'create_lansia']);
+
+    Route::get('/remaja/create', function () {
         $title = 'Posyandu Desa Wonorejo';
-        return view('posyandu.balita.index', compact('title'));
-    });
-    Route::get('/remaja', function () {
-        $title = 'Posyandu Desa Wonorejo';
-        return view('posyandu.remaja.index', compact('title'));
+        return view('posyandu.balita.create', compact('title'));
     });
     Route::get('/lansia', function () {
         $title = 'Posyandu Desa Wonorejo';

@@ -11,11 +11,11 @@
  
 
 <!-- Breadcrumb -->
-<nav class="justify-between px-4 py-3 text-white border border-gray-200 rounded-lg sm:flex sm:px-5 bg-gradient-to-b from-sky-600 to-green-500 dark:border-gray-700" aria-label="Breadcrumb">
+<nav class="justify-between px-4 py-3 text-black border border-gray-200 rounded-lg sm:flex sm:px-5 bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 dark:border-gray-700" aria-label="Breadcrumb">
   <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-2 rtl:space-x-reverse sm:mb-0">
     <li>
       <div class="flex items-center">
-        <a href="#" class="ms-1 text-xl font-medium hover:text-blue-200 dark:hover:text-white">DATA POSYANDU BALITA</a>
+        <a href="/posyandu/remaja" class="ms-1 text-xl font-medium">DATA POSYANDU REMAJA</a>
       </div>
     </li>
   </ol>
@@ -61,8 +61,11 @@
     </form>
     <!-- Tombol Tambah Data dan Download Data -->
     <div class="flex gap-2">
-        <button class="bg-blue-200 hover:bg-blue-300 font-bold text-blue-600 px-3 py-2 rounded-md">Tambah Data</button>
-        <button class="bg-gray-200 hover:bg-gray-300 font-bold text-gray-600 px-3 py-2 rounded-md flex items-center">
+        <a href="/posyandu/remaja/create" class="inline-block">
+        <button class="bg-blue-200 hover:bg-blue-300 font-bold text-blue-600 px-3 py-2 rounded-md">
+            Tambah Data
+        </button>
+        </a>        <button class="bg-gray-200 hover:bg-gray-300 font-bold text-gray-600 px-3 py-2 rounded-md flex items-center">
             <!-- Icon download -->
             <svg class="flex-shrink-0 w-5 h-5 text-gray transition duration-75 group-hover:text-gray dark:group-hover:text-gray" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 25 25">
                 <path fill-rule="evenodd" d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" clip-rule="evenodd"/>
@@ -99,7 +102,7 @@
                     Tinggi Badan
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Lingkar Kepala
+                    Tensi Darah
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Tanggal
@@ -137,7 +140,7 @@
                     15 kg
                 </td>
                 <td class="px-6 py-4">
-                    30 cm
+                    30
                 </td>
                 <td class="px-6 py-4">
                     19 Juli 2024
