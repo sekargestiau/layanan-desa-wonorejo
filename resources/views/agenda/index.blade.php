@@ -1,54 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('layouts.head')
-
+<head>
+    <link href="{{ asset('css/agenda_app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+</head>
 <body>
-    <section class="h-screen w-full border border-red-500">
-        <div
-            class="flex flex-col items-center md:justify-center w-full h-1/4 pb-3 text-white  bg-gradient-to-r from-sky-800 from-10%   to-green-600 to-80%">
-            <h1 class="text-xl font-bold text-center uppercase mt-3">
-                Selamat Datang
-            </h1>
-            <div class="flex  h-3/5 space-x-2  w-4/5 sm:justify-center sm:w-1/4 mt-4 border mx-auto border-red-500">
-                <div class="h-20 w-20 mt-2 border">
-                    <img src='{{ asset('Logo.png') }}' alt="logo" class="w-full h-full" />
-                </div>
-                <div class="flex flex-col ms-2 w-full h-full -space-y-1 mt-1 ">
-                    <p class="text-sm font-semibold"> Peta Desa </p>
-                    <h1 class="text-lg font-bold uppercase">Desa Wonorejo</h1>
-                    <p class="text-sm font-thin"> Kecamatan Polokarto</p>
-                    <p class="text-sm font-thin ">
-                        Kabupaten Sukoharjo
-                    </p>
-                    <p class="text-sm font-semibold"></p>
+    <div class="header">
+        <div class="header-bg" style="background-image: url('http://wonorejo.id/assets/front/css/images/latar_website.jpg?v2fea19cb8b4f08ffe6b24e38cc2e0829');">
+            <div class="wrapbg">
+                <div class="bg"></div>
+                <div class="bg bg2"></div>
+                <div class="bg bg3"></div>
+            </div>
+        </div>
+        <div class="marginpage">
+            <div class="headermain">
+                <div class="headermain-left">
+                    <a href="http://wonorejo.id/">
+                        <div class="maingrid">
+                            <div class="headermain-logo">
+                                <img src="http://wonorejo.id/desa/logo/1698142051_457px-Kabupaten_Sukoharjo.png" alt="Logo">
+                            </div>
+                            <div class="headermain-title">
+                                <h2>Wonorejo Religius Dan Berbudaya</h2>
+                                <h1>Desa Wonorejo</h1>
+                                <p>Kecamatan Polokarto<br>Kabupaten Sukoharjo - Jawa Tengah</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="flex flex-col">
-            <p class="text-white bg-gradient-to-r text-center from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 py-2 px-4 rounded-md w-3/4 mx-auto mt-4 font-semibold">
-                {{-- text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 --}}
-                <a href="#">Tentukan Lokasi Anda</a>
-            </p>
-            <select name="pilih_lokasi" id="pilih_lokasi" class="text-black bg-gradient-to-r text-center py-2 px-4 rounded-md w-3/4 mx-auto mt-4 font-semibold">
-                <option value="1">Pilih RW</option>
-                <option value="2">Lokasi 1</option>
-                <option value="3">Lokasi 2</option>
-                <option value="4">Lokasi 3</option>
-            </select>
-            <select name="pilih_lokasi" id="pilih_lokasi" class="text-black bg-gradient-to-r text-center py-2 px-4 rounded-md w-3/4 mx-auto mt-4 font-semibold">
-                <option value="1">Pilih RT</option>
-                <option value="2">Lokasi 1</option>
-                <option value="3">Lokasi 2</option>
-                <option value="4">Lokasi 3</option>
-            </select>
-            <a  href='https://www.google.com/maps/dir/?api=1&destination=-7.6221348,110.8891758' class="text-white bg-gradient-to-r text-center from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 py-2 px-4 rounded-md w-3/4 mx-auto mt-4 font-semibold">
-                {{-- text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 --}}
-                Lihat Peta
-            </a>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d3954.5481390364284!2d110.88585821052176!3d-7.62404354235974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e0!4m3!3m2!1d-7.6260559!2d110.8878391!4m3!3m2!1d-7.6221347999999995!2d110.88917579999999!5e0!3m2!1sen!2sid!4v1721229371425!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <section class="h-screen w-full">
+        <div class="container mx-auto mt-4">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold">Jadwal Kegiatan Desa</h2>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="showAddEventModal()">Tambah Kegiatan</button>
+            </div>
+            <div id="calendar"></div>
+        </div>
+
+        <!-- Modal -->
+        <div id="addEventModal" class="hidden fixed z-10 inset-0 overflow-y-auto">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+                    <div>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Tambah Kegiatan
+                        </h3>
+                        <div class="mt-2">
+                            <input type="text" name="title" id="title" placeholder="Nama Kegiatan" class="w-full border-gray-300 rounded-md">
+                            <input type="datetime-local" name="start" id="start" placeholder="Tanggal Mulai" class="w-full border-gray-300 rounded-md mt-2">
+                            <input type="datetime-local" name="end" id="end" placeholder="Tanggal Selesai" class="w-full border-gray-300 rounded-md mt-2">
+                        </div>
+                    </div>
+                    <div class="mt-5 sm:mt-6">
+                        <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm" onclick="addEvent()">
+                            Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-</body>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                events: '/events',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                editable: true,
+                droppable: true,
+                eventDrop: function (event, delta, revertFunc) {
+                    $.ajax({
+                        url: '/events/update',
+                        method: 'POST',
+                        data: {
+                            id: event.id,
+                            start: event.start.format(),
+                            end: event.end ? event.end.format() : null
+                        },
+                        success: function (response) {
+                            alert('Event updated');
+                        },
+                        error: function () {
+                            revertFunc();
+                        }
+                    });
+                }
+            });
+        });
+
+        function showAddEventModal() {
+            $('#addEventModal').removeClass('hidden');
+        }
+
+        function addEvent() {
+            var title = $('#title').val();
+            var start = $('#start').val();
+            var end = $('#end').val();
+
+            $.ajax({
+                url: '/events/create',
+                method: 'POST',
+                data: {
+                    title: title,
+                    start: start,
+                    end: end
+                },
+                success: function (response) {
+                    $('#calendar').fullCalendar('renderEvent', response);
+                    $('#addEventModal').addClass('hidden');
+                }
+            });
+        }
+    </script>
+</body>
 </html>
