@@ -13,6 +13,7 @@ Route::get('/', function () {
     );
 });
 
+//Route Peta
 Route::group(['prefix' => 'peta'], function () {
     Route::get('/', function () {
         $title = 'Map';
@@ -20,6 +21,10 @@ Route::group(['prefix' => 'peta'], function () {
     });
     Route::get('/admin', [petaController::class, 'index'])->name('peta.admin');
     Route::get('/admin/create', [petaController::class, 'create'])->name('peta.create');
+    Route::post('/admin/store', [petaController::class, 'store'])->name('peta.store');
+    Route::get('/admin/view/{id}', [petaController::class, 'view'])->name('peta.view');
+    Route::put('/admin/update', [petaController::class, 'update'])->name('peta.update');
+    Route::delete('/admin/delete/{id}', [petaController::class, 'destroy'])->name('peta.delete');
 });
 
 // Route Posyandu

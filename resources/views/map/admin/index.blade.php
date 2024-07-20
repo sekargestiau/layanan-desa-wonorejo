@@ -42,7 +42,7 @@
                             {{ $peta->destinasi }}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="#"
+                            <a href="{{ route('peta.view', $peta->id) }}"
                                 class="font-medium bg-blue-200 px-5 py-2 hover:bg-blue-300 rounded-lg text-blue-600 dark:text-blue-500 ">Edit</a>
                         </td>
                     </tr>

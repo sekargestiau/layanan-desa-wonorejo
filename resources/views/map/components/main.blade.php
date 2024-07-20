@@ -9,6 +9,7 @@
 
     @include('map.components.sidebar')
     <div class="p-4 sm:ml-64">
+        @include('map.components.notification')
         @yield('content')
     </div>
 </body>
