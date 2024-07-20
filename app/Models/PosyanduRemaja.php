@@ -21,18 +21,9 @@ class PosyanduRemaja extends Model
         'rw',
         'berat_badan',
         'tinggi_badan',
-        'lingkar_kepala',
+        'tensi_darah',
         'tanggal',
         'keterangan_lain',
-        'id_user',
     ];
-
-    /**
-     * Relasi dengan model User.
-     * Satu posyandu balita dimiliki oleh satu pengguna (user).
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'id_user');
-    }
+    
 }

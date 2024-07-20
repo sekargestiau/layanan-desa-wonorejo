@@ -16,23 +16,12 @@ class PosyanduLansia extends Model
     protected $fillable = [
         'nama',
         'umur_tahun',
-        'umur_bulan',
         'rt',
         'rw',
         'berat_badan',
-        'tinggi_badan',
-        'lingkar_kepala',
+        'tensi_darah',
         'tanggal',
         'keterangan_lain',
-        'id_user',
     ];
 
-    /**
-     * Relasi dengan model User.
-     * Satu posyandu balita dimiliki oleh satu pengguna (user).
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'id_user');
-    }
 }
