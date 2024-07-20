@@ -20,6 +20,8 @@ Route::group(['prefix' => 'peta'], function () {
         return view('map.index', compact('title'));
     });
     Route::get('/admin', [petaController::class, 'index'])->name('peta.admin');
+    Route::get('/admin/export', [petaController::class, 'export'])->name('peta.export');
+    Route::get('/admin/import', [petaController::class, 'import'])->name('peta.import');
     Route::get('/admin/create', [petaController::class, 'create'])->name('peta.create');
     Route::post('/admin/store', [petaController::class, 'store'])->name('peta.store');
     Route::get('/admin/view/{id}', [petaController::class, 'view'])->name('peta.view');
