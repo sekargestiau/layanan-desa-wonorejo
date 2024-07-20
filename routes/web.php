@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\petaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PosyanduController;
 
@@ -17,10 +18,8 @@ Route::group(['prefix' => 'peta'], function () {
         $title = 'Map';
         return view('map.index', compact('title'));
     });
-    Route::get('/admin', function () {
-        $title = 'Map';
-        return view('map.admin.index', compact('title'));
-    });
+    Route::get('/admin', [petaController::class, 'index'])->name('peta.admin');
+    Route::get('/admin/create', [petaController::class, 'create'])->name('peta.create');
 });
 
 // Route Posyandu
