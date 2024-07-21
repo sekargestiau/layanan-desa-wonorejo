@@ -70,7 +70,7 @@ class PosyanduController extends Controller
         $balita = new PosyanduBalita($validatedData);
         $balita->save();
 
-        return redirect('/posyandu/balita')->with('message', 'Data balita berhasil ditambahkan.');
+        return redirect('/posyandu/balita')->with('success', 'Data balita berhasil ditambahkan.');
     }
 
 
@@ -152,7 +152,7 @@ class PosyanduController extends Controller
         $balita = new PosyanduRemaja($validatedData);
         $balita->save();
 
-        return redirect('/posyandu/remaja')->with('message', 'Data remaja berhasil ditambahkan.');
+        return redirect('/posyandu/remaja')->with('success', 'Data remaja berhasil ditambahkan.');
     }
 
 
@@ -231,7 +231,7 @@ class PosyanduController extends Controller
         $balita = new PosyanduLansia($validatedData);
         $balita->save();
 
-        return redirect('/posyandu/lansia')->with('message', 'Data lansia berhasil ditambahkan.');
+        return redirect('/posyandu/lansia')->with('success', 'Data lansia berhasil ditambahkan.');
     }
 
 
