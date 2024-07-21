@@ -32,20 +32,24 @@ Route::group(['prefix' => 'peta'], function () {
 // Route Posyandu
 Route::group(['prefix' => 'posyandu'], function () {
     Route::get('/balita', [PosyanduController::class, 'index_balita']);
-    Route::get('/remaja', [PosyanduController::class, 'index_remaja']);
-    Route::get('/lansia', [PosyanduController::class, 'index_lansia']);
     Route::get('/balita/create', [PosyanduController::class, 'create_balita']);
+    Route::post('/balita/store', [PosyanduController::class, 'store_balita']);
+    Route::get('/balita/edit/{id}', [PosyanduController::class, 'edit_balita']);
+    Route::put('/balita/update/{id}', [PosyanduController::class, 'update_balita']);
+    Route::delete('/balita/delete/{id}', [PosyanduController::class, 'delete_balita']);
+    Route::get('/remaja', [PosyanduController::class, 'index_remaja']);
     Route::get('/remaja/create', [PosyanduController::class, 'create_remaja']);
+    Route::post('/remaja/store', [PosyanduController::class, 'store_remaja']);
+    Route::get('/remaja/edit/{id}', [PosyanduController::class, 'edit_remaja']);
+    Route::put('/remaja/update/{id}', [PosyanduController::class, 'update_remaja']);
+    Route::delete('/remaja/delete/{id}', [PosyanduController::class, 'delete_remaja']);
+    Route::get('/lansia', [PosyanduController::class, 'index_lansia']);
     Route::get('/lansia/create', [PosyanduController::class, 'create_lansia']);
+    Route::post('/lansia/store', [PosyanduController::class, 'store_lansia']);
+    Route::get('/lansia/edit/{id}', [PosyanduController::class, 'edit_lansia']);
+    Route::put('/lansia/update/{id}', [PosyanduController::class, 'update_lansia']);
+    Route::delete('/lansia/delete/{id}', [PosyanduController::class, 'delete_lansia']);
 
-    Route::get('/remaja/create', function () {
-        $title = 'Posyandu Desa Wonorejo';
-        return view('posyandu.balita.create', compact('title'));
-    });
-    Route::get('/lansia', function () {
-        $title = 'Posyandu Desa Wonorejo';
-        return view('posyandu.lansia.index', compact('title'));
-    });
 });
 
 Route::get('/agenda', function () {

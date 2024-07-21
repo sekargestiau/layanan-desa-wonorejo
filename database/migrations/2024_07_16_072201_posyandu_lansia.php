@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('posyandu_lansia', function (Blueprint $table) {
             $table->id();
+            $table->enum('nama_posyandu', ['Posyandu Jetis', 'Posyandu Blimbing', 'Posyandu Wonorejo','Posyandu Sayangan','Posyandu Bangunrejo','Posyandu Bancakan','Posyandu Tegalan']);;
             $table->string('nama');
             $table->integer('umur_tahun');
             $table->integer('rt');

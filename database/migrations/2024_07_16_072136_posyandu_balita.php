@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('posyandu_balita', function (Blueprint $table) {
             $table->id();
+            $table->enum('nama_posyandu', ['Posyandu Jetis', 'Posyandu Blimbing', 'Posyandu Wonorejo','Posyandu Sayangan','Posyandu Bangunrejo','Posyandu Bancakan','Posyandu Tegalan']);
             $table->string('nama');
             $table->integer('umur_tahun');
             $table->integer('umur_bulan');
@@ -25,7 +26,6 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('keterangan_lain');
             $table->timestamps();
-
         });
     }
 
