@@ -9,6 +9,7 @@ use App\Models\PosyanduRemaja;
 use Illuminate\Support\Facades\DB; 
 use Illuminate\Support\Facades\Schema; 
 use Carbon\Carbon;
+use Carbon\Exceptions\InvalidFormatException;
 
 
 class PosyanduController extends Controller
@@ -18,24 +19,103 @@ class PosyanduController extends Controller
      */
 
     // CONTROLLER INDEX
-    public function index_balita()
+
+    public function index_balita(Request $request)
     {
         $title = 'Posyandu Desa Wonorejo';
-        $balitas = PosyanduBalita::all();
-        return view('posyandu.balita.index', compact('title','balitas'));
+        
+        $query = PosyanduBalita::query();
+    
+        // Check if search is performed
+        if ($request->has('category')) {
+            $searchCategory = $request->category;
+            $searchTerm = $request->search;
+            $searchDate = $request->search_date;
+    
+            if ($searchCategory === 'all') {
+                $query->where(function($q) use ($searchTerm) {
+                    $q->where('nama_posyandu', 'LIKE', "%{$searchTerm}%")
+                      ->orWhere('nama', 'LIKE', "%{$searchTerm}%")
+                      ->orWhere('tanggal', 'LIKE', "%{$searchTerm}%");
+                });
+            } elseif ($searchCategory === 'posyandu') {
+                $query->where('nama_posyandu', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'nama') {
+                $query->where('nama', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'tanggal' && $searchDate) {
+                $query->whereDate('tanggal', Carbon::parse($searchDate)->format('Y-m-d'));
+            }
+        }
+    
+        $balitas = $query->get();
+    
+        return view('posyandu.balita.index', compact('title', 'balitas'));
     }
-    public function index_remaja()
+
+    public function index_remaja(Request $request)
     {
         $title = 'Posyandu Desa Wonorejo';
-        $remajas = PosyanduRemaja::all();
-        return view('posyandu.remaja.index', compact('title','remajas'));
+        
+        $query = PosyanduRemaja::query();
+    
+        // Check if search is performed
+        if ($request->has('category')) {
+            $searchCategory = $request->category;
+            $searchTerm = $request->search;
+            $searchDate = $request->search_date;
+    
+            if ($searchCategory === 'all') {
+                $query->where(function($q) use ($searchTerm) {
+                    $q->where('nama_posyandu', 'LIKE', "%{$searchTerm}%")
+                      ->orWhere('nama', 'LIKE', "%{$searchTerm}%")
+                      ->orWhere('tanggal', 'LIKE', "%{$searchTerm}%");
+                });
+            } elseif ($searchCategory === 'posyandu') {
+                $query->where('nama_posyandu', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'nama') {
+                $query->where('nama', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'tanggal' && $searchDate) {
+                $query->whereDate('tanggal', Carbon::parse($searchDate)->format('Y-m-d'));
+            }
+        }
+    
+        $remajas = $query->get();
+    
+        return view('posyandu.remaja.index', compact('title', 'remajas'));
     }
-    public function index_lansia()
+
+    public function index_lansia(Request $request)
     {
         $title = 'Posyandu Desa Wonorejo';
-        $lansias = PosyanduLansia::all();
-        return view('posyandu.lansia.index', compact('title','lansias'));
+        
+        $query = PosyanduLansia::query();
+    
+        // Check if search is performed
+        if ($request->has('category')) {
+            $searchCategory = $request->category;
+            $searchTerm = $request->search;
+            $searchDate = $request->search_date;
+    
+            if ($searchCategory === 'all') {
+                $query->where(function($q) use ($searchTerm) {
+                    $q->where('nama_posyandu', 'LIKE', "%{$searchTerm}%")
+                      ->orWhere('nama', 'LIKE', "%{$searchTerm}%")
+                      ->orWhere('tanggal', 'LIKE', "%{$searchTerm}%");
+                });
+            } elseif ($searchCategory === 'posyandu') {
+                $query->where('nama_posyandu', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'nama') {
+                $query->where('nama', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'tanggal' && $searchDate) {
+                $query->whereDate('tanggal', Carbon::parse($searchDate)->format('Y-m-d'));
+            }
+        }
+    
+        $lansias = $query->get();
+    
+        return view('posyandu.lansia.index', compact('title', 'lansias'));
     }
+
 
     /**
      * Show the form for creating a new resource.
