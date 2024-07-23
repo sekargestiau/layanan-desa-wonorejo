@@ -8,6 +8,7 @@ use App\Models\PosyanduLansia;
 use App\Models\PosyanduRemaja;
 use Illuminate\Support\Facades\DB; 
 use Illuminate\Support\Facades\Schema; 
+use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Carbon\Exceptions\InvalidFormatException;
 
@@ -22,8 +23,8 @@ class PosyanduController extends Controller
 
     public function index_balita(Request $request)
     {
+        $filteredData =  PosyanduBalita::all();
         $title = 'Posyandu Desa Wonorejo';
-        
         $query = PosyanduBalita::query();
     
         // Check if search is performed
@@ -45,17 +46,22 @@ class PosyanduController extends Controller
             } elseif ($searchCategory === 'tanggal' && $searchDate) {
                 $query->whereDate('tanggal', Carbon::parse($searchDate)->format('Y-m-d'));
             }
+            
+            // $filteredData = $query->get();
+            // dd($filteredData);
         }
     
         $balitas = $query->get();
+        $filteredData = $query->get();
+        Session::put('filtered_data', $filteredData);
     
-        return view('posyandu.balita.index', compact('title', 'balitas'));
+        return view('posyandu.balita.index', compact('title', 'balitas','filteredData'));
     }
 
     public function index_remaja(Request $request)
     {
+        $filteredData =  PosyanduRemaja::all();
         $title = 'Posyandu Desa Wonorejo';
-        
         $query = PosyanduRemaja::query();
     
         // Check if search is performed
@@ -77,17 +83,22 @@ class PosyanduController extends Controller
             } elseif ($searchCategory === 'tanggal' && $searchDate) {
                 $query->whereDate('tanggal', Carbon::parse($searchDate)->format('Y-m-d'));
             }
+            
+            // $filteredData = $query->get();
+            // dd($filteredData);
         }
     
         $remajas = $query->get();
+        $filteredData = $query->get();
+        Session::put('filtered_data', $filteredData);
     
-        return view('posyandu.remaja.index', compact('title', 'remajas'));
+        return view('posyandu.remaja.index', compact('title', 'remajas','filteredData'));
     }
 
     public function index_lansia(Request $request)
     {
+        $filteredData =  PosyanduLansia::all();
         $title = 'Posyandu Desa Wonorejo';
-        
         $query = PosyanduLansia::query();
     
         // Check if search is performed
@@ -109,11 +120,16 @@ class PosyanduController extends Controller
             } elseif ($searchCategory === 'tanggal' && $searchDate) {
                 $query->whereDate('tanggal', Carbon::parse($searchDate)->format('Y-m-d'));
             }
+            
+            // $filteredData = $query->get();
+            // dd($filteredData);
         }
     
         $lansias = $query->get();
+        $filteredData = $query->get();
+        Session::put('filtered_data', $filteredData);
     
-        return view('posyandu.lansia.index', compact('title', 'lansias'));
+        return view('posyandu.lansia.index', compact('title', 'lansias','filteredData'));
     }
 
 
@@ -237,6 +253,35 @@ class PosyanduController extends Controller
         return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
     }
 
+    public function export_filtered_balita()
+{
+    $filteredData = Session::get('filtered_data', PosyanduBalita::all());
+    $fileName = 'filtered_data_posyandu_balita_' . date('Y-m-d_H-i-s') . '.csv';
+    $handle = fopen($fileName, 'w+');
+    fputcsv($handle, array('Nama Posyandu', 'Nama', 'Umur (tahun)', 'Umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan', 'Lingkar Kepala', 'Lingkar Lengan', 'Tanggal', 'Keterangan Lain'));
+
+    foreach ($filteredData as $row) {
+        fputcsv($handle, array(
+            $row['nama_posyandu'],
+            $row['nama'],
+            $row['umur_tahun'],
+            $row['umur_bulan'],
+            $row['rt'],
+            $row['rw'],
+            $row['berat_badan'],
+            $row['tinggi_badan'],
+            $row['lingkar_kepala'],
+            $row['lingkar_lengan'],
+            $row['tanggal'],
+            $row['keterangan_lain']
+        ));
+    }
+
+    fclose($handle);
+    $headers = array('Content-Type' => 'text/csv');
+    return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
+}
+
 
     // CONTROLLER POSYANDU REMAJA - CRUD
     public function create_remaja()
@@ -352,6 +397,34 @@ class PosyanduController extends Controller
         return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
     }
 
+    public function export_filtered_remaja()
+{
+    $filteredData = Session::get('filtered_data', PosyanduRemaja::all());
+    $fileName = 'filtered_data_posyandu_remaja_' . date('Y-m-d_H-i-s') . '.csv';
+    $handle = fopen($fileName, 'w+');
+    fputcsv($handle, array('Nama Posyandu', 'Nama', 'Umur (tahun)', 'Umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan', 'Tensi Darah', 'Tanggal', 'Keterangan Lain'));
+
+    foreach ($filteredData as $row) {
+        fputcsv($handle, array(
+            $row['nama_posyandu'],
+            $row['nama'],
+            $row['umur_tahun'],
+            $row['umur_bulan'],
+            $row['rt'],
+            $row['rw'],
+            $row['berat_badan'],
+            $row['tinggi_badan'],
+            $row['tensi_darah'],
+            $row['tanggal'],
+            $row['keterangan_lain']
+        ));
+    }
+
+    fclose($handle);
+    $headers = array('Content-Type' => 'text/csv');
+    return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
+}
+
     // CONTROLLER POSYANDU LANSIA - CRUD
     public function create_lansia()
     {
@@ -437,7 +510,7 @@ class PosyanduController extends Controller
 
         $fileName = 'data_posyandu_lansia_' . date('Y-m-d_H-i-s') . '.csv';
         $handle = fopen($fileName, 'w+');
-        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tensi Darah', 'tanggal','keterangan_lain'));
+        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)','RT', 'RW', 'Berat Badan', 'Tensi Darah', 'tanggal','keterangan_lain'));
 
         foreach ($data as $row) {
         fputcsv($handle, array(
@@ -461,6 +534,32 @@ class PosyanduController extends Controller
 
         return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
     }
+
+    public function export_filtered_lansia()
+{
+    $filteredData = Session::get('filtered_data', PosyanduLansia::all());
+    $fileName = 'filtered_data_posyandu_balita_' . date('Y-m-d_H-i-s') . '.csv';
+    $handle = fopen($fileName, 'w+');
+    fputcsv($handle, array('Nama Posyandu', 'Nama', 'Umur (tahun)', 'RT', 'RW', 'Berat Badan', 'Tensi Darah', 'Tanggal', 'Keterangan Lain'));
+
+    foreach ($filteredData as $row) {
+        fputcsv($handle, array(
+            $row['nama_posyandu'],
+            $row['nama'],
+            $row['umur_tahun'],
+            $row['rt'],
+            $row['rw'],
+            $row['berat_badan'],
+            $row['tensi_darah'],
+            $row['tanggal'],
+            $row['keterangan_lain']
+        ));
+    }
+
+    fclose($handle);
+    $headers = array('Content-Type' => 'text/csv');
+    return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
+}
     
 
     /**

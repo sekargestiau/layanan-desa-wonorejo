@@ -38,6 +38,7 @@ Route::group(['prefix' => 'posyandu'], function () {
     Route::put('/balita/update/{id}', [PosyanduController::class, 'update_balita']);
     Route::delete('/balita/delete/{id}', [PosyanduController::class, 'delete_balita']);
     Route::get('/balita/export', [PosyanduController::class, 'export_balita']);
+    Route::get('/balita/filter', [PosyanduController::class, 'export_filtered_balita'])->name('balita.filter');
     Route::get('/remaja', [PosyanduController::class, 'index_remaja']);
     Route::get('/remaja/create', [PosyanduController::class, 'create_remaja']);
     Route::post('/remaja/store', [PosyanduController::class, 'store_remaja']);
@@ -45,6 +46,7 @@ Route::group(['prefix' => 'posyandu'], function () {
     Route::put('/remaja/update/{id}', [PosyanduController::class, 'update_remaja']);
     Route::delete('/remaja/delete/{id}', [PosyanduController::class, 'delete_remaja']);
     Route::get('/remaja/export', [PosyanduController::class, 'export_remaja']);
+    Route::get('/remaja/filter', [PosyanduController::class, 'export_filtered_remaja'])->name('remaja.filter');
     Route::get('/lansia', [PosyanduController::class, 'index_lansia']);
     Route::get('/lansia/create', [PosyanduController::class, 'create_lansia']);
     Route::post('/lansia/store', [PosyanduController::class, 'store_lansia']);
@@ -52,6 +54,7 @@ Route::group(['prefix' => 'posyandu'], function () {
     Route::put('/lansia/update/{id}', [PosyanduController::class, 'update_lansia']);
     Route::delete('/lansia/delete/{id}', [PosyanduController::class, 'delete_lansia']);
     Route::get('/lansia/export', [PosyanduController::class, 'export_lansia']);
+    Route::get('/lansia/filter', [PosyanduController::class, 'export_filtered_lansia'])->name('lansia.filter');
 
 
 });
