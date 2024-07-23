@@ -203,6 +203,40 @@ class PosyanduController extends Controller
         }
     }
 
+    public function export_balita()
+    {
+        $data = PosyanduBalita::all();
+
+        $fileName = 'data_posyandu_balita_' . date('Y-m-d_H-i-s') . '.csv';
+        $handle = fopen($fileName, 'w+');
+        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan', 'Lingkar Kepala', 'Lingkar Lengan', 'tanggal','keterangan_lain'));
+
+        foreach ($data as $row) {
+        fputcsv($handle, array(
+                $row['nama_posyandu'],
+                $row['nama'],
+                $row['umur_tahun'],
+                $row['umur_bulan'],
+                $row['rt'],
+                $row['rw'],
+                $row['berat_badan'],
+                $row['tinggi_badan'],
+                $row['lingkar_kepala'],
+                $row['lingkar_lengan'],
+                $row['tanggal'],
+                $row['keterangan_lain']
+            ));        
+        }
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
+    }
+
 
     // CONTROLLER POSYANDU REMAJA - CRUD
     public function create_remaja()
@@ -285,6 +319,39 @@ class PosyanduController extends Controller
         }
     }
 
+    public function export_remaja()
+    {
+        $data = PosyanduRemaja::all();
+
+        $fileName = 'data_posyandu_remaja_' . date('Y-m-d_H-i-s') . '.csv';
+        $handle = fopen($fileName, 'w+');
+        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan', 'Tensi Darah', 'tanggal','keterangan_lain'));
+
+        foreach ($data as $row) {
+        fputcsv($handle, array(
+                $row['nama_posyandu'],
+                $row['nama'],
+                $row['umur_tahun'],
+                $row['umur_bulan'],
+                $row['rt'],
+                $row['rw'],
+                $row['berat_badan'],
+                $row['tinggi_badan'],
+                $row['tensi_darah'],
+                $row['tanggal'],
+                $row['keterangan_lain']
+            ));        
+        }
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
+    }
+
     // CONTROLLER POSYANDU LANSIA - CRUD
     public function create_lansia()
     {
@@ -362,6 +429,37 @@ class PosyanduController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menghapus data lansia. ' . $e->getMessage());
         }
+    }
+
+    public function export_lansia()
+    {
+        $data = PosyanduLansia::all();
+
+        $fileName = 'data_posyandu_lansia_' . date('Y-m-d_H-i-s') . '.csv';
+        $handle = fopen($fileName, 'w+');
+        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tensi Darah', 'tanggal','keterangan_lain'));
+
+        foreach ($data as $row) {
+        fputcsv($handle, array(
+                $row['nama_posyandu'],
+                $row['nama'],
+                $row['umur_tahun'],
+                $row['rt'],
+                $row['rw'],
+                $row['berat_badan'],
+                $row['tensi_darah'],
+                $row['tanggal'],
+                $row['keterangan_lain']
+            ));        
+        }
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
     }
     
 
