@@ -15,12 +15,14 @@ class petaController extends Controller
         return view('map.admin.index', compact('title', 'data'));
     }
 
-    public function create(){
+    public function create()
+    {
         $title = 'Tambah Data Peta';
         return view('map.admin.create', compact('title'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $validate = $request->validate([
             'dusun' => 'required',
             'rw' => 'required',
@@ -43,13 +45,15 @@ class petaController extends Controller
         return redirect()->route('peta.admin')->with('success', 'Data berhasil ditambahkan');
     }
 
-    public function view($id){
+    public function view($id)
+    {
         $title = 'Detail Data Peta';
         $peta = Peta::find($id);
         return view('map.admin.view', compact('title', 'peta'));
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $validate = $request->validate([
             'dusun' => 'required',
             'rw' => 'required',
@@ -72,10 +76,32 @@ class petaController extends Controller
         return redirect()->route('peta.admin')->with('success', 'Data berhasil diubah');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $peta = Peta::find($id);
         $peta->delete();
 
         return redirect()->route('peta.admin')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function export()
+    {
+        $data = Peta::all();
+
+        $fileName = 'data_peta_' . date('Y-m-d_H-i-s') . '.csv';
+        $handle = fopen($fileName, 'w+');
+        fputcsv($handle, array('Dusun', 'RW', 'RT', 'Destinasi'));
+
+        foreach ($data as $row) {
+            fputcsv($handle, array($row['dusun'], $row['rw'], $row['rt'], $row['destinasi']));
+        }
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
     }
 }
