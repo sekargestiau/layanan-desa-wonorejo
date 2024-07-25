@@ -1,8 +1,8 @@
 @extends('map.components.main')
 @section('content')
-    <div class="flex gap-2 mb-6">
+    <div class="flex gap-2 mb-6 flex-wrap max-sm:justify-center">
         <a href="{{ route('peta.create') }}"
-            class="bg-blue-200 hover:bg-blue-300 font-bold text-blue-600 px-3 py-2 rounded-md "> Tambah Data
+            class="bg-blue-200 hover:bg-blue-300 font-bold text-blue-600 px-3 py-2 rounded-md "> + <span class="hidden sm:inline-block ms-2">Tambah Data</span>
         </a>
         <a href="{{ route('peta.export') }}"
             class="bg-green-200 hover:bg-green-300 font-bold text-green-600 px-3 py-2 rounded-md flex items-center">
@@ -16,13 +16,10 @@
                     d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" />
             </svg>
             <span class="hidden sm:inline-block ms-2">Export CSV</span>
-
         </a>
-
-
-        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-            class="px-3 py-2 rounded-md  bg-orange-200 hover:bg-orange-300 font-bold text-orange-600 flex items-center"
-            type="button">
+        <a href="{{ route('peta.filter') }}"
+            class="bg-green-200 hover:bg-green-300 font-bold text-green-600 px-3 py-2 rounded-md flex items-center">
+            <!-- Icon download -->
             <svg class="flex-shrink-0 w-5 h-5 text-gray transition duration-75 group-hover:text-gray dark:group-hover:text-gray"
                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 25 25">
                 <path fill-rule="evenodd"
@@ -31,10 +28,33 @@
                 <path
                     d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" />
             </svg>
-            <span class="hidden sm:inline-block ms-2">Import CSV</span>
-        </button>
+            <span class="hidden sm:inline-block ms-2">Export Filtered CSV</span>
+        </a>
 
-        <div id="popup-modal" tabindex="-1"
+
+        <form class="flex items-center max-w-lg w-full" action="{{ route('peta.admin') }}" method="GET">
+            <div class="flex items-center w-full">
+                <select name="category" id="dropdown-button" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
+                    <option value="all">Semua Kategori</option>
+                    <option value="dusun">Dusun</option>
+                    <option value="rw">RW</option>
+                    <option value="rt">RT</option>
+                    <option value="destinasi">Destinasi</option>
+                </select>
+                <div class="relative w-full">
+                    <input type="search" id="search-dropdown" name="search" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Posyandu atau Nama..." />
+                    <input type="date" id="search-date" name="search_date" class="hidden block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
+                    <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        {{-- <div id="popup-modal" tabindex="-1"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -69,7 +89,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
