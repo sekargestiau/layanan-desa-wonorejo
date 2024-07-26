@@ -1,134 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="{{ asset('css/agenda_app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
-</head>
-<body>
-    <div class="header">
-        <div class="header-bg" style="background-image: url('http://wonorejo.id/assets/front/css/images/latar_website.jpg?v2fea19cb8b4f08ffe6b24e38cc2e0829');">
-            <div class="wrapbg">
-                <div class="bg"></div>
-                <div class="bg bg2"></div>
-                <div class="bg bg3"></div>
+@extends('agenda.components.main')
+@section('content')
+    <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+
+    <nav class="justify-between px-4 py-3 text-black border border-gray-200 rounded-lg sm:flex sm:px-5 bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 dark:border-gray-700" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-2 rtl:space-x-reverse sm:mb-0">
+          <li>
+            <div class="flex items-center">
+              <a href="/posyandu/balita" class="ms-1 text-xl font-medium">Agenda Kegiatan Desa</a>
             </div>
-        </div>
-        <div class="marginpage">
-            <div class="headermain">
-                <div class="headermain-left">
-                    <a href="http://wonorejo.id/">
-                        <div class="maingrid">
-                            <div class="headermain-logo">
-                                <img src="http://wonorejo.id/desa/logo/1698142051_457px-Kabupaten_Sukoharjo.png" alt="Logo">
-                            </div>
-                            <div class="headermain-title">
-                                <h2>Wonorejo Religius Dan Berbudaya</h2>
-                                <h1>Desa Wonorejo</h1>
-                                <p>Kecamatan Polokarto<br>Kabupaten Sukoharjo - Jawa Tengah</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+          </li>
+        </ol>
+      </nav>
+
+    <div id="calendar" style="max-width: 1200px; margin: 20px auto;"></div>
+
+    <!-- Modal for displaying event details -->
+    <div id="eventDetailsModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; border:1px solid #ccc; border-radius:5px; box-shadow:0px 0px 10px rgba(0,0,0,0.5);">
+        <h2 id="modalTitle"></h2>
+        <p><strong>Start:</strong> <span id="modalStart"></span></p>
+        <p><strong>End:</strong> <span id="modalEnd"></span></p>
+        <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+        <button onclick="closeModal()">Close</button>
     </div>
 
-    <section class="h-screen w-full">
-        <div class="container mx-auto mt-4">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-bold">Jadwal Kegiatan Desa</h2>
-                <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="showAddEventModal()">Tambah Kegiatan</button>
-            </div>
-            <div id="calendar"></div>
-        </div>
-
-        <!-- Modal -->
-        <div id="addEventModal" class="hidden fixed z-10 inset-0 overflow-y-auto">
-            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-                <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-                    <div>
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            Tambah Kegiatan
-                        </h3>
-                        <div class="mt-2">
-                            <input type="text" name="title" id="title" placeholder="Nama Kegiatan" class="w-full border-gray-300 rounded-md">
-                            <input type="datetime-local" name="start" id="start" placeholder="Tanggal Mulai" class="w-full border-gray-300 rounded-md mt-2">
-                            <input type="datetime-local" name="end" id="end" placeholder="Tanggal Selesai" class="w-full border-gray-300 rounded-md mt-2">
-                        </div>
-                    </div>
-                    <div class="mt-5 sm:mt-6">
-                        <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm" onclick="addEvent()">
-                            Tambah
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#calendar').fullCalendar({
-                events: '/events',
-                header: {
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
-                editable: true,
-                droppable: true,
-                eventDrop: function (event, delta, revertFunc) {
-                    $.ajax({
-                        url: '/events/update',
-                        method: 'POST',
-                        data: {
-                            id: event.id,
-                            start: event.start.format(),
-                            end: event.end ? event.end.format() : null
-                        },
-                        success: function (response) {
-                            alert('Event updated');
-                        },
-                        error: function () {
-                            revertFunc();
+                events: [
+                    {
+                        id: '1',
+                        title: 'Lunch Meeting',
+                        start: '2024-07-26T12:00:00',
+                        end: '2024-07-26T13:30:00',
+                        extendedProps: {
+                            location: 'Cafe'
                         }
-                    });
+                    },
+                    {
+                        id: '2',
+                        title: 'Coding Session',
+                        start: '2024-07-26T15:00:00',
+                        end: '2024-07-26T18:00:00',
+                        extendedProps: {
+                            location: 'Office'
+                        }
+                    }
+                ],
+                editable: true,
+                selectable: true,
+                eventClick: function(info) {
+                    // Display event details in the modal
+                    document.getElementById('modalTitle').innerText = info.event.title;
+                    document.getElementById('modalStart').innerText = info.event.start.toLocaleString();
+                    document.getElementById('modalEnd').innerText = info.event.end.toLocaleString();
+                    document.getElementById('modalLocation').innerText = info.event.extendedProps.location;
+
+                    // Show the modal
+                    document.getElementById('eventDetailsModal').style.display = 'block';
+                },
+                select: function(info) {
+                    var title = prompt('Enter event title:');
+                    var location = prompt('Enter event location:');
+                    if (title) {
+                        calendar.addEvent({
+                            title: title,
+                            start: info.startStr,
+                            end: info.endStr,
+                            extendedProps: {
+                                location: location
+                            }
+                        });
+                    }
+                    calendar.unselect();
                 }
             });
+
+            calendar.render();
         });
 
-        function showAddEventModal() {
-            $('#addEventModal').removeClass('hidden');
-        }
-
-        function addEvent() {
-            var title = $('#title').val();
-            var start = $('#start').val();
-            var end = $('#end').val();
-
-            $.ajax({
-                url: '/events/create',
-                method: 'POST',
-                data: {
-                    title: title,
-                    start: start,
-                    end: end
-                },
-                success: function (response) {
-                    $('#calendar').fullCalendar('renderEvent', response);
-                    $('#addEventModal').addClass('hidden');
-                }
-            });
+        function closeModal() {
+            document.getElementById('eventDetailsModal').style.display = 'none';
         }
     </script>
-</body>
-</html>
+@endsection
