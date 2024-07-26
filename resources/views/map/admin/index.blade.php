@@ -42,7 +42,7 @@
                     <option value="destinasi">Destinasi</option>
                 </select>
                 <div class="relative w-full">
-                    <input type="search" id="search-dropdown" name="search" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Posyandu atau Nama..." />
+                    <input type="search" id="search-dropdown" name="search" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Cari Lokasi..." />
                     <input type="date" id="search-date" name="search_date" class="hidden block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
                     <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -138,36 +138,6 @@
                 @endforeach
             </tbody>
         </table>
-        <nav aria-label="Page navigation example"
-            class="flex justify-center py-3 text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-            <ul class="inline-flex -space-x-px text-sm mx-auto">
-                <li>
-                    <a href="{{ $data->previousPageUrl() }}"
-                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg 
-                   {{ $data->onFirstPage() ? 'text-gray-300 cursor-not-allowed pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700' : 'hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' }}"
-                        @if ($data->onFirstPage()) aria-disabled="true" tabindex="-1" @endif>
-                        < </a>
-                </li>
-
-                @for ($i = 1; $i <= $data->lastPage(); $i++)
-                    <li>
-                        <a href="{{ $data->url($i) }}"
-                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 
-                       {{ $data->currentPage() == $i ? 'bg-blue-500 text-white' : 'bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' }}">
-                            {{ $i }}
-                        </a>
-                    </li>
-                @endfor
-
-                <li>
-                    <a href="{{ $data->nextPageUrl() }}"
-                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg 
-                   {{ $data->hasMorePages() ? 'hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' : 'text-gray-300 cursor-not-allowed pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700' }}"
-                        @if (!$data->hasMorePages()) aria-disabled="true" tabindex="-1" @endif>
-                        >
-                    </a>
-                </li>
-            </ul>
-        </nav>
+       @include('map.components.pagination')
     </div>
 @endsection

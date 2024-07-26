@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\petaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\pengaduanController;
 use App\Http\Controllers\PosyanduController;
-
 
 Route::get('/', function () {
     $title = 'Map';
@@ -53,8 +53,17 @@ Route::group(['prefix' => 'posyandu'], function () {
     Route::delete('/lansia/delete/{id}', [PosyanduController::class, 'delete_lansia']);
     Route::get('/lansia/export', [PosyanduController::class, 'export_lansia']);
     Route::get('/lansia/filter', [PosyanduController::class, 'export_filtered_lansia'])->name('lansia.filter');
+});
 
-
+Route::group(['prefix' => 'pengaduan'], function () {
+    Route::get('/', [PengaduanController::class, 'index']);
+    Route::post('/', [PengaduanController::class, 'store']);
+    Route::get('/admin', [PengaduanController::class, 'show_all']);
+    Route::get('/admin/stats', [PengaduanController::class, 'stats']);
+    Route::get('/admin/export', [PengaduanController::class, 'export_data'])->name('pengaduan.export');
+    Route::get('/isu/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
+    Route::get('/isu/{id}/delete', [PengaduanController::class, 'destroy'])->name('pengaduan.delete');
+    Route::patch('/isu/{id}/status', [PengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
 });
 
 Route::get('/agenda', function () {
@@ -66,3 +75,4 @@ Route::get('/navTest', function () {
     $title = 'Map';
     return view('map.navbar', compact('title'));
 });
+
