@@ -5,6 +5,6 @@
 <!--====== Favicon Icon ======-->
 <link rel="shortcut icon" href="{{ asset('Logo.png') }}" type="image/png">
 
-<title>{{ $title }}</title>
-@vite(['resources/css/app.css','resources/js/app.js'])
+<title>Agenda</title>
+@vite(['resources/css/agenda_app.css','resources/js/app.js'])
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>

@@ -3,6 +3,8 @@
 use App\Http\Controllers\petaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\CalendarController;
+
 
 
 Route::get('/', function () {
@@ -59,10 +61,16 @@ Route::group(['prefix' => 'posyandu'], function () {
 
 });
 
+
+// Route Agenda
 Route::get('/agenda', function () {
     $title = 'Map';
     return view('agenda.index', compact('title'));
 });
+
+Route::get('/agenda/details', [CalendarController::class, 'showDetailsPage'])->name('agenda.details');
+Route::post('/agenda/store', [CalendarController::class, 'storeDetails'])->name('agenda.storeDetails');
+
 
 Route::get('/navTest', function () {
     $title = 'Map';

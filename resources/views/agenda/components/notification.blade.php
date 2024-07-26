@@ -1,6 +1,6 @@
 @if ($errors->any())
-        @include('map.components.error')
+        @include('agenda.components.error')
     @endif
     @if (session('success'))
-        @include('map.components.success')
+        @include('agenda.components.success')
     @endif

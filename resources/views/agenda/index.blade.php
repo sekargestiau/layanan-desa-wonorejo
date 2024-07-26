@@ -2,28 +2,48 @@
 @section('content')
     <!-- FullCalendar CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- FullCalendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <nav class="justify-between px-4 py-3 text-black border border-gray-200 rounded-lg sm:flex sm:px-5 bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 dark:border-gray-700" aria-label="Breadcrumb">
+    <nav class="justify-between px-4 py-3 text-black border border-gray-200 rounded-lg sm:flex sm:px-5 bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 dark:border-gray-700 text-lg" aria-label="Breadcrumb">
         <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-2 rtl:space-x-reverse sm:mb-0">
           <li>
             <div class="flex items-center">
-              <a href="/posyandu/balita" class="ms-1 text-xl font-medium">Agenda Kegiatan Desa</a>
+              <a href="/agenda" class="ms-1 text-2xl font-semibold text-white">Agenda Kegiatan Desa</a>
             </div>
           </li>
         </ol>
-      </nav>
+    </nav>
 
     <div id="calendar" style="max-width: 1200px; margin: 20px auto;"></div>
 
     <!-- Modal for displaying event details -->
-    <div id="eventDetailsModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; border:1px solid #ccc; border-radius:5px; box-shadow:0px 0px 10px rgba(0,0,0,0.5);">
-        <h2 id="modalTitle"></h2>
-        <p><strong>Start:</strong> <span id="modalStart"></span></p>
-        <p><strong>End:</strong> <span id="modalEnd"></span></p>
-        <p><strong>Location:</strong> <span id="modalLocation"></span></p>
-        <button onclick="closeModal()">Close</button>
+    <div class="modal fade" id="eventDetailsModal" tabindex="-1" aria-labelledby="eventDetailsLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Event Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Start:</strong> <span id="modalStart"></span></p>
+                    <p><strong>End:</strong> <span id="modalEnd"></span></p>
+                    <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -67,7 +87,7 @@
                     document.getElementById('modalLocation').innerText = info.event.extendedProps.location;
 
                     // Show the modal
-                    document.getElementById('eventDetailsModal').style.display = 'block';
+                    $('#eventDetailsModal').modal('show');
                 },
                 select: function(info) {
                     var title = prompt('Enter event title:');
@@ -90,7 +110,7 @@
         });
 
         function closeModal() {
-            document.getElementById('eventDetailsModal').style.display = 'none';
+            $('#eventDetailsModal').modal('hide');
         }
     </script>
 @endsection
