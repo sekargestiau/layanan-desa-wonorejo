@@ -20,21 +20,38 @@ class pengaduanController extends Controller
         $totalPending = Pengaduan::where('status', 0)->count();
         $totalInProcess = Pengaduan::where('status', 1)->count();
         $totalCompleted = Pengaduan::where('status', 2)->count();
-
         return view('pengaduan.admin.stats', compact('title', 'totalComplaints', 'totalPending', 'totalInProcess', 'totalCompleted'));
     }
 
-    public function show_all()
+    public function show_all(Request $request)
     {
-        $pengaduan = Pengaduan::paginate(5); // Retrieve all records
-        $title = 'Admin Pengaduan';
-        return view('pengaduan.admin.index', compact('pengaduan', 'title'));
+        $pengaduan = Pengaduan::all();
+        $title = 'Pengaduan Desa Wonorejo';
+        $query = Pengaduan::query();
+
+        if ($request->has('category')) {
+            $searchCategory = $request->category;
+            $searchTerm = $request->search;
+
+            if ($searchCategory === 'all') {
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('title', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('name', 'LIKE', "%{$searchTerm}%");
+                });
+            } elseif ($searchCategory === 'name') {
+                $query->where('name', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'judul') {
+                $query->where('title', 'LIKE', "%{$searchTerm}%");
+            }
+        }
+
+        $pengaduan = $query->paginate(10);
+        return view('pengaduan.admin.index', compact('title', 'pengaduan',));
     }
 
 
     public function store(Request $request)
     {
-        // Validate the form data
         $validatedData = $request->validate([
             'nik' => 'nullable|string|max:255',
             'name' => 'required|string|max:255',
@@ -45,7 +62,6 @@ class pengaduanController extends Controller
             'message' => 'required|string',
         ]);
 
-        // Handle file uploads
         $filePaths = [];
         if ($request->hasFile('file_input')) {
             foreach ($request->file('file_input') as $file) {
@@ -55,7 +71,6 @@ class pengaduanController extends Controller
             }
         }
 
-        // Save file paths as JSON in the database
         $complaint = Pengaduan::create([
             'nik' => $validatedData['nik'],
             'name' => $validatedData['name'],
@@ -65,7 +80,6 @@ class pengaduanController extends Controller
             'file_paths' => json_encode($filePaths),
             'message' => $validatedData['message'],
         ]);
-
         return redirect('/pengaduan')->with('success', 'Pengaduan berhasil dikirim!');
     }
 
@@ -88,10 +102,21 @@ class pengaduanController extends Controller
     public function destroy($id)
     {
         $pengaduan = Pengaduan::findOrFail($id);
+        $filePaths = json_decode($pengaduan->file_paths, true);
+        foreach ($filePaths as $filePath) {
+            $fullFilePath = storage_path('app/public/' . $filePath);
+            if (file_exists($fullFilePath)) {
+                unlink($fullFilePath);
+            } else {
+                echo "File does not exist: " . $fullFilePath;
+            }
+        }
         $pengaduan->delete();
-
         return redirect('/pengaduan/admin')->with('success', 'Pengaduan deleted successfully');
     }
+
+
+
 
     public function updateStatus(Request $request, $id)
     {
@@ -102,7 +127,6 @@ class pengaduanController extends Controller
         $pengaduan = Pengaduan::findOrFail($id);
         $pengaduan->status = $request->status;
         $pengaduan->save();
-
         return redirect('/pengaduan/admin')->with('success', 'Status pengaduan updated successfully');
     }
 

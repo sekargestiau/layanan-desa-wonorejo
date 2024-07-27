@@ -11,11 +11,8 @@
 </head>
 
 <body>
-
     @include('pengaduan.components.sidebar')
-
     <div class="p-4 sm:ml-64">
-
 
         <!-- Breadcrumb -->
         @include('pengaduan.components.notification')
@@ -35,35 +32,20 @@
         <div class="flex justify-between items-center mb-6">
 
             <!-- Formulir pencarian -->
-            <form class="flex items-center max-w-lg w-full">
+            <form class="flex items-center max-w-lg w-full" action="{{ route('pengaduan.admin') }}" method="GET">
                 <div class="flex items-center w-full">
-                    <button id="dropdown-button" data-dropdown-toggle="dropdown"
-                        class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                        type="button">
-                        Semua Kategori
-                        <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <div id="dropdown"
-                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                            <li>
-                                <button type="button"
-                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Judul</button>
-                            </li>
-                            <li>
-                                <button type="button"
-                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Nama</button>
-                            </li>
-                        </ul>
-                    </div>
+                    <select name="category" id="dropdown-button"
+                        class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
+                        <option value="all">Semua Kategori</option>
+                        <option value="judul">Judul</option>
+                        <option value="name">Nama</option>
+                    </select>
                     <div class="relative w-full">
-                        <input type="search" id="search-dropdown"
+                        <input type="search" id="search-dropdown" name="search"
                             class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                            placeholder="Search Posyandu, Nama, Tanggal..." required />
+                            placeholder="Cari Aduan..." />
+                        <input type="date" id="search-date" name="search_date"
+                            class="hidden p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
                         <button type="submit"
                             class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -98,39 +80,18 @@
                 </a>
             </div>
         </div>
-        {{-- @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
-                role="alert">
-                <strong class="font-bold">{{ session('success') }}</strong>
-            </div>
-        @endif --}}
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-black uppercase bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-4 py-3">
-                            No.
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Title
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Nama
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Phone
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Tanggal
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Status
-                        </th>
-                        <th scope="col" colspan="2" class="px-6 py-3 text-center">
-                            Action
-                        </th>
-
+                        <th scope="col" class="px-4 py-3">No.</th>
+                        <th scope="col" class="px-6 py-3">Judul</th>
+                        <th scope="col" class="px-6 py-3">Nama</th>
+                        <th scope="col" class="px-6 py-3">Telepon</th>
+                        <th scope="col" class="px-6 py-3">Tanggal</th>
+                        <th scope="col" class="px-6 py-3">Status</th>
+                        <th scope="col" colspan="2" class="px-6 py-3 text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -167,16 +128,11 @@
                                     class="font-medium bg-blue-200 px-5 py-2 hover:bg-blue-300 rounded-lg text-blue-600 dark:text-blue-500">Detail</a>
                                 <a href="{{ route('pengaduan.delete', $item->id) }}"
                                     class="font-medium bg-red-200 px-5 py-2 hover:bg-red-300 rounded-lg text-red-600 dark:text-red-500">Delete</a>
-
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            {{-- <div class="p-2 flex  items-center justify-end">
-                {{ $pengaduan->links() }}
-            </div> --}}
-
             @include('pengaduan.components.pagination')
         </div>
 

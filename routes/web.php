@@ -58,7 +58,7 @@ Route::group(['prefix' => 'posyandu'], function () {
 Route::group(['prefix' => 'pengaduan'], function () {
     Route::get('/', [PengaduanController::class, 'index']);
     Route::post('/', [PengaduanController::class, 'store']);
-    Route::get('/admin', [PengaduanController::class, 'show_all']);
+    Route::get('/admin', [PengaduanController::class, 'show_all'])->name('pengaduan.admin');
     Route::get('/admin/stats', [PengaduanController::class, 'stats']);
     Route::get('/admin/export', [PengaduanController::class, 'export_data'])->name('pengaduan.export');
     Route::get('/isu/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');

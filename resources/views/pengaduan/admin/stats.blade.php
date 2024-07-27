@@ -36,7 +36,6 @@
                         class="flex items-center space-x-2 rtl:space-x-reverse text-lg font-bold text-gray-500 dark:text-gray-400">
                         <span>Total Pengaduan</span>
                     </div>
-
                     <div class="text-3xl dark:text-gray-100">
                         {{ $totalComplaints }}
                     </div>
@@ -49,19 +48,16 @@
                         class="flex items-center space-x-2 rtl:space-x-reverse text-lg font-bold text-white dark:text-gray-400">
                         <span>Belum Diproses</span>
                     </div>
-
                     <div class="text-3xl text-white dark:text-gray-100">
                         {{ $totalPending }}
                     </div>
                 </div>
-
             </div>
 
             <div class="relative p-6 rounded-2xl bg-blue-500 shadow dark:bg-gray-800">
                 <div class="space-y-2">
                     <div
                         class="flex items-center space-x-2 rtl:space-x-reverse text-lg font-bold text-white dark:text-gray-400">
-
                         <span>Diproses</span>
                     </div>
                     <div class="text-3xl text-white dark:text-gray-100">
@@ -82,8 +78,6 @@
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>
