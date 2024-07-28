@@ -84,6 +84,11 @@ Route::get('/login', function () {
     return view('session.login', compact('title'));
 });
 
+Route::get('/landing', function () {
+    $title = 'Map';
+    return view('landing', compact('title'));
+});
+
 Route::get('/navTest', function () {
     $title = 'Map';
     return view('map.navbar', compact('title'));
