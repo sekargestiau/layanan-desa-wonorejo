@@ -53,6 +53,14 @@ Route::group(['prefix' => 'posyandu'], function () {
     Route::delete('/lansia/delete/{id}', [PosyanduController::class, 'delete_lansia']);
     Route::get('/lansia/export', [PosyanduController::class, 'export_lansia']);
     Route::get('/lansia/filter', [PosyanduController::class, 'export_filtered_lansia'])->name('lansia.filter');
+    Route::get('/posbindu', [PosyanduController::class, 'index_posbindu']);
+    Route::get('/posbindu/create', [PosyanduController::class, 'create_posbindu']);
+    Route::post('/posbindu/store', [PosyanduController::class, 'store_posbindu']);
+    Route::get('/posbindu/edit/{id}', [PosyanduController::class, 'edit_posbindu']);
+    Route::put('/posbindu/update/{id}', [PosyanduController::class, 'update_posbindu']);
+    Route::delete('/posbindu/delete/{id}', [PosyanduController::class, 'delete_posbindu']);
+    Route::get('/posbindu/export', [PosyanduController::class, 'export_posbindu']);
+    Route::get('/posbindu/filter', [PosyanduController::class, 'export_filtered_posbindu'])->name('posbindu.filter');
 });
 
 Route::group(['prefix' => 'pengaduan'], function () {
