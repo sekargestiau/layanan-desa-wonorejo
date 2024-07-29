@@ -138,7 +138,16 @@
             </div>
         </div>
     </div>
-    <br>    
+    <br>
+    <div class="mb-4">
+        <h3 class="text-gray-700 text-sm font-bold mb-2">Status Perokok</h3>
+        <select name="status_perokok" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status_perokok">
+            <option value="">Pilih Status Perokok</option>
+            @foreach($perokokOptions as $option2)
+                <option value="{{ $option2 }}" {{ $option2 === $posbindu->status_perokok ? 'selected' : '' }}>{{ $option2 }}</option>
+            @endforeach
+        </select>
+    </div>    
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="riwayat_penyakit">Riwayat Penyakit</label>
       <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="riwayat_penyakit" id="riwayat_penyakit" rows="4">{{ $posbindu->riwayat_penyakit }}</textarea>

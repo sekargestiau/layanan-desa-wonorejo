@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-green-400 via-emerald-500 to-cyan-500 min-h-screen">
-    <nav class="bg-white shadow-lg">
+    <nav class="bg-white shadow-lg fixed w-full top-0 left-0 z-50">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between">
                 <div class="flex space-x-7">
@@ -23,9 +23,36 @@
                     <a href="#" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Pengaduan</a>                    
                     <a href="#" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Login</a>
                 </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="outline-none mobile-menu-button">
+                        <svg class="w-6 h-6 text-gray-500 hover:text-green-500"
+                            x-show="!showMenu"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
+        <!-- Mobile menu -->
+        <div class="hidden mobile-menu">
+            <ul class="">
+                <li><a href="#" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Peta</a></li>
+                <li><a href="#" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Pengaduan</a></li>
+                <li><a href="#" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Login</a></li>
+            </ul>
+        </div>
     </nav>
+
+    <!-- Spacer to prevent content from being hidden under the fixed navbar -->
+    <div class="h-16"></div>
 
     <div class="container mx-auto px-4 py-8">
         <div class="bg-white rounded-lg shadow-xl overflow-hidden">
@@ -34,11 +61,11 @@
                 <h2 class="text-2xl font-semibold text-white mt-4">Wonorejo Religius dan Berbudaya</h2>
                 <h1 class="text-4xl font-bold text-white mt-2">Desa Wonorejo</h1>
             </div>
-            
+
             <div class="p-8">
                 <h3 class="text-2xl font-semibold text-gray-800 mb-4">VISI</h3>
                 <p class="text-gray-600 mb-6">DENGAN SEMANGAT PERSAUDARAAN, GOTONG ROYONG DAN AKHLAK MULIA GUNA MEWUJUDKAN DESA LANGKAP YANG LUAR BIASA</p>
-                
+
                 <h3 class="text-2xl font-semibold text-gray-800 mb-4">MISI</h3>
                 <p class="text-gray-600 mb-6">Melanjutkan program yang telah dilaksanakan dan memelihara program-program yang sudah dilaksanakan oleh pemerintah Desa Langkap periode yang lalu sesuai dengan fungsinya. Menggali, memberdayakan serta memaksimalkan semua potensi yang ada di masyarakat, meliputi:</p>
                 <ul class="list-disc list-inside text-gray-600 mb-6">
@@ -47,10 +74,10 @@
                     <li>Pemberdayaan Ekonomi Kerakyatan</li>
                     <li>Menciptakan kondisi masyarakat Desa Langkap yang aman, tertib, guyub dan rukun dalam kehidupan bermasyarakat.</li>
                 </ul>
-                
+
                 <h2 class="text-3xl font-semibold text-gray-800 mb-4">About Us</h2>
                 <p class="text-gray-600 mb-4">Desa Wonorejo adalah sebuah desa yang terletak di Kabupaten Sukoharjo, Jawa Tengah. Kami berkomitmen untuk membangun masyarakat yang religius dan berbudaya.</p>
-                
+
                 <h3 class="text-2xl font-semibold text-gray-800 mb-2">Our Values</h3>
                 <ul class="list-disc list-inside text-gray-600">
                     <li>Gotong Royong</li>
@@ -61,5 +88,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Grab HTML Elements
+        const btn = document.querySelector("button.mobile-menu-button");
+        const menu = document.querySelector(".mobile-menu");
+
+        // Add Event Listeners
+        btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+        });
+    </script>
 </body>
 </html>

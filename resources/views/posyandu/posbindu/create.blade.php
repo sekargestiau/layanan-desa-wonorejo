@@ -179,7 +179,7 @@
     </div>
     <br>
     <div class="mb-4">
-        <h3 class="text-lg font-semibold mb-2">Status Perokok</h3>
+        <p class="text-gray-700 text-sm font-bold mb-2">Status Perokok</p>
         <select name="status_perokok" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status_perokok" required>
             <option value="">Pilih Status Perokok</option>
             <option value="Perokok Aktif" {{ old('status_perokok') == 'Perokok Aktif' ? 'selected' : '' }}>Perokok Aktif</option>

@@ -197,7 +197,7 @@ class PosyanduController extends Controller
             'lingkar_kepala' => ['required', 'numeric', 'min:0'],
             'lingkar_lengan' => ['required', 'numeric', 'min:0'],
             'tanggal' => ['required', 'date'],
-            'status_stunting' => ['required', 'in:Ya,Tidak'],
+            'status_stunting' => ['required', 'in:Stunting,Tidak Stunting'],
             'keterangan_lain' => ['nullable', 'string'],
         ]);
 
@@ -624,7 +624,7 @@ class PosyanduController extends Controller
             'lemak_perut' => ['required', 'numeric', 'min:0'],
             'kolesterol' => ['required', 'numeric', 'min:0'],
             'tanggal' => ['required', 'date'],
-            'status_perokok' => ['required', 'in:Perokok Aktif, Perokok Pasif, Bukan Perokok'],
+            'status_perokok' => ['required', 'in:Perokok Aktif,Perokok Pasif,Bukan Perokok'],
             'riwayat_penyakit' => ['nullable', 'string'],
         ]);
 
@@ -656,9 +656,15 @@ class PosyanduController extends Controller
             'Posyandu Bancakan',
             'Posyandu Tegalan'
         ];
+
+        $perokokOptions = [
+            'Perokok Aktif',
+            'Perokok Pasif',
+            'Bukan Perokok'
+        ];
         
         // Kembalikan tampilan dengan data yang diperlukan
-        return view('posyandu.posbindu.edit', compact('posbindu', 'posyanduOptions', 'title'));
+        return view('posyandu.posbindu.edit', compact('posbindu', 'posyanduOptions', 'perokokOptions', 'title'));
     }
 
     // Mengupdate data balita

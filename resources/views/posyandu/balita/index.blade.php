@@ -159,6 +159,9 @@
                 <th scope="col" class="px-6 py-3">
                     Keterangan Lain
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Status Stunting
+                </th>
                 <th scope="col" colspan="2" class="px-6 py-3 text-center">
                     Action
                 </th>
@@ -197,6 +200,9 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ \Carbon\Carbon::parse($balita->tanggal)->format('d F Y') }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $balita->status_stunting }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $balita->keterangan_lain }}

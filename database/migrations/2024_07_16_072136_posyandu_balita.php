@@ -25,7 +25,7 @@ return new class extends Migration
             $table->float('lingkar_lengan');
             $table->date('tanggal');
             $table->string('keterangan_lain');
-            $table->enum('status_stunting', ['Ya', 'Tidak']);
+            $table->enum('status_stunting', ['Stunting', 'Tidak Stunting']);
             $table->timestamps();
         });
     }

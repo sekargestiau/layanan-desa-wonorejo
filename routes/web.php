@@ -5,12 +5,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pengaduanController;
 use App\Http\Controllers\PosyanduController;
 
-Route::get('/', function () {
+Route::get('/example', function () {
     $title = 'Map';
     return view(
         'index',
         compact('title')
     );
+});
+
+Route::get('/', function () {
+    $title = 'Layanan Desa Wonorejo';
+    return view('landing', compact('title'));
 });
 
 //Route Peta

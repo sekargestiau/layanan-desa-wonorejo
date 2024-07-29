@@ -153,6 +153,17 @@
     </div>
     <br>
     <div class="mb-4">
+        <p class="text-gray-700 text-sm font-bold mb-2">Status Stunting</p>
+        <select name="status_stunting" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status_stunting" required>
+            <option value="">Pilih Status Stunting</option>
+            <option value="Stunting" {{ old('status_stunting') == 'Stunting' ? 'selected' : '' }}>Stunting</option>
+            <option value="Tidak Stunting" {{ old('status_stunting') == 'Tidak Stunting' ? 'selected' : '' }}>Tidak Stunting</option>
+        </select>
+        @error('status_stunting')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="keterangan_lain">Keterangan Lain</label>
         <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="keterangan_lain" id="keterangan_lain" required>{{ old('keterangan_lain') }}</textarea>
         @error('keterangan_lain')
