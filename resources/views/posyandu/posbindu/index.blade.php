@@ -159,9 +159,6 @@
                     Kolesterol
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Kolesterol
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Status Perokok
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -204,13 +201,13 @@
                         {{ $posbindu->lemak_perut }} cm
                     </td>
                     <td class="px-6 py-4">
-                        {{ $posbindu->tensi_darah }} cm
+                        {{ $posbindu->tensi_darah }} mmHg
                     </td>
                     <td class="px-6 py-4">
-                        {{ $posbindu->gula_darah }} cm
+                        {{ $posbindu->gula_darah }} mg/dL
                     </td>
                     <td class="px-6 py-4">
-                        {{ $posbindu->kolesterol }}
+                        {{ $posbindu->kolesterol }} mg/dL
                     </td>
                     <td class="px-6 py-4">
                         {{ $posbindu->status_perokok }}

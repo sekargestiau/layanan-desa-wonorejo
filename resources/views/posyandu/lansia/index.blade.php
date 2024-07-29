@@ -181,7 +181,7 @@
                         {{ $lansia->berat_badan }} kg
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->tensi_darah }} cm
+                        {{ $lansia->tensi_darah }} mmHg
                     </td>
                     <td class="px-6 py-4">
                         {{ \Carbon\Carbon::parse($lansia->tanggal)->format('d F Y') }}

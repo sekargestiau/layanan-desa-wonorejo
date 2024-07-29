@@ -157,10 +157,10 @@
                     Tanggal
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Keterangan Lain
+                    Status Stunting
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Status Stunting
+                    Keterangan Lain
                 </th>
                 <th scope="col" colspan="2" class="px-6 py-3 text-center">
                     Action

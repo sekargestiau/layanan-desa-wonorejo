@@ -114,7 +114,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah">Tensi Darah</label>
             <div class="flex items-center">
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah" id="tensi_darah" type="number" value="{{ $posbindu->tensi_darah }}">
-                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+                <span class="bg-white-200 px-3 py-2 text-black-700">mmHg</span>
             </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="gula_darah">Gula Darah</label>
             <div class="flex items-center">
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="gula_darah" id="gula_darah" type="number" value="{{ $posbindu->gula_darah }}">
-                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+                <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
             </div>
         </div>
     </div>
@@ -134,7 +134,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="kolesterol">Kolesterol</label>
             <div class="flex items-center">
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="kolesterol" id="kolesterol" type="number" value="{{ $posbindu->kolesterol }}">
-                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+                <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
             </div>
         </div>
     </div>

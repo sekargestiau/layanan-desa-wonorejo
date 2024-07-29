@@ -230,9 +230,13 @@ class PosyanduController extends Controller
             'Posyandu Bancakan',
             'Posyandu Tegalan'
         ];
+        $stuntingOptions = [
+            'Stunting',
+            'Tidak Stunting'
+        ];
         
         // Kembalikan tampilan dengan data yang diperlukan
-        return view('posyandu.balita.edit', compact('balita', 'posyanduOptions', 'title'));
+        return view('posyandu.balita.edit', compact('balita', 'posyanduOptions', 'stuntingOptions','title'));
     }
 
     

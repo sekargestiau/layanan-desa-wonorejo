@@ -186,7 +186,7 @@
                         {{ $remaja->tinggi_badan }} cm
                     </td>
                     <td class="px-6 py-4">
-                        {{ $remaja->tensi_darah }} cm
+                        {{ $remaja->tensi_darah }} mmHg
                     </td>
                     <td class="px-6 py-4">
                         {{ \Carbon\Carbon::parse($remaja->tanggal)->format('d F Y') }}

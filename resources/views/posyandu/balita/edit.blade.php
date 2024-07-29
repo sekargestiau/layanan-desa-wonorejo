@@ -118,7 +118,16 @@
             </div>
         </div>
     </div>
-    <br>    
+    <br>
+    <div class="mb-4">
+        <h3 class="text-gray-700 text-sm font-bold mb-2">Status Stunting</h3>
+        <select name="status_stunting" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status_stunting">
+            <option value="">Pilih Status Perokok</option>
+            @foreach($stuntingOptions as $option2)
+                <option value="{{ $option2 }}" {{ $option2 === $balita->status_stunting ? 'selected' : '' }}>{{ $option2 }}</option>
+            @endforeach
+        </select>
+    </div>    
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="keterangan_lain">Keterangan lain</label>
       <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="keterangan_lain" id="keterangan_lain" rows="4">{{ $balita->keterangan_lain }}</textarea>
