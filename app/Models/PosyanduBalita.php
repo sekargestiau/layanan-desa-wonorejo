@@ -25,6 +25,7 @@ class PosyanduBalita extends Model
         'tinggi_badan',
         'lingkar_kepala',
         'lingkar_lengan',
+        'status_stunting',
         'tanggal',
         'keterangan_lain',
     ];

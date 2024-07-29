@@ -15,14 +15,14 @@
   <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-2 rtl:space-x-reverse sm:mb-0">
     <li>
       <div class="flex items-center">
-        <a href="/posyandu/balita" class="ms-1 text-xl font-medium">Pendataan Pasien - Posyandu Balita</a>
+        <a href="/posyandu/posbindu" class="ms-1 text-xl font-medium">Pendataan Pasien - Posbindu</a>
       </div>
     </li>
   </ol>
 </nav>
 
 <div class="bg-white p-6 rounded-lg shadow-md">
-  <form action="{{ url('posyandu/balita/store') }}" method="POST">
+  <form action="{{ url('posyandu/posbindu/store') }}" method="POST">
     @csrf
     <div class="mb-4">
         <h3 class="text-lg font-semibold mb-2">Pemeriksaan dilakukan di: </h3>
@@ -128,12 +128,12 @@
     <br>
     <div class="grid grid-cols-2 gap-4">
         <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_kepala">Lingkar Kepala</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lemak_perut">Lemak Perut</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_kepala" id="lingkar_kepala" type="number" value="{{ old('lingkar_kepala') }}" required>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lemak_perut" id="lemak_perut" type="number" value="{{ old('lemak_perut') }}" required>
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
-            @error('lingkar_kepala')
+            @error('lemak_perut')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
@@ -141,32 +141,59 @@
     <br>
     <div class="grid grid-cols-2 gap-4">
         <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_lengan">Lingkar Lengan</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah">Tensi Darah</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_lengan" id="lingkar_lengan" type="number" value="{{ old('lingkar_lengan') }}" required>
-                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah" id="tensi_darah" type="number" value="{{ old('tensi_darah') }}" required>
+                <span class="bg-white-200 px-3 py-2 text-black-700">mmHg</span>
             </div>
-            @error('lingkar_lengan')
+            @error('tensi_darah')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+    <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="gula_darah">Gula Darah</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="gula_darah" id="gula_darah" type="number" value="{{ old('gula_darah') }}" required>
+                <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
+            </div>
+            @error('gula_darah')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+    <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="kolesterol">Kolesterol</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="kolesterol" id="kolesterol" type="number" value="{{ old('kolesterol') }}" required>
+                <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
+            </div>
+            @error('gula_darah')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
     </div>
     <br>
     <div class="mb-4">
-        <p class="text-gray-700 text-sm font-bold mb-2">Status Stunting</p>
-        <select name="status_stunting" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status_stunting" required>
-            <option value="">Pilih Status Stunting</option>
-            <option value="Stunting" {{ old('status_stunting') == 'Stunting' ? 'selected' : '' }}>Stunting</option>
-            <option value="Tidak Stunting" {{ old('status_stunting') == 'Tidak Stunting' ? 'selected' : '' }}>Tidak Stunting</option>
+        <p class="text-gray-700 text-sm font-bold mb-2">Status Perokok</p>
+        <select name="status_perokok" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status_perokok" required>
+            <option value="">Pilih Status Perokok</option>
+            <option value="Perokok Aktif" {{ old('status_perokok') == 'Perokok Aktif' ? 'selected' : '' }}>Perokok Aktif</option>
+            <option value="Perokok Pasif" {{ old('status_perokok') == 'Perokok Pasif' ? 'selected' : '' }}>Perokok Pasif</option>
+            <option value="Bukan Perokok" {{ old('status_perokok') == 'Bukan Perokok' ? 'selected' : '' }}>Bukan Perokok</option>
         </select>
-        @error('status_stunting')
+        @error('status_perokok')
             <span class="text-red-500 text-sm">{{ $message }}</span>
         @enderror
     </div>
     <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="keterangan_lain">Keterangan Lain</label>
-        <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="keterangan_lain" id="keterangan_lain" required>{{ old('keterangan_lain') }}</textarea>
-        @error('keterangan_lain')
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="riwayat_penyakit">Riwayat Penyakit</label>
+        <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="riwayat_penyakit" id="riwayat_penyakit" required>{{ old('riwayat_penyakit') }}</textarea>
+        @error('riwayat_penyakit')
             <span class="text-red-500 text-sm">{{ $message }}</span>
         @enderror
     </div>

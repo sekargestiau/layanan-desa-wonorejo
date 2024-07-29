@@ -4,15 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Models\Peta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class petaController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
+    {
+        $data = Peta::all();
+        $filteredData = Peta::all();
+        $title = 'Peta Desa Wonorejo';
+        $query = Peta::query();
+
+        // Check if search is performed
+        if ($request->has('category')) {
+            $searchCategory = $request->category;
+            $searchTerm = $request->search;
+
+            if ($searchCategory === 'all') {
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('dusun', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('rw', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('rt', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('destinasi', 'LIKE', "%{$searchTerm}%");
+                });
+            } elseif ($searchCategory === 'dusun') {
+                $query->where('dusun', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'rw') {
+                $query->where('rw', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'rt') {
+                $query->where('rt', 'LIKE', "%{$searchTerm}%");
+            } elseif ($searchCategory === 'destinasi') {
+                $query->where('destinasi', 'LIKE', "%{$searchTerm}%");
+            }
+        }
+
+        $data = $query->orderBy('rw', 'asc')->paginate(10);
+        $filteredData = $query->get();
+        Session::put('filteredData', $filteredData);
+
+        return view('map.admin.index', compact('title', 'data', 'filteredData'));
+    }
+
+
+    public function map()
     {
         $title = 'Peta Desa Wonorejo';
-        $data = Peta::orderBy('rw', 'desc')->paginate(10);
-        return view('map.admin.index', compact('title', 'data'));
+        $data = Peta::all();
+        return view('map.index', compact('title', 'data'));
     }
 
     public function create()
@@ -89,6 +128,27 @@ class petaController extends Controller
         $data = Peta::all();
 
         $fileName = 'data_peta_' . date('Y-m-d_H-i-s') . '.csv';
+        $handle = fopen($fileName, 'w+');
+        fputcsv($handle, array('Dusun', 'RW', 'RT', 'Destinasi'));
+
+        foreach ($data as $row) {
+            fputcsv($handle, array($row['dusun'], $row['rw'], $row['rt'], $row['destinasi']));
+        }
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return response()->download($fileName, $fileName, $headers)->deleteFileAfterSend(true);
+    }
+
+    public function export_filtered()
+    {
+        $data = Session::get('filteredData', Peta::all());
+
+        $fileName = 'filtered_data_peta_' . date('Y-m-d_H-i-s') . '.csv';
         $handle = fopen($fileName, 'w+');
         fputcsv($handle, array('Dusun', 'RW', 'RT', 'Destinasi'));
 

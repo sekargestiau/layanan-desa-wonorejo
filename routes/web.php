@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\petaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\pengaduanController;
 use App\Http\Controllers\PosyanduController;
 use App\Http\Controllers\CalendarController;
 
 
-
-Route::get('/', function () {
+Route::get('/example', function () {
     $title = 'Map';
     return view(
         'index',
@@ -15,15 +15,18 @@ Route::get('/', function () {
     );
 });
 
+Route::get('/', function () {
+    $title = 'Layanan Desa Wonorejo';
+    return view('landing', compact('title'));
+});
+
 //Route Peta
 Route::group(['prefix' => 'peta'], function () {
-    Route::get('/', function () {
-        $title = 'Map';
-        return view('map.index', compact('title'));
-    });
+    Route::get('/', [petaController::class, 'map'])->name('peta.map');
     Route::get('/admin', [petaController::class, 'index'])->name('peta.admin');
     Route::get('/admin/export', [petaController::class, 'export'])->name('peta.export');
-    Route::get('/admin/import', [petaController::class, 'import'])->name('peta.import');
+    Route::get('/admin/filter', [petaController::class, 'export_filtered'])->name('peta.filter');
+    // Route::get('/admin/import', [petaController::class, 'import'])->name('peta.import');
     Route::get('/admin/create', [petaController::class, 'create'])->name('peta.create');
     Route::post('/admin/store', [petaController::class, 'store'])->name('peta.store');
     Route::get('/admin/view/{id}', [petaController::class, 'view'])->name('peta.view');
@@ -32,6 +35,7 @@ Route::group(['prefix' => 'peta'], function () {
 });
 
 // Route Posyandu
+// Route::group(['prefix' => 'posyandu', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'posyandu'], function () {
     Route::get('/balita', [PosyanduController::class, 'index_balita']);
     Route::get('/balita/create', [PosyanduController::class, 'create_balita']);
@@ -57,8 +61,25 @@ Route::group(['prefix' => 'posyandu'], function () {
     Route::delete('/lansia/delete/{id}', [PosyanduController::class, 'delete_lansia']);
     Route::get('/lansia/export', [PosyanduController::class, 'export_lansia']);
     Route::get('/lansia/filter', [PosyanduController::class, 'export_filtered_lansia'])->name('lansia.filter');
+    Route::get('/posbindu', [PosyanduController::class, 'index_posbindu']);
+    Route::get('/posbindu/create', [PosyanduController::class, 'create_posbindu']);
+    Route::post('/posbindu/store', [PosyanduController::class, 'store_posbindu']);
+    Route::get('/posbindu/edit/{id}', [PosyanduController::class, 'edit_posbindu']);
+    Route::put('/posbindu/update/{id}', [PosyanduController::class, 'update_posbindu']);
+    Route::delete('/posbindu/delete/{id}', [PosyanduController::class, 'delete_posbindu']);
+    Route::get('/posbindu/export', [PosyanduController::class, 'export_posbindu']);
+    Route::get('/posbindu/filter', [PosyanduController::class, 'export_filtered_posbindu'])->name('posbindu.filter');
+});
 
-
+Route::group(['prefix' => 'pengaduan'], function () {
+    Route::get('/', [PengaduanController::class, 'index']);
+    Route::post('/', [PengaduanController::class, 'store']);
+    Route::get('/admin', [PengaduanController::class, 'show_all'])->name('pengaduan.admin');
+    Route::get('/admin/stats', [PengaduanController::class, 'stats']);
+    Route::get('/admin/export', [PengaduanController::class, 'export_data'])->name('pengaduan.export');
+    Route::get('/isu/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
+    Route::get('/isu/{id}/delete', [PengaduanController::class, 'destroy'])->name('pengaduan.delete');
+    Route::patch('/isu/{id}/status', [PengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
 });
 
 
@@ -71,8 +92,18 @@ Route::get('/agenda', function () {
 Route::get('/agenda/details', [CalendarController::class, 'showDetailsPage'])->name('agenda.details');
 Route::post('/agenda/store', [CalendarController::class, 'storeDetails'])->name('agenda.storeDetails');
 
+Route::get('/login', function () {
+    $title = 'Map';
+    return view('session.login', compact('title'));
+});
+
+Route::get('/landing', function () {
+    $title = 'Map';
+    return view('landing', compact('title'));
+});
 
 Route::get('/navTest', function () {
     $title = 'Map';
     return view('map.navbar', compact('title'));
 });
+

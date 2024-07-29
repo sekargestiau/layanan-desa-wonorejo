@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posyandu_balita', function (Blueprint $table) {
+        Schema::create('posbindu', function (Blueprint $table) {
             $table->id();
             $table->enum('nama_posyandu', ['Posyandu Jetis', 'Posyandu Blimbing', 'Posyandu Wonorejo','Posyandu Sayangan','Posyandu Bangunrejo','Posyandu Bancakan','Posyandu Tegalan']);
             $table->string('nama');
@@ -21,12 +21,14 @@ return new class extends Migration
             $table->integer('rw');
             $table->float('berat_badan');
             $table->float('tinggi_badan');
-            $table->float('lingkar_kepala');
-            $table->float('lingkar_lengan');
+            $table->float('lemak_perut');
+            $table->float('tensi_darah');
+            $table->float('gula_darah');
+            $table->float('kolesterol');
+            $table->enum('status_perokok', ['Perokok Aktif', 'Perokok Pasif', 'Bukan Perokok']);
+            $table->string('riwayat_penyakit');
             $table->date('tanggal');
-            $table->string('keterangan_lain');
-            $table->enum('status_stunting', ['Stunting', 'Tidak Stunting']);
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
@@ -35,7 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posyandu_balita');
-
+        Schema::dropIfExists('posbindu');
     }
 };

@@ -16,7 +16,7 @@
   <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-2 rtl:space-x-reverse sm:mb-0">
     <li>
       <div class="flex items-center">
-        <a href="/posyandu/lansia" class="ms-1 text-xl font-medium">DATA POSYANDU LANSIA</a>
+        <a href="/posyandu/posbindu" class="ms-1 text-xl font-medium">DATA POSBINDU</a>
       </div>
     </li>
   </ol>
@@ -28,7 +28,7 @@
 <div class="flex justify-between items-center mb-6">
 
     <!-- Formulir pencarian -->
-    <form class="flex items-center max-w-lg w-full" action="{{ url('posyandu/lansia') }}" method="GET">
+    <form class="flex items-center max-w-lg w-full" action="{{ url('posyandu/posbindu') }}" method="GET">
         <div class="flex items-center w-full">
             <select name="category" id="dropdown-button" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
                 <option value="all">Semua Kategori</option>
@@ -52,10 +52,10 @@
 
 <!-- Tombol Tambah Data dan Download Data -->
 <div class="flex gap-2 mb-6">
-        <a href="/posyandu/lansia/create"
+        <a href="/posyandu/posbindu/create"
             class="bg-blue-200 hover:bg-blue-300 font-bold text-blue-600 px-3 py-2 rounded-md "> Tambah Data
         </a>
-        <a href="/posyandu/lansia/export"
+        <a href="/posyandu/posbindu/export"
             class="bg-green-200 hover:bg-green-300 font-bold text-green-600 px-3 py-2 rounded-md flex items-center">
             <!-- Icon download -->
             <svg class="flex-shrink-0 w-5 h-5 text-gray transition duration-75 group-hover:text-gray dark:group-hover:text-gray"
@@ -68,7 +68,7 @@
             </svg>
             <span class="hidden sm:inline-block ms-2">Export CSV</span>
         </a>
-        <a href="{{ route('lansia.filter') }}"
+        <a href="{{ route('posbindu.filter') }}"
             class="bg-green-200 hover:bg-green-300 font-bold text-green-600 px-3 py-2 rounded-md flex items-center">
             <!-- Icon download -->
             <svg class="flex-shrink-0 w-5 h-5 text-gray transition duration-75 group-hover:text-gray dark:group-hover:text-gray"
@@ -121,7 +121,6 @@
         </div>
     @endif
 {{--  end of toast  --}}
-
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-black uppercase bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
@@ -145,13 +144,28 @@
                     Berat Badan
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Tinggi Badan
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Lemak Perut
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Tensi Darah
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Gula Darah
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Kolesterol
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status Perokok
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Tanggal
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Keterangan Lain
+                    Riwayat Penyakit
                 </th>
                 <th scope="col" colspan="2" class="px-6 py-3 text-center">
                     Action
@@ -160,37 +174,52 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($lansias as $index => $lansia)
+            @foreach($posbindus as $index => $posbindu)
                 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <td class="px-4 py-4">
                         {{ $index + 1 }}
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $lansia->nama_posyandu }}
+                        {{ $posbindu->nama_posyandu }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->rt }}/{{ $lansia->rw }}
+                        {{ $posbindu->rt }}/{{ $posbindu->rw }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->nama }}
+                        {{ $posbindu->nama }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->umur_tahun }} Tahun {{ $lansia->umur_bulan }} Bulan
+                        {{ $posbindu->umur_tahun }} Tahun {{ $posbindu->umur_bulan }} Bulan
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->berat_badan }} kg
+                        {{ $posbindu->berat_badan }} kg
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->tensi_darah }} mmHg
+                        {{ $posbindu->tinggi_badan }} cm
                     </td>
                     <td class="px-6 py-4">
-                        {{ \Carbon\Carbon::parse($lansia->tanggal)->format('d F Y') }}
+                        {{ $posbindu->lemak_perut }} cm
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->keterangan_lain }}
+                        {{ $posbindu->tensi_darah }} mmHg
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $posbindu->gula_darah }} mg/dL
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $posbindu->kolesterol }} mg/dL
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $posbindu->status_perokok }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $posbindu->riwayat_penyakit }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ \Carbon\Carbon::parse($posbindu->tanggal)->format('d F Y') }}
                     </td>
                     <td class="px-1 py-4">
-                        <a href="{{ url('posyandu/lansia/edit', ['id' => $lansia->id]) }}" class="font-medium bg-blue-200 px-5 py-2 hover:bg-blue-300 rounded-lg text-blue-600 dark:text-blue-500">
+                        <a href="{{ url('posyandu/posbindu/edit', ['id' => $posbindu->id]) }}" class="font-medium bg-blue-200 px-5 py-2 hover:bg-blue-300 rounded-lg text-blue-600 dark:text-blue-500">
                             Edit
                         </a>
                     </td>
@@ -200,7 +229,7 @@
                         <button 
                             data-modal-target="popup-modal" 
                             data-modal-toggle="popup-modal" 
-                            data-url="{{ url('posyandu/lansia/delete', $lansia->id) }}" 
+                            data-url="{{ url('posyandu/posbindu/delete', $posbindu->id) }}" 
                             class="font-medium bg-red-200 px-5 py-2 hover:bg-red-300 rounded-lg text-red-600 dark:text-red-500">
                             Delete
                         </button>
@@ -225,7 +254,7 @@
                     <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                     </svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin untuk menghapus data lansia?</h3>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Anda yakin untuk menghapus data posbindu?</h3>
                     <form id="delete-form" method="POST">
                         @csrf
                         @method('DELETE')
