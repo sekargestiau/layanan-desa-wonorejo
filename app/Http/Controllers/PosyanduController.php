@@ -552,7 +552,7 @@ class PosyanduController extends Controller
 
         $fileName = 'data_posyandu_lansia_' . date('Y-m-d_H-i-s') . '.csv';
         $handle = fopen($fileName, 'w+');
-        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)','RT', 'RW', 'Berat Badan', 'Tensi Darah', 'tanggal','keterangan_lain'));
+        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)','RT', 'RW', 'Berat Badan', 'Tensi Darah', 'Tanggal','Keterangan Lain'));
 
         foreach ($data as $row) {
         fputcsv($handle, array(
@@ -698,7 +698,7 @@ class PosyanduController extends Controller
 
         $fileName = 'data_posbindu_' . date('Y-m-d_H-i-s') . '.csv';
         $handle = fopen($fileName, 'w+');
-        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan', 'Tensi Darah', 'tanggal','keterangan_lain'));
+        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan','Lemak Perut', 'Tensi Darah','Gula Darah','Kolesterol', 'Tanggal','Status Perokok', 'Riwayat Penyakit'));
 
         foreach ($data as $row) {
         fputcsv($handle, array(
@@ -710,9 +710,13 @@ class PosyanduController extends Controller
                 $row['rw'],
                 $row['berat_badan'],
                 $row['tinggi_badan'],
+                $row['lemak_perut'],
                 $row['tensi_darah'],
+                $row['gula_darah'],
+                $row['kolesterol'],
                 $row['tanggal'],
-                $row['keterangan_lain']
+                $row['status_perokok'],
+                $row['riwayat_penyakit']
             ));        
         }
 

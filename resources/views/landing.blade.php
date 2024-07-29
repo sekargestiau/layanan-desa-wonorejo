@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desa Wonorejo</title>
+    <title>Layanan Desa Wonorejo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-green-400 via-emerald-500 to-cyan-500 min-h-screen">
@@ -14,7 +14,7 @@
                     <div>
                         <a href="#" class="flex items-center py-4 px-2">
                             <img src="logo.png" alt="Logo" class="h-8 w-8 mr-2">
-                            <span class="font-semibold text-gray-500 text-lg">Desa Wonorejo</span>
+                            <span class="font-semibold text-gray-500 text-lg">Layanan Desa Wonorejo</span>
                         </a>
                     </div>
                 </div>
@@ -75,16 +75,16 @@
                     <li>Menciptakan kondisi masyarakat Desa Langkap yang aman, tertib, guyub dan rukun dalam kehidupan bermasyarakat.</li>
                 </ul>
 
-                <h2 class="text-3xl font-semibold text-gray-800 mb-4">About Us</h2>
-                <p class="text-gray-600 mb-4">Desa Wonorejo adalah sebuah desa yang terletak di Kabupaten Sukoharjo, Jawa Tengah. Kami berkomitmen untuk membangun masyarakat yang religius dan berbudaya.</p>
-
-                <h3 class="text-2xl font-semibold text-gray-800 mb-2">Our Values</h3>
-                <ul class="list-disc list-inside text-gray-600">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Tentang Kami</h2>
+                <p class="text-gray-600 mb-4">Desa Wonorejo adalah sebuah desa yang terletak di Kabupaten Sukoharjo, Jawa Tengah. Kami berkomitmen untuk membangun masyarakat yang religius dan berbudaya.
+                                              Nilai-nilai yang kami junjung tinggi meliputi:</p>
+                <ul class="list-disc list-inside text-gray-600 mb-4">
                     <li>Gotong Royong</li>
                     <li>Persaudaraan</li>
                     <li>Akhlak Mulia</li>
                     <li>Pemberdayaan Masyarakat</li>
                 </ul>
+                <p class="text-gray-600">Dengan berlandaskan pada nilai-nilai ini, kami terus berupaya untuk memajukan desa dan meningkatkan kesejahteraan masyarakat kami.</p>
             </div>
         </div>
     </div>
@@ -100,4 +100,10 @@
         });
     </script>
 </body>
+
+<footer class="bg-white text-gray-600 py-4 shadow-lg">
+    <div class="container mx-auto px-4 text-center">
+        <p>&copy; 2024 Desa Wonorejo. All rights reserved.</p>
+    </div>
+</footer>
 </html>

@@ -33,6 +33,7 @@ Route::group(['prefix' => 'peta'], function () {
 });
 
 // Route Posyandu
+// Route::group(['prefix' => 'posyandu', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'posyandu'], function () {
     Route::get('/balita', [PosyanduController::class, 'index_balita']);
     Route::get('/balita/create', [PosyanduController::class, 'create_balita']);
