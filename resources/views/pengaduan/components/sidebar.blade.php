@@ -52,7 +52,7 @@
             </li>
 
             <li>
-                <a href="#"
+                <a href="{{ route('logout') }}"
                     class="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-green-300 dark:hover:bg-green-700 group">
                     <svg class="flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">

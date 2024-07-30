@@ -4,6 +4,7 @@ use App\Http\Controllers\petaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pengaduanController;
 use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\sessionController;
 
 Route::get('/example', function () {
     $title = 'Map';
@@ -35,7 +36,7 @@ Route::group(['prefix' => 'peta'], function () {
 // Route Posyandu
 // Route::group(['prefix' => 'posyandu', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'posyandu'], function () {
-    Route::get('/balita', [PosyanduController::class, 'index_balita']);
+    Route::get('/balita', [PosyanduController::class, 'index_balita'])->name('posyandu.admin');
     Route::get('/balita/create', [PosyanduController::class, 'create_balita']);
     Route::post('/balita/store', [PosyanduController::class, 'store_balita']);
     Route::get('/balita/edit/{id}', [PosyanduController::class, 'edit_balita']);
@@ -85,10 +86,9 @@ Route::get('/agenda', function () {
     return view('agenda.index', compact('title'));
 });
 
-Route::get('/login', function () {
-    $title = 'Map';
-    return view('session.login', compact('title'));
-});
+Route::get('/login', [sessionController::class,'index'])->name('loginPage');
+Route::post('/login', [sessionController::class,'login'])->name('login');
+Route::get('/logout',[sessionController::class,'logout'])->name('logout');
 
 Route::get('/landing', function () {
     $title = 'Map';
