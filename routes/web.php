@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\petaController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\pengaduanController;
-use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\petaController;
 use App\Http\Controllers\sessionController;
+use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\pengaduanController;
+use App\Http\Controllers\superAdminController;
 
 Route::get('/example', function () {
     $title = 'Map';
@@ -84,6 +85,10 @@ Route::group(['prefix' => 'pengaduan'], function () {
 Route::get('/agenda', function () {
     $title = 'Map';
     return view('agenda.index', compact('title'));
+});
+
+Route::group(['prefix' => 'superadmin'], function(){
+    Route::get('/', [superAdminController::class,'index'])->name('superadmin');
 });
 
 Route::get('/login', [sessionController::class,'index'])->name('loginPage');
