@@ -69,9 +69,9 @@
                     },
                     {
                         id: '2',
-                        title: 'Coding Session',
-                        start: '2024-07-26T15:00:00',
-                        end: '2024-07-26T18:00:00',
+                        title: 'DL Proker',
+                        start: '2024-08-09T15:00:00',
+                        end: '2024-08-09T18:00:00',
                         extendedProps: {
                             location: 'Office'
                         }
