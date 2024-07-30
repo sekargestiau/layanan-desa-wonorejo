@@ -83,14 +83,20 @@ Route::group(['prefix' => 'pengaduan'], function () {
 });
 
 
-// Route Agenda
-Route::get('/agenda', function () {
-    $title = 'Map';
-    return view('agenda.index', compact('title'));
+// Agenda Routes
+Route::prefix('agenda')->group(function () {
+    Route::get('/', function () {
+        $title = 'Agenda';
+        return view('agenda.index', compact('title'));
+    })->name('agenda.index');
+
+    Route::get('/details', [CalendarController::class, 'showDetailsPage'])->name('agenda.details');
+    Route::post('/store', [CalendarController::class, 'storeDetails'])->name('agenda.storeDetails');
+    Route::get('/fetch-events', [CalendarController::class, 'fetchEvents'])->name('agenda.fetchEvents');
+    Route::delete('/agenda/delete', [CalendarController::class, 'deleteEvent'])->name('agenda.deleteEvent');
+
 });
 
-Route::get('/agenda/details', [CalendarController::class, 'showDetailsPage'])->name('agenda.details');
-Route::post('/agenda/store', [CalendarController::class, 'storeDetails'])->name('agenda.storeDetails');
 
 Route::get('/login', function () {
     $title = 'Map';
