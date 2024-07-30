@@ -89,6 +89,7 @@ Route::get('/agenda', function () {
 
 Route::group(['prefix' => 'superadmin'], function(){
     Route::get('/', [superAdminController::class,'index'])->name('superadmin');
+    Route::patch('/updateStatus/{id}', [superAdminController::class,'updateStatus'])->name('superadmin.updateStatus');
 });
 
 Route::get('/login', [sessionController::class,'index'])->name('loginPage');

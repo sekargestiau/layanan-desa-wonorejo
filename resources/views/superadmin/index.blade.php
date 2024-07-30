@@ -102,18 +102,17 @@
                             <td class="px-6 py-4">{{ $item->email ?? '' }}</td>
                             <td class="px-6 py-4">{{ $item->username ?? '' }}</td>
                             <td class="px-6 py-4">
-                                <form action="{{ route('pengaduan.updateStatus', $item->id) }}" method="POST"
+                                <form action="{{ route('superadmin.updateStatus', $item->id) }}" method="POST"
                                     onsubmit="updateStatus(this);">
                                     @csrf
                                     @method('PATCH')
-                                    <select name="status" class="border border-gray-400 px-3 py-1 rounded-md"
+                                    <select name="role" class="border border-gray-400 px-3 py-1 rounded-md"
                                         onchange="updateStatus(this.form)">
-                                        <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Belum
-                                            diproses
+                                        <option value="admin_peta" {{ $item->role == 'admin_peta' ? 'selected' : '' }}>Peta
                                         </option>
-                                        <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Diproses
+                                        <option value="admin_posyandu" {{ $item->role == 'admin_posyandu' ? 'selected' : '' }}>Posyandu
                                         </option>
-                                        <option value="2" {{ $item->status == 2 ? 'selected' : '' }}>Selesai
+                                        <option value="admin_pengaduan" {{ $item->role == 'admin_pengaduan' ? 'selected' : '' }}>Pengaduan
                                         </option>
                                     </select>
                                 </form>
