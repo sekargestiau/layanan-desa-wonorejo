@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('role', ['superadmin','admin_peta','admin_posyandu','admin_pengaduan','admin_agenda','guest']);
             $table->string('password');
-            $table->string('lokasi');
+            $table->string('lokasi')->nullable();
             $table->string('username');
             $table->rememberToken();
             $table->timestamps();
