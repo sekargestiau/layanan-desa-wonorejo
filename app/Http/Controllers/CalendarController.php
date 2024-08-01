@@ -91,14 +91,23 @@ class CalendarController extends Controller
 {
     $id = $request->input('id');
     
-    // Assuming you have a model called Event and it uses the 'id' as its primary key
-    $event = Event::find($id);
-    if ($event) {
-        $event->delete();
-        return response()->json(['success' => true]);
+    \Log::info('Attempting to delete event with ID: ' . $id);
+
+    try {
+        $event = Event::find($id);
+        if ($event) {
+            $event->delete();
+            \Log::info('Event deleted successfully.');
+            return response()->json(['success' => true]);
+        } else {
+            \Log::warning('Event not found with ID: ' . $id);
+            return response()->json(['success' => false, 'message' => 'Event not found'], 404);
+        }
+    } catch (\Exception $e) {
+        \Log::error('Error deleting event: ' . $e->getMessage());
+        return response()->json(['success' => false, 'message' => 'An error occurred while deleting the event.'], 500);
     }
-    
-    return response()->json(['success' => false], 404);
 }
+
 
 }
