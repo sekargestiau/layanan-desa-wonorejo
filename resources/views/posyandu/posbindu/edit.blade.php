@@ -38,7 +38,8 @@
     </div>
 
     <div class="mb-4">
-      <h3 class="text-lg font-semibold mb-2">Hasil periksa</h3>
+        <h3 class="text-lg font-semibold mt-0">Hasil periksa</h3>
+        <h4 class="text-sm text-gray-800 mb-2">Gunakan tanda titik (.) untuk angka desimal. Contoh: 120.5</h4>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="nama">Nama</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nama" id="nama" type="text" value="{{ $posbindu->nama }}">
@@ -85,7 +86,6 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" step="any" value="{{ $posbindu->berat_badan }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">kg</span>
             </div>
-            <p class="text-sm text-gray-600 mt-1">Gunakan tanda titik (.) untuk angka desimal. Contoh: 12.5</p>
         </div>
     </div>
     <br>
@@ -97,7 +97,6 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tinggi_badan" id="tinggi_badan" type="number" step="any" value="{{ $posbindu->tinggi_badan }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
-            <p class="text-sm text-gray-600 mt-1">Gunakan tanda titik (.) untuk angka desimal. Contoh: 12.5</p>
         </div>
     </div>
     <br>
@@ -108,7 +107,6 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lemak_perut" id="lemak_perut" type="number" step="any" value="{{ $posbindu->lemak_perut }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
-            <p class="text-sm text-gray-600 mt-1">Gunakan tanda titik (.) untuk angka desimal. Contoh: 12.5</p>
         </div>
     </div>
     <br>
@@ -119,7 +117,6 @@
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah_sistolik" id="tensi_darah_sistolik" type="number" step="any" value="{{ $posbindu->tensi_darah_sistolik }}">
                     <span class="bg-white-200 px-3 py-2 text-black-700">/</span>
                 </div>
-                <p class="text-sm text-gray-600 mt-1">Gunakan tanda titik (.) untuk angka desimal. Contoh: 120.5</p>
             </div>
             <div>
                 <label class="block text-white text-sm font-bold mb-2" for="tensi_darah_diastolik">Tensi Darah</label>
@@ -137,7 +134,6 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="gula_darah" id="gula_darah" type="number" step="any" value="{{ $posbindu->gula_darah }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
             </div>
-            <p class="text-sm text-gray-600 mt-1">Gunakan tanda titik (.) untuk angka desimal. Contoh: 12.5</p>
         </div>
     </div>
     <br>
@@ -148,7 +144,6 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="kolesterol" id="kolesterol" type="number" step="any" value="{{ $posbindu->kolesterol }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
             </div>
-            <p class="text-sm text-gray-600 mt-1">Gunakan tanda titik (.) untuk angka desimal. Contoh: 12.5</p>
         </div>
     </div>
     <br>
