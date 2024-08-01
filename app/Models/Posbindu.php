@@ -25,6 +25,7 @@ class Posbindu extends Model
         'tensi_darah_diastolik',
         'gula_darah',
         'kolesterol',
+        'asam_urat',
         'status_perokok',
         'riwayat_penyakit',
         'tanggal',
