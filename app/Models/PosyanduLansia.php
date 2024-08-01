@@ -21,7 +21,8 @@ class PosyanduLansia extends Model
         'rt',
         'rw',
         'berat_badan',
-        'tensi_darah',
+        'tensi_darah_sistolik',
+        'tensi_darah_diastolik',        
         'tanggal',
         'keterangan_lain',
     ];
