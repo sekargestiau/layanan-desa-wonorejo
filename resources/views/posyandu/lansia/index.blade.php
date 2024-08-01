@@ -181,10 +181,10 @@
                         {{ $lansia->berat_badan }} kg
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->tensi_darah }} mmHg
+                        {{ $lansia->tensi_darah_sistolik }}/{{ $lansia->tensi_darah_diastolik }} mmHg
                     </td>
                     <td class="px-6 py-4">
-                        {{ \Carbon\Carbon::parse($lansia->tanggal)->format('d F Y') }}
+                        {{ \Carbon\Carbon::parse($lansia->tanggal)->translatedFormat('d F Y') }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $lansia->keterangan_lain }}
@@ -209,6 +209,8 @@
             @endforeach
         </tbody>
     </table>
+    @include('posyandu.components.paginationlansia')
+
 
 
     <!-- Modal konfirmasi -->

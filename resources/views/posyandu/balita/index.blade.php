@@ -227,6 +227,7 @@
             @endforeach
         </tbody>
     </table>
+    @include('posyandu.components.paginationbalita')
 
 
     <!-- Modal konfirmasi -->

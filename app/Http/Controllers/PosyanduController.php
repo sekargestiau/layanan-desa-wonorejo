@@ -20,6 +20,12 @@ class PosyanduController extends Controller
      * Display a listing of the resource.
      */
 
+     public function boot()
+    {
+        // Set locale for Carbon
+        Carbon::setLocale('id');
+    }
+
     // CONTROLLER INDEX
 
     public function index_balita(Request $request)
@@ -53,6 +59,7 @@ class PosyanduController extends Controller
         }
     
         $balitas = $query->get();
+        $balitas = $query->paginate(10);
         $filteredData = $query->get();
         Session::put('filtered_data', $filteredData);
     
@@ -90,6 +97,7 @@ class PosyanduController extends Controller
         }
     
         $remajas = $query->get();
+        $remajas = $query->paginate(10);
         $filteredData = $query->get();
         Session::put('filtered_data', $filteredData);
     
@@ -127,6 +135,7 @@ class PosyanduController extends Controller
         }
     
         $lansias = $query->get();
+        $lansias = $query->paginate(10);
         $filteredData = $query->get();
         Session::put('filtered_data', $filteredData);
     
@@ -164,6 +173,7 @@ class PosyanduController extends Controller
         }
     
         $posbindus = $query->get();
+        $posbindus = $query->paginate(10);
         $filteredData = $query->get();
         Session::put('filtered_data', $filteredData);
     
