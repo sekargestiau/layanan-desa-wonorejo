@@ -24,7 +24,8 @@ class PosyanduRemaja extends Model
         'rw',
         'berat_badan',
         'tinggi_badan',
-        'tensi_darah',
+        'tensi_darah_sistolik',
+        'tensi_darah_diastolik',        
         'tanggal',
         'keterangan_lain',
     ];

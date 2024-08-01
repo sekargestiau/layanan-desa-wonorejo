@@ -37,6 +37,7 @@ Route::group(['prefix' => 'peta'], function () {
 // Route Posyandu
 // Route::group(['prefix' => 'posyandu', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'posyandu'], function () {
+    Route::get('/', [PosyanduController::class, 'index_balita'])->name('posyandu.admin');
     Route::get('/balita', [PosyanduController::class, 'index_balita'])->name('posyandu.admin');
     Route::get('/balita/create', [PosyanduController::class, 'create_balita']);
     Route::post('/balita/store', [PosyanduController::class, 'store_balita']);

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('rt');
             $table->integer('rw');
             $table->float('berat_badan');
-            $table->float('tensi_darah');
+            $table->float('tensi_darah_sistolik');
+            $table->float('tensi_darah_diastolik');
             $table->date('tanggal');
             $table->string('keterangan_lain');
             $table->timestamps();

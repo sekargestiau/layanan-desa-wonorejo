@@ -22,7 +22,8 @@ return new class extends Migration
             $table->float('berat_badan');
             $table->float('tinggi_badan');
             $table->float('lemak_perut');
-            $table->float('tensi_darah');
+            $table->float('tensi_darah_sistolik');
+            $table->float('tensi_darah_diastolik');
             $table->float('gula_darah');
             $table->float('kolesterol');
             $table->enum('status_perokok', ['Perokok Aktif', 'Perokok Pasif', 'Bukan Perokok']);

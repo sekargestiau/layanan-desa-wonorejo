@@ -347,7 +347,8 @@ class PosyanduController extends Controller
             'rw' => ['required', 'integer', 'min:1'],
             'berat_badan' => ['required', 'numeric', 'min:0'],
             'tinggi_badan' => ['required', 'numeric', 'min:0'],
-            'tensi_darah' => ['required', 'numeric', 'min:0'],
+            'tensi_darah_sistolik' => ['required', 'numeric', 'min:0'],
+            'tensi_darah_diastolik' => ['required', 'numeric', 'min:0'],
             'tanggal' => ['required', 'date'],
             'keterangan_lain' => ['nullable', 'string'],
         ]);
@@ -424,7 +425,7 @@ class PosyanduController extends Controller
                 $row['rw'],
                 $row['berat_badan'],
                 $row['tinggi_badan'],
-                $row['tensi_darah'],
+                $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],
                 $row['tanggal'],
                 $row['keterangan_lain']
             ));        
@@ -456,7 +457,7 @@ class PosyanduController extends Controller
             $row['rw'],
             $row['berat_badan'],
             $row['tinggi_badan'],
-            $row['tensi_darah'],
+            $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],
             $row['tanggal'],
             $row['keterangan_lain']
         ));
@@ -484,7 +485,8 @@ class PosyanduController extends Controller
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
             'berat_badan' => ['required', 'numeric', 'min:0'],
-            'tensi_darah' => ['required', 'numeric', 'min:0'],
+            'tensi_darah_sistolik' => ['required', 'numeric', 'min:0'],
+            'tensi_darah_diastolik' => ['required', 'numeric', 'min:0'],
             'tanggal' => ['required', 'date'],
             'keterangan_lain' => ['nullable', 'string'],
         ]);
@@ -562,7 +564,7 @@ class PosyanduController extends Controller
                 $row['rt'],
                 $row['rw'],
                 $row['berat_badan'],
-                $row['tensi_darah'],
+                $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],
                 $row['tanggal'],
                 $row['keterangan_lain']
             ));        
@@ -592,7 +594,7 @@ class PosyanduController extends Controller
             $row['rt'],
             $row['rw'],
             $row['berat_badan'],
-            $row['tensi_darah'],
+            $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],
             $row['tanggal'],
             $row['keterangan_lain']
         ));
@@ -623,7 +625,8 @@ class PosyanduController extends Controller
             'rw' => ['required', 'integer', 'min:1'],
             'berat_badan' => ['required', 'numeric', 'min:0'],
             'tinggi_badan' => ['required', 'numeric', 'min:0'],
-            'tensi_darah' => ['required', 'numeric', 'min:0'],
+            'tensi_darah_sistolik' => ['required', 'numeric', 'min:0'],
+            'tensi_darah_diastolik' => ['required', 'numeric', 'min:0'],
             'gula_darah' => ['required', 'numeric', 'min:0'],
             'lemak_perut' => ['required', 'numeric', 'min:0'],
             'kolesterol' => ['required', 'numeric', 'min:0'],
@@ -711,7 +714,7 @@ class PosyanduController extends Controller
                 $row['berat_badan'],
                 $row['tinggi_badan'],
                 $row['lemak_perut'],
-                $row['tensi_darah'],
+                $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],                
                 $row['gula_darah'],
                 $row['kolesterol'],
                 $row['tanggal'],
@@ -747,7 +750,7 @@ class PosyanduController extends Controller
                 $row['berat_badan'],
                 $row['tinggi_badan'],
                 $row['lemak_perut'],
-                $row['tensi_darah'],
+                $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],
                 $row['gula_darah'],
                 $row['kolesterol'],
                 $row['tanggal'],
