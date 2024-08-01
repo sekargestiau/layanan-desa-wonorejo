@@ -107,6 +107,7 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" step="any" value="{{ old('berat_badan') }}" required>
                 <span class="bg-white-200 px-3 py-2 text-black-700">kg</span>
             </div>
+            <p class="text-sm text-gray-600 mt-1">Gunakan tanda titik (.) untuk angka desimal. Contoh: 12.5</p>
             @error('berat_badan')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
@@ -120,6 +121,7 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tinggi_badan" id="tinggi_badan" type="number" step="any" value="{{ old('tinggi_badan') }}" required>
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
+            <p class="text-sm text-gray-600 mt-1">Gunakan tanda titik (.) untuk angka desimal. Contoh: 12.5</p>
             @error('tinggi_badan')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
@@ -133,6 +135,7 @@
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah_sistolik" id="tensi_darah_sistolik" type="number" step="any" value="{{ old('tensi_darah_sistolik') }}" required>
                     <span class="bg-white-200 px-3 py-2 text-black-700">/</span>
                 </div>
+                <p class="text-sm text-gray-600 mt-1">Gunakan tanda titik (.) untuk angka desimal. Contoh: 120.5</p>
                 @error('tensi_darah_sistolik')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
@@ -172,7 +175,7 @@
           transition: all 0.3s ease;"
           onmouseover="this.style.background='linear-gradient(to bottom left, #4ade80, #3b82f6)'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.2)';"
           onmouseout="this.style.background='linear-gradient(to bottom right, #4ade80, #3b82f6)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.1)';">
-          Setor
+          Submit Data
       </button>
     </div>
 </form>
