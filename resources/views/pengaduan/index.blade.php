@@ -33,7 +33,19 @@
                     <strong class="font-bold">{{ session('success') }}</strong>
                 </div>
             @endif
-            <form action="/pengaduan" method="post" enctype="multipart/form-data">
+
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+                    role="alert">
+                    <strong class="font-bold">Whoops! Something went wrong.</strong>
+                    <ul class="list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form action="/pengaduan" method="post" enctype="multipart/form-data" onsubmit="return validateCaptcha()">
                 @csrf
                 <div class="mb-4">
                     <label for="nik" class="block text-gray-700 font-medium mb-2">NIK <span
@@ -78,6 +90,7 @@
                         class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" rows="5"
                         required></textarea>
                 </div>
+                <div class="g-recaptcha m-4 " data-sitekey={{ config('services.recaptcha.key') }}></div>
                 <div class="flex justify-end">
                     <button type="submit"
                         class="bg-red-500 text-black px-4 py-2 rounded-lg hover:bg-red-600">Submit</button>
@@ -85,6 +98,19 @@
             </form>
         </div>
     </section>
+
+
+
+    <script>
+        function validateCaptcha() {
+            var captchaResponse = grecaptcha.getResponse();
+            if (captchaResponse.length === 0) {
+                alert("Tolong Selesaikan Verifikasi CAPTCHA");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 
 </html>
