@@ -25,7 +25,7 @@
                     </div>
             </li>
             <li>
-                <a href="/pengaduan/admin"
+                <a href="{{ route('superadmin') }}"
                     class="flex items-center p-2 rounded-lg text-white hover:text-black hover:bg-green-300 dark:hover:bg-green-700 group">
                     <!-- Complaints Icon SVG -->
                     <svg class="flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-black dark:group-hover:text-white"
@@ -33,7 +33,7 @@
                         <path
                             d="M12 2C6.48 2 2 5.58 2 10c0 2.48 1.28 4.66 3.21 6.07-.08.35-.21.83-.21 1.14 0 .34.19.54.35.54.18 0 .37-.15.48-.35.04-.08.08-.17.11-.25.02-.07.04-.13.06-.2C9.29 18.69 10.58 20 12 20c5.52 0 10-3.58 10-8S17.52 2 12 2zm-1 11h-2v-2h2v2zm4 0h-2v-2h2v2z" />
                     </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Data Pengaduan</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Data Admin</span>
                 </a>
 
             </li>

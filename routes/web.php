@@ -91,6 +91,11 @@ Route::get('/agenda', function () {
 Route::group(['prefix' => 'superadmin'], function(){
     Route::get('/', [superAdminController::class,'index'])->name('superadmin');
     Route::patch('/updateStatus/{id}', [superAdminController::class,'updateStatus'])->name('superadmin.updateStatus');
+    Route::get('/create', [superAdminController::class,'create'])->name('superadmin.create');
+    Route::post('/store', [superAdminController::class,'store'])->name('superadmin.store');
+    Route::get('/view/{id}', [superAdminController::class,'view'])->name('superadmin.view');
+    Route::put('/update/{id}', [superAdminController::class,'update'])->name('superadmin.update');
+    Route::delete('/delete/{id}', [superAdminController::class,'delete'])->name('superadmin.delete');
 });
 
 Route::get('/login', [sessionController::class,'index'])->name('loginPage');
