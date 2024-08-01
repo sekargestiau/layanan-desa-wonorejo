@@ -184,7 +184,7 @@
                         {{ $lansia->tensi_darah_sistolik }}/{{ $lansia->tensi_darah_diastolik }} mmHg
                     </td>
                     <td class="px-6 py-4">
-                        {{ \Carbon\Carbon::parse($lansia->tanggal)->translatedFormat('d F Y') }}
+                        {{ \Carbon\Carbon::parse($lansia->tanggal)->locale('id')->isoFormat('D MMMM Y') }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $lansia->keterangan_lain }}
