@@ -104,7 +104,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="berat_badan">Berat Badan</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" value="{{ old('berat_badan') }}" required>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" step="any" value="{{ old('berat_badan') }}" required>
                 <span class="bg-white-200 px-3 py-2 text-black-700">kg</span>
             </div>
             @error('berat_badan')
@@ -117,7 +117,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="tinggi_badan">Tinggi Badan</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tinggi_badan" id="tinggi_badan" type="number" value="{{ old('tinggi_badan') }}" required>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tinggi_badan" id="tinggi_badan" type="number" step="any" value="{{ old('tinggi_badan') }}" required>
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
             @error('tinggi_badan')
@@ -130,7 +130,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_kepala">Lingkar Kepala</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_kepala" id="lingkar_kepala" type="number" value="{{ old('lingkar_kepala') }}" required>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_kepala" id="lingkar_kepala" type="number" step="any" value="{{ old('lingkar_kepala') }}" required>
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
             @error('lingkar_kepala')
@@ -143,7 +143,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_lengan">Lingkar Lengan</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_lengan" id="lingkar_lengan" type="number" value="{{ old('lingkar_lengan') }}" required>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_lengan" id="lingkar_lengan" type="number" step="any" value="{{ old('lingkar_lengan') }}" required>
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
             @error('lingkar_lengan')

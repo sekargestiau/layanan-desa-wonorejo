@@ -82,7 +82,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="berat_badan">Berat Badan</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" value="{{ $balita->berat_badan }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" step="any" value="{{ $balita->berat_badan }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">kg</span>
             </div>
         </div>
@@ -93,7 +93,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="tinggi_badan">Tinggi Badan</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tinggi_badan" id="tinggi_badan" type="number" value="{{ $balita->tinggi_badan }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tinggi_badan" id="tinggi_badan" type="number" step="any" value="{{ $balita->tinggi_badan }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
         </div>
@@ -103,7 +103,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_kepala">Lingkar Kepala</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_kepala" id="lingkar_kepala" type="number" value="{{ $balita->lingkar_kepala }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_kepala" id="lingkar_kepala" type="number" step="any" value="{{ $balita->lingkar_kepala }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
         </div>
@@ -113,7 +113,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_lengan">Lingkar Lengan</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_lengan" id="lingkar_lengan" type="number" value="{{ $balita->lingkar_lengan }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_lengan" id="lingkar_lengan" type="number" step="any" value="{{ $balita->lingkar_lengan }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
         </div>
