@@ -88,7 +88,7 @@ Route::get('/agenda', function () {
     return view('agenda.index', compact('title'));
 });
 
-Route::group(['prefix' => 'superadmin'], function(){
+Route::group(['prefix' => 'superadmin', 'middleware' => 'superadmin'], function(){
     Route::get('/', [superAdminController::class,'index'])->name('superadmin');
     Route::patch('/updateStatus/{id}', [superAdminController::class,'updateStatus'])->name('superadmin.updateStatus');
     Route::get('/create', [superAdminController::class,'create'])->name('superadmin.create');
