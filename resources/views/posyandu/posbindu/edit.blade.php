@@ -147,6 +147,16 @@
         </div>
     </div>
     <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="asam_urat">Asam Urat</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="asam_urat" id="asam_urat" type="number" step="any" value="{{ $posbindu->asam_urat }}">
+                <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
+            </div>
+        </div>
+    </div>
+    <br>
     <div class="mb-4">
         <h3 class="text-gray-700 text-sm font-bold mb-2">Status Perokok</h3>
         <select name="status_perokok" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status_perokok">

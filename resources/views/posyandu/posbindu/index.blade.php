@@ -159,6 +159,9 @@
                     Kolesterol
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Asam Urat
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Status Perokok
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -210,13 +213,16 @@
                         {{ $posbindu->kolesterol }} mg/dL
                     </td>
                     <td class="px-6 py-4">
+                        {{ $posbindu->asam_urat }} mg/dL
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $posbindu->status_perokok }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $posbindu->riwayat_penyakit }}
+                        {{ \Carbon\Carbon::parse($posbindu->tanggal)->locale('id')->isoFormat('D MMMM Y') }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ \Carbon\Carbon::parse($posbindu->tanggal)->locale('id')->isoFormat('D MMMM Y') }}
+                        {{ $posbindu->riwayat_penyakit }}
                     </td>
                     <td class="px-1 py-4">
                         <a href="{{ url('posyandu/posbindu/edit', ['id' => $posbindu->id]) }}" class="font-medium bg-blue-200 px-5 py-2 hover:bg-blue-300 rounded-lg text-blue-600 dark:text-blue-500">

@@ -183,7 +183,20 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="kolesterol" id="kolesterol" type="number" step="any" value="{{ old('kolesterol') }}" required>
                 <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
             </div>
-            @error('gula_darah')
+            @error('kolesterol')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+    <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="asam_urat">Asam Urat</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="asam_urat" id="asam_urat" type="number" step="any" value="{{ old('asam_urat') }}" required>
+                <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
+            </div>
+            @error('asam_urat')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
