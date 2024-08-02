@@ -6,7 +6,6 @@ use App\Http\Controllers\sessionController;
 use App\Http\Controllers\PosyanduController;
 use App\Http\Controllers\pengaduanController;
 use App\Http\Controllers\superAdminController;
-use App\Http\Controllers\AgendaController;
 
 Route::get('/example', function () {
     $title = 'Map';
@@ -86,19 +85,11 @@ Route::group(['prefix' => 'pengaduan'], function () {
     });
 });
 
-// Agenda Routes
-Route::prefix('agenda')->group(function () {
-    Route::get('/', function () {
-        $title = 'Agenda';
-        return view('agenda.index', compact('title'));
-    })->name('agenda.index');
-
-    
-    
+Route::get('/agenda', function () {
+    $title = 'Map';
+    return view('agenda.index', compact('title'));
 });
-Route::get('/events', [AgendaController::class, 'getEvents'])->name('events.get');
-Route::post('/events', [AgendaController::class, 'storeEvent'])->name('events.store');
-    
+
 Route::group(['prefix' => 'superadmin', 'middleware' => ['isLogin','superadmin']], function(){
     Route::get('/', [superAdminController::class,'index'])->name('superadmin');
     Route::patch('/updateStatus/{id}', [superAdminController::class,'updateStatus'])->name('superadmin.updateStatus');
