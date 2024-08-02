@@ -11,9 +11,10 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->dateTime('event_datetime'); // Store combined date and time
+            $table->dateTime('start_datetime'); // Store start date and time
+            $table->dateTime('end_datetime');   // Store end date and time
             $table->string('location');
-            $table->timestamps(); // If you use timestamps
+            $table->timestamps(); // For created_at and updated_at
         });
     }
 

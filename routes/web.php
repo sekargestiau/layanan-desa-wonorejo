@@ -85,6 +85,7 @@ Route::group(['prefix' => 'pengaduan'], function () {
 
 // Agenda Routes
 Route::prefix('agenda')->group(function () {
+    // Route to display the agenda index page
     Route::get('/', function () {
         $title = 'Agenda';
         return view('agenda.index', compact('title'));
@@ -93,8 +94,7 @@ Route::prefix('agenda')->group(function () {
     Route::get('/details', [CalendarController::class, 'showDetailsPage'])->name('agenda.details');
     Route::post('/store', [CalendarController::class, 'storeDetails'])->name('agenda.storeDetails');
     Route::get('/fetch-events', [CalendarController::class, 'fetchEvents'])->name('agenda.fetchEvents');
-    Route::delete('/agenda/delete', [CalendarController::class, 'deleteEvent'])->name('agenda.deleteEvent');
-
+    Route::delete('/delete', [CalendarController::class, 'deleteEvent'])->name('agenda.deleteEvent');
 });
 
 

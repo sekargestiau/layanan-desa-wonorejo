@@ -14,14 +14,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <div class="container mt-5">
+        <!-- Breadcrumb Navigation -->
         <nav class="justify-between px-4 py-3 text-black border border-gray-200 rounded-lg sm:flex sm:px-5 bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 dark:border-gray-700 text-lg" aria-label="Breadcrumb">
             <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-2 rtl:space-x-reverse sm:mb-0">
                 <li class="flex justify-center w-full">
-                    <a href="{{ route('agenda.index') }}" class="ms-1 text-2xl font-semibold text-white flex justify-center items-center">Tambah Kegiatan</a>
+                    <a href="{{ route('agenda.index') }}" class="text-2xl font-semibold text-white">Tambah Kegiatan</a>
                 </li>
             </ol>
         </nav>
 
+        <!-- Event Form -->
         <form id="eventForm" method="POST" action="{{ route('agenda.storeDetails') }}">
             @csrf
             <div class="table-responsive mt-3">
@@ -52,6 +54,7 @@
             </div>
         </form>
 
+        <!-- Calendar -->
         <div id="calendar" style="max-width: 1200px; margin: 20px auto;"></div>
 
         <!-- Modal for Viewing Event Details -->
@@ -121,6 +124,7 @@
             </div>
         </div>
 
+        <!-- JavaScript -->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var calendarEl = document.getElementById('calendar');
