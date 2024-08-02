@@ -192,7 +192,7 @@
                         {{ $posbindu->nama }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $posbindu->umur_tahun }} Tahun {{ $posbindu->umur_bulan }} Bulan
+                        {{ $posbindu->umur_tahun }} Tahun
                     </td>
                     <td class="px-6 py-4">
                         {{ $posbindu->berat_badan }} kg

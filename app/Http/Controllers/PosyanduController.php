@@ -196,7 +196,10 @@ class PosyanduController extends Controller
     {
         // Validasi input
         $validatedData = $request->validate([
-            'nama_posyandu' => ['required', 'in:Posyandu Jetis,Posyandu Blimbing,Posyandu Wonorejo,Posyandu Sayangan,Posyandu Bangunrejo,Posyandu Bancakan,Posyandu Tegalan'],
+            'nama_posyandu' => [
+                'required',
+                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+            ],
             'nama' => ['required', 'string'],
             'umur_tahun' => ['required', 'integer', 'min:0'],
             'umur_bulan' => ['required', 'integer', 'min:0', 'max:11'],
@@ -232,14 +235,14 @@ class PosyanduController extends Controller
 
         // Daftar opsi posyandu sesuai dengan enum di database
         $posyanduOptions = [
-            'Posyandu Jetis',
-            'Posyandu Blimbing',
-            'Posyandu Wonorejo',
-            'Posyandu Sayangan',
-            'Posyandu Bangunrejo',
-            'Posyandu Bancakan',
-            'Posyandu Tegalan'
-        ];
+            'Posyandu 1 Anggrek - Njetis',
+            'Posyandu 2 Flamboyan - Sayangan',
+            'Posyandu 3 Riya - Wonorejo',
+            'Posyandu 4 Melati - Blimbing 4',
+            'Posyandu 5 Dahlia - Blimbing 5',
+            'Posyandu 6 Mawar - Blimbing 6',
+            'Posyandu 7 Cempaka - Perum Persada Hijau'
+        ];        
         $stuntingOptions = [
             'Stunting',
             'Tidak Stunting'
@@ -352,7 +355,10 @@ class PosyanduController extends Controller
     {
         // Validasi input
         $validatedData = $request->validate([
-            'nama_posyandu' => ['required', 'in:Posyandu Jetis,Posyandu Blimbing,Posyandu Wonorejo,Posyandu Sayangan,Posyandu Bangunrejo,Posyandu Bancakan,Posyandu Tegalan'],
+            'nama_posyandu' => [
+                'required',
+                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+            ],
             'nama' => ['required', 'string'],
             'umur_tahun' => ['required', 'integer', 'min:0'],
             'umur_bulan' => ['required', 'integer', 'min:0', 'max:11'],
@@ -386,14 +392,15 @@ class PosyanduController extends Controller
 
         // Daftar opsi posyandu sesuai dengan enum di database
         $posyanduOptions = [
-            'Posyandu Jetis',
-            'Posyandu Blimbing',
-            'Posyandu Wonorejo',
-            'Posyandu Sayangan',
-            'Posyandu Bangunrejo',
-            'Posyandu Bancakan',
-            'Posyandu Tegalan'
+            'Posyandu 1 Anggrek - Njetis',
+            'Posyandu 2 Flamboyan - Sayangan',
+            'Posyandu 3 Riya - Wonorejo',
+            'Posyandu 4 Melati - Blimbing 4',
+            'Posyandu 5 Dahlia - Blimbing 5',
+            'Posyandu 6 Mawar - Blimbing 6',
+            'Posyandu 7 Cempaka - Perum Persada Hijau'
         ];
+        
         
         // Kembalikan tampilan dengan data yang diperlukan
         return view('posyandu.remaja.edit', compact('remaja', 'posyanduOptions', 'title'));
@@ -494,7 +501,10 @@ class PosyanduController extends Controller
     {
         // Validasi input
         $validatedData = $request->validate([
-            'nama_posyandu' => ['required', 'in:Posyandu Jetis,Posyandu Blimbing,Posyandu Wonorejo,Posyandu Sayangan,Posyandu Bangunrejo,Posyandu Bancakan,Posyandu Tegalan'],
+            'nama_posyandu' => [
+                'required',
+                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+            ],
             'nama' => ['required', 'string'],
             'umur_tahun' => ['required', 'integer', 'min:0'],
             'rt' => ['required', 'integer', 'min:1'],
@@ -527,14 +537,14 @@ class PosyanduController extends Controller
 
         // Daftar opsi posyandu sesuai dengan enum di database
         $posyanduOptions = [
-            'Posyandu Jetis',
-            'Posyandu Blimbing',
-            'Posyandu Wonorejo',
-            'Posyandu Sayangan',
-            'Posyandu Bangunrejo',
-            'Posyandu Bancakan',
-            'Posyandu Tegalan'
-        ];
+            'Posyandu 1 Anggrek - Njetis',
+            'Posyandu 2 Flamboyan - Sayangan',
+            'Posyandu 3 Riya - Wonorejo',
+            'Posyandu 4 Melati - Blimbing 4',
+            'Posyandu 5 Dahlia - Blimbing 5',
+            'Posyandu 6 Mawar - Blimbing 6',
+            'Posyandu 7 Cempaka - Perum Persada Hijau'
+        ];        
         
         // Kembalikan tampilan dengan data yang diperlukan
         return view('posyandu.lansia.edit', compact('lansia', 'posyanduOptions', 'title'));
@@ -635,10 +645,12 @@ class PosyanduController extends Controller
     {
         // Validasi input
         $validatedData = $request->validate([
-            'nama_posyandu' => ['required', 'in:Posyandu Jetis,Posyandu Blimbing,Posyandu Wonorejo,Posyandu Sayangan,Posyandu Bangunrejo,Posyandu Bancakan,Posyandu Tegalan'],
+            'nama_posyandu' => [
+                'required',
+                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+            ],
             'nama' => ['required', 'string'],
             'umur_tahun' => ['required', 'integer', 'min:0'],
-            'umur_bulan' => ['required', 'integer', 'min:0', 'max:11'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
             'berat_badan' => ['required', 'numeric', 'min:0'],
@@ -674,14 +686,14 @@ class PosyanduController extends Controller
 
         // Daftar opsi posyandu sesuai dengan enum di database
         $posyanduOptions = [
-            'Posyandu Jetis',
-            'Posyandu Blimbing',
-            'Posyandu Wonorejo',
-            'Posyandu Sayangan',
-            'Posyandu Bangunrejo',
-            'Posyandu Bancakan',
-            'Posyandu Tegalan'
-        ];
+            'Posyandu 1 Anggrek - Njetis',
+            'Posyandu 2 Flamboyan - Sayangan',
+            'Posyandu 3 Riya - Wonorejo',
+            'Posyandu 4 Melati - Blimbing 4',
+            'Posyandu 5 Dahlia - Blimbing 5',
+            'Posyandu 6 Mawar - Blimbing 6',
+            'Posyandu 7 Cempaka - Perum Persada Hijau'
+        ];        
 
         $perokokOptions = [
             'Perokok Aktif',
@@ -720,7 +732,7 @@ class PosyanduController extends Controller
 
         $fileName = 'data_posbindu_' . date('Y-m-d_H-i-s') . '.csv';
         $handle = fopen($fileName, 'w+');
-        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan','Lemak Perut', 'Tensi Darah','Gula Darah','Kolesterol', 'Asam Urat','Tanggal','Status Perokok', 'Riwayat Penyakit'));
+        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan','Lemak Perut', 'Tensi Darah','Gula Darah','Kolesterol', 'Asam Urat','Tanggal','Status Perokok', 'Riwayat Penyakit'));
 
         foreach ($data as $row) {
         $formattedDate = \Carbon\Carbon::parse($row['tanggal'])->format('d/m/Y');
@@ -728,7 +740,6 @@ class PosyanduController extends Controller
                 $row['nama_posyandu'],
                 $row['nama'],
                 $row['umur_tahun'],
-                $row['umur_bulan'],
                 $row['rt'],
                 $row['rw'],
                 $row['berat_badan'],
@@ -758,7 +769,7 @@ class PosyanduController extends Controller
         $filteredData = Session::get('filtered_data', Posbindu::all());
         $fileName = 'filtered_data_posbindu_' . date('Y-m-d_H-i-s') . '.csv';
         $handle = fopen($fileName, 'w+');
-        fputcsv($handle, array('Nama Posyandu', 'Nama', 'Umur (tahun)', 'Umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan','Lemak Perut', 'Tensi Darah','Gula Darah','Kolesterol','Asam Urat', 'Tanggal','Status Perokok', 'Riwayat Penyakit'));
+        fputcsv($handle, array('Nama Posyandu', 'Nama', 'Umur (tahun)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan','Lemak Perut', 'Tensi Darah','Gula Darah','Kolesterol','Asam Urat', 'Tanggal','Status Perokok', 'Riwayat Penyakit'));
 
         foreach ($filteredData as $row) {
             $formattedDate = \Carbon\Carbon::parse($row['tanggal'])->format('d/m/Y');
@@ -767,7 +778,6 @@ class PosyanduController extends Controller
                 $row['nama_posyandu'],
                 $row['nama'],
                 $row['umur_tahun'],
-                $row['umur_bulan'],
                 $row['rt'],
                 $row['rw'],
                 $row['berat_badan'],

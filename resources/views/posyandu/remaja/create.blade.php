@@ -28,13 +28,13 @@
         <h3 class="text-lg font-semibold mb-2">Pemeriksaan dilakukan di: </h3>
         <select name="nama_posyandu" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nama_posyandu" required>
             <option value="">Pilih Posyandu</option>
-            <option value="Posyandu Jetis" {{ old('nama_posyandu') == 'Posyandu Jetis' ? 'selected' : '' }}>Posyandu Jetis</option>
-            <option value="Posyandu Blimbing" {{ old('nama_posyandu') == 'Posyandu Blimbing' ? 'selected' : '' }}>Posyandu Blimbing</option>
-            <option value="Posyandu Wonorejo" {{ old('nama_posyandu') == 'Posyandu Wonorejo' ? 'selected' : '' }}>Posyandu Wonorejo</option>
-            <option value="Posyandu Sayangan" {{ old('nama_posyandu') == 'Posyandu Sayangan' ? 'selected' : '' }}>Posyandu Sayangan</option>
-            <option value="Posyandu Bangunrejo" {{ old('nama_posyandu') == 'Posyandu Bangunrejo' ? 'selected' : '' }}>Posyandu Bangunrejo</option>
-            <option value="Posyandu Bancakan" {{ old('nama_posyandu') == 'Posyandu Bancakan' ? 'selected' : '' }}>Posyandu Bancakan</option>
-            <option value="Posyandu Tegalan" {{ old('nama_posyandu') == 'Posyandu Tegalan' ? 'selected' : '' }}>Posyandu Tegalan</option>
+            <option value="Posyandu 1 Anggrek - Njetis" {{ old('nama_posyandu') == 'Posyandu 1 Anggrek - Njetis' ? 'selected' : '' }}>Posyandu 1 Anggrek - Njetis</option>
+            <option value="Posyandu 2 Flamboyan - Sayangan" {{ old('nama_posyandu') == 'Posyandu 2 Flamboyan - Sayangan' ? 'selected' : '' }}>Posyandu 2 Flamboyan - Sayangan</option>
+            <option value="Posyandu 3 Riya - Wonorejo" {{ old('nama_posyandu') == 'Posyandu 3 Riya - Wonorejo' ? 'selected' : '' }}>Posyandu 3 Riya - Wonorejo</option>
+            <option value="Posyandu 4 Melati - Blimbing 4" {{ old('nama_posyandu') == 'Posyandu 4 Melati - Blimbing 4' ? 'selected' : '' }}>Posyandu 4 Melati - Blimbing 4</option>
+            <option value="Posyandu 5 Dahlia - Blimbing 5" {{ old('nama_posyandu') == 'Posyandu 5 Dahlia - Blimbing 5' ? 'selected' : '' }}>Posyandu 5 Dahlia - Blimbing 5</option>
+            <option value="Posyandu 6 Mawar - Blimbing 6" {{ old('nama_posyandu') == 'Posyandu 6 Mawar - Blimbing 6' ? 'selected' : '' }}>Posyandu 6 Mawar - Blimbing 6</option>
+            <option value="Posyandu 7 Cempaka - Perum Persada Hijau" {{ old('nama_posyandu') == 'Posyandu 7 Cempaka - Perum Persada Hijau' ? 'selected' : '' }}>Posyandu 7 Cempaka - Perum Persada Hijau</option>
         </select>
         @error('nama_posyandu')
             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -64,7 +64,7 @@
                 @enderror
             </div>
             <div>
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="umur_bulan">Umur</label>
+                <label class="block text-white text-sm font-bold mb-2" for="umur_bulan">Umur</label>
                 <div class="flex items-center">
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="umur_bulan" id="umur_bulan" type="number" value="{{ old('umur_bulan') }}" required>
                     <span class="bg-white-200 px-3 py-2 text-black-700">bulan</span>

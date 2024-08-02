@@ -52,13 +52,9 @@
                 <span class="bg-white-200 px-3 py-2 text-black-700">tahun</span>
             </div>
         </div>
-        <div>
-            <label class="block text-white text-sm font-bold mb-2" for="umur_bulan">Umur</label>
-            <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="umur_bulan" id="umur_bulan" type="number" value="{{ $posbindu->umur_bulan }}">
-                <span class="bg-white-200 px-3 py-2 text-black-700">bulan</span>
-            </div>
-        </div>
+    </div>
+    <br>
+      <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="rt">RT</label>
             <div class="flex items-center">
