@@ -26,6 +26,27 @@ class AgendaController extends Controller
     return view('agenda.tambah', compact('title')); // Pass the title to the view
 }
 
+
+
+public function update(Request $request, $id)
+{
+    // Validate the request
+    $title = 'Detail Agenda'; 
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'start' => 'required|date',
+        'end' => 'nullable|date',
+        'all_day' => 'boolean',
+        'location' => 'nullable|string|max:255',
+    ]);
+
+    // Find the event by ID and update it
+    $event = Event::findOrFail($id);
+    $event->update($validated);
+
+    return response()->json($event);
+}
+
     /**
      * Store a new event.
      *
@@ -67,6 +88,12 @@ class AgendaController extends Controller
         ], 500); // Internal Server Error
     }
 }
+    public function showDetailAgenda()
+    {
+        // Fetch the events or any necessary data
+        $events = Event::all(); // Adjust this based on your actual data source
+        $title = 'Detail Agenda';
+        return view('agenda.detail_agenda', compact('title', 'events'));    }
 
     public function destroy(Request $request): JsonResponse
     {

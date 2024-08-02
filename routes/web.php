@@ -97,6 +97,8 @@ Route::prefix('agenda')->name('agenda.')->group(function () {
     Route::get('/events', [AgendaController::class, 'getEvents'])->name('events.get');
     Route::post('/events', [AgendaController::class, 'storeEvent'])->name('events.store');
     Route::delete('/events/{id}', [AgendaController::class, 'destroy'])->name('events.destroy');
+    Route::get('/detail-agenda', [AgendaController::class, 'showDetailAgenda'])->name('detail_agenda.index');
+    Route::put('/events/{id}', [AgendaController::class, 'update'])->name('events.update');
 });
 
 Route::group(['prefix' => 'superadmin', 'middleware' => ['isLogin','superadmin']], function(){
