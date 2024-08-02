@@ -104,6 +104,7 @@ Route::prefix('agenda')->group(function () {
 Route::get('/login', function () {
     $title = 'Map';
     return view('session.login', compact('title'));
+});
 
 Route::group(['prefix' => 'superadmin', 'middleware' => 'superadmin'], function(){
     Route::get('/', [superAdminController::class,'index'])->name('superadmin');
