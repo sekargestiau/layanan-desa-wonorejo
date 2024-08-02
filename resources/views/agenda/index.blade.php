@@ -28,17 +28,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
-
+    
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: '{{ route('events.get') }}', // use the named route
+                events: '{{ route('events.get') }}', // Fetch events from server
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
-                navLinks: true, // can click day/week names to navigate views
-                businessHours: true, // display business hours
+                navLinks: true, // Click day/week names to navigate views
+                businessHours: true, // Display business hours
                 editable: true,
                 selectable: true,
                 selectMirror: true,
@@ -64,18 +64,39 @@
                                     allDay: response.all_day
                                 });
                                 calendar.unselect();
+                            },
+                            error: function(xhr) {
+                                alert('Error adding event: ' + xhr.responseText);
                             }
                         });
                     }
                 },
                 eventClick: function(arg) {
-                    if (confirm('Are you sure you want to delete this event?')) {
+            if (confirm('Are you sure you want to delete this event?')) {
+                $.ajax({
+                    url: '{{ route('events.destroy', ':id') }}'.replace(':id', arg.event.id),
+                    type: 'POST', // Use POST for method spoofing
+                    data: {
+                        _method: 'DELETE', // Method spoofing for DELETE
+                        _token: '{{ csrf_token() }}', // CSRF token
+                        id: arg.event.id // Ensure the id is included in the data
+                    },
+                    success: function(response) {
                         arg.event.remove();
+                        alert('Event deleted successfully.');
+                    },
+                    error: function(xhr) {
+                        alert('Error deleting event: ' + xhr.responseText);
                     }
-                }
-            });
+                });
+            }
+        }
 
+
+            });
+    
             calendar.render();
         });
     </script>
+    
 @endsection

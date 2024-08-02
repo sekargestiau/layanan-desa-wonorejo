@@ -98,6 +98,7 @@ Route::prefix('agenda')->group(function () {
 });
 Route::get('/events', [AgendaController::class, 'getEvents'])->name('events.get');
 Route::post('/events', [AgendaController::class, 'storeEvent'])->name('events.store');
+Route::delete('/events/{id}', [AgendaController::class, 'destroy'])->name('events.destroy');
     
 Route::group(['prefix' => 'superadmin', 'middleware' => ['isLogin','superadmin']], function(){
     Route::get('/', [superAdminController::class,'index'])->name('superadmin');
