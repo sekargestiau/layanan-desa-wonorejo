@@ -16,5 +16,6 @@ class Event extends Model
         'start',
         'end',
         'all_day',
+        'location',
     ];
 }

@@ -1,4 +1,3 @@
-<!-- resources/views/agenda/index.blade.php -->
 
 @extends('agenda.components.main')
 
@@ -58,6 +57,10 @@
                                 <label class="form-check-label" for="eventAllDay">All Day</label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="eventLocation">Location</label>
+                            <input type="text" class="form-control" id="eventLocation" name="location">
+                        </div>
                         <button type="submit" class="btn btn-primary">Save Event</button>
                     </form>
                 </div>
@@ -84,9 +87,11 @@
             selectMirror: true,
             select: function(arg) {
                 // Open the modal when a date is selected
+                $('#eventTitle').val('');
                 $('#eventStart').val(formatDate(arg.start));
                 $('#eventEnd').val(arg.end ? formatDate(arg.end) : '');
                 $('#eventAllDay').prop('checked', arg.allDay);
+                $('#eventLocation').val('');
                 $('#eventModal').modal('show');
 
                 // Handle form submission
@@ -102,7 +107,8 @@
                             title: $('#eventTitle').val(),
                             start: $('#eventStart').val(),
                             end: $('#eventEnd').val(),
-                            all_day: $('#eventAllDay').is(':checked')
+                            all_day: $('#eventAllDay').is(':checked'),
+                            location: $('#eventLocation').val()
                         })
                     })
                     .then(response => response.json())
@@ -115,7 +121,8 @@
                                 title: data.title,
                                 start: data.start,
                                 end: data.end,
-                                allDay: data.all_day
+                                allDay: data.all_day,
+                                location: data.location
                             });
                             $('#eventModal').modal('hide');
                         }

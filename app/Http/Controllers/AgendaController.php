@@ -40,6 +40,7 @@ class AgendaController extends Controller
         'start' => 'required|date',
         'end' => 'nullable|date|after_or_equal:start',
         'all_day' => 'required|boolean',
+        'location' => 'nullable|string|max:255',
     ]);
 
     if ($validator->fails()) {
@@ -55,6 +56,7 @@ class AgendaController extends Controller
             'start' => $request->input('start'),
             'end' => $request->input('end'),
             'all_day' => $request->input('all_day'),
+            'location' => $request->input('location'),
         ]);
 
         return response()->json($event, 201); // Created
