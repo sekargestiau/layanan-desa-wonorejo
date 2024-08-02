@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\petaController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\pengaduanController;
+use App\Http\Controllers\petaController;
+use App\Http\Controllers\sessionController;
 use App\Http\Controllers\PosyanduController;
-use App\Http\Controllers\CalendarController;
 
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\pengaduanController;
+use App\Http\Controllers\superAdminController;
 
 Route::get('/example', function () {
     $title = 'Map';
@@ -37,7 +39,8 @@ Route::group(['prefix' => 'peta'], function () {
 // Route Posyandu
 // Route::group(['prefix' => 'posyandu', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'posyandu'], function () {
-    Route::get('/balita', [PosyanduController::class, 'index_balita']);
+    Route::get('/', [PosyanduController::class, 'index_balita'])->name('posyandu.admin');
+    Route::get('/balita', [PosyanduController::class, 'index_balita'])->name('posyandu.admin');
     Route::get('/balita/create', [PosyanduController::class, 'create_balita']);
     Route::post('/balita/store', [PosyanduController::class, 'store_balita']);
     Route::get('/balita/edit/{id}', [PosyanduController::class, 'edit_balita']);
@@ -101,7 +104,20 @@ Route::prefix('agenda')->group(function () {
 Route::get('/login', function () {
     $title = 'Map';
     return view('session.login', compact('title'));
+
+Route::group(['prefix' => 'superadmin', 'middleware' => 'superadmin'], function(){
+    Route::get('/', [superAdminController::class,'index'])->name('superadmin');
+    Route::patch('/updateStatus/{id}', [superAdminController::class,'updateStatus'])->name('superadmin.updateStatus');
+    Route::get('/create', [superAdminController::class,'create'])->name('superadmin.create');
+    Route::post('/store', [superAdminController::class,'store'])->name('superadmin.store');
+    Route::get('/view/{id}', [superAdminController::class,'view'])->name('superadmin.view');
+    Route::put('/update/{id}', [superAdminController::class,'update'])->name('superadmin.update');
+    Route::delete('/delete/{id}', [superAdminController::class,'delete'])->name('superadmin.delete');
 });
+
+Route::get('/login', [sessionController::class,'index'])->name('loginPage');
+Route::post('/login', [sessionController::class,'login'])->name('login');
+Route::get('/logout',[sessionController::class,'logout'])->name('logout');
 
 Route::get('/landing', function () {
     $title = 'Map';

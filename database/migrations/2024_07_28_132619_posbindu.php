@@ -13,18 +13,27 @@ return new class extends Migration
     {
         Schema::create('posbindu', function (Blueprint $table) {
             $table->id();
-            $table->enum('nama_posyandu', ['Posyandu Jetis', 'Posyandu Blimbing', 'Posyandu Wonorejo','Posyandu Sayangan','Posyandu Bangunrejo','Posyandu Bancakan','Posyandu Tegalan']);
+            $table->enum('nama_posyandu', [
+                'Posyandu 1 Anggrek - Njetis',
+                'Posyandu 2 Flamboyan - Sayangan',
+                'Posyandu 3 Riya - Wonorejo',
+                'Posyandu 4 Melati - Blimbing 4',
+                'Posyandu 5 Dahlia - Blimbing 5',
+                'Posyandu 6 Mawar - Blimbing 6',
+                'Posyandu 7 Cempaka - Perum Persada Hijau'
+            ]);
             $table->string('nama');
             $table->integer('umur_tahun');
-            $table->integer('umur_bulan');
             $table->integer('rt');
             $table->integer('rw');
             $table->float('berat_badan');
             $table->float('tinggi_badan');
             $table->float('lemak_perut');
-            $table->float('tensi_darah');
+            $table->float('tensi_darah_sistolik');
+            $table->float('tensi_darah_diastolik');
             $table->float('gula_darah');
             $table->float('kolesterol');
+            $table->float('asam_urat');
             $table->enum('status_perokok', ['Perokok Aktif', 'Perokok Pasif', 'Bukan Perokok']);
             $table->string('riwayat_penyakit');
             $table->date('tanggal');

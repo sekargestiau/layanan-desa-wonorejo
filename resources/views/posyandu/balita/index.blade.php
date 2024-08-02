@@ -199,7 +199,7 @@
                         {{ $balita->lingkar_lengan }} cm
                     </td>
                     <td class="px-6 py-4">
-                        {{ \Carbon\Carbon::parse($balita->tanggal)->format('d F Y') }}
+                        {{ \Carbon\Carbon::parse($balita->tanggal)->locale('id')->isoFormat('D MMMM Y') }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $balita->status_stunting }}
@@ -227,6 +227,7 @@
             @endforeach
         </tbody>
     </table>
+    @include('posyandu.components.paginationbalita')
 
 
     <!-- Modal konfirmasi -->

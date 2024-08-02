@@ -38,7 +38,8 @@
     </div>
 
     <div class="mb-4">
-      <h3 class="text-lg font-semibold mb-2">Hasil periksa</h3>
+        <h3 class="text-lg font-semibold mt-0">Hasil periksa</h3>
+        <h4 class="text-sm text-gray-800 mb-2">Gunakan tanda titik (.) untuk angka desimal. Contoh: 120.5</h4>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="nama">Nama</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nama" id="nama" type="text" value="{{ $posbindu->nama }}">
@@ -51,13 +52,9 @@
                 <span class="bg-white-200 px-3 py-2 text-black-700">tahun</span>
             </div>
         </div>
-        <div>
-            <label class="block text-white text-sm font-bold mb-2" for="umur_bulan">Umur</label>
-            <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="umur_bulan" id="umur_bulan" type="number" value="{{ $posbindu->umur_bulan }}">
-                <span class="bg-white-200 px-3 py-2 text-black-700">bulan</span>
-            </div>
-        </div>
+    </div>
+    <br>
+      <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="rt">RT</label>
             <div class="flex items-center">
@@ -82,7 +79,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="berat_badan">Berat Badan</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" value="{{ $posbindu->berat_badan }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" step="any" value="{{ $posbindu->berat_badan }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">kg</span>
             </div>
         </div>
@@ -93,7 +90,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="tinggi_badan">Tinggi Badan</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tinggi_badan" id="tinggi_badan" type="number" value="{{ $posbindu->tinggi_badan }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tinggi_badan" id="tinggi_badan" type="number" step="any" value="{{ $posbindu->tinggi_badan }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
         </div>
@@ -103,7 +100,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="lemak_perut">Lemak Perut</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lemak_perut" id="lemak_perut" type="number" value="{{ $posbindu->lemak_perut }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lemak_perut" id="lemak_perut" type="number" step="any" value="{{ $posbindu->lemak_perut }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
             </div>
         </div>
@@ -111,19 +108,26 @@
     <br>
     <div class="grid grid-cols-2 gap-4">
         <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah">Tensi Darah</label>
-            <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah" id="tensi_darah" type="number" value="{{ $posbindu->tensi_darah }}">
-                <span class="bg-white-200 px-3 py-2 text-black-700">mmHg</span>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah_sistolik">Tensi Darah</label>
+                <div class="flex items-center">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah_sistolik" id="tensi_darah_sistolik" type="number" step="any" value="{{ $posbindu->tensi_darah_sistolik }}">
+                    <span class="bg-white-200 px-3 py-2 text-black-700">/</span>
+                </div>
             </div>
-        </div>
+            <div>
+                <label class="block text-white text-sm font-bold mb-2" for="tensi_darah_diastolik">Tensi Darah</label>
+                <div class="flex items-center">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah_diastolik" id="tensi_darah_diastolik" type="number" step="any" value="{{ $posbindu->tensi_darah_diastolik }}">
+                    <span class="bg-white-200 px-3 py-2 text-white-700">mmHg</span>
+                </div>
+            </div>
     </div>
     <br>    
     <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="gula_darah">Gula Darah</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="gula_darah" id="gula_darah" type="number" value="{{ $posbindu->gula_darah }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="gula_darah" id="gula_darah" type="number" step="any" value="{{ $posbindu->gula_darah }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
             </div>
         </div>
@@ -133,7 +137,17 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="kolesterol">Kolesterol</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="kolesterol" id="kolesterol" type="number" value="{{ $posbindu->kolesterol }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="kolesterol" id="kolesterol" type="number" step="any" value="{{ $posbindu->kolesterol }}">
+                <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="asam_urat">Asam Urat</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="asam_urat" id="asam_urat" type="number" step="any" value="{{ $posbindu->asam_urat }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
             </div>
         </div>

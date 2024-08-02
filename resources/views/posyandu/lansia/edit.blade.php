@@ -38,7 +38,8 @@
     </div>
 
     <div class="mb-4">
-      <h3 class="text-lg font-semibold mb-2">Hasil periksa</h3>
+        <h3 class="text-lg font-semibold mt-0">Hasil periksa</h3>
+        <h4 class="text-sm text-gray-800 mb-2">Gunakan tanda titik (.) untuk angka desimal. Contoh: 120.5</h4>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="nama">Nama</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nama" id="nama" type="text" value="{{ $lansia->nama }}">
@@ -79,7 +80,7 @@
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="berat_badan">Berat Badan</label>
             <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" value="{{ $lansia->berat_badan }}">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="berat_badan" id="berat_badan" type="number" step="any" value="{{ $lansia->berat_badan }}">
                 <span class="bg-white-200 px-3 py-2 text-black-700">kg</span>
             </div>
         </div>
@@ -88,12 +89,19 @@
     
     <div class="grid grid-cols-2 gap-4">
         <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah">Tensi Darah</label>
-            <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah" id="tensi_darah" type="number" value="{{ $lansia->tensi_darah }}">
-                <span class="bg-white-200 px-3 py-2 text-black-700">mmHg</span>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah_sistolik">Tensi Darah</label>
+                <div class="flex items-center">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah_sistolik" id="tensi_darah_sistolik" type="number" step="any" value="{{ $lansia->tensi_darah_sistolik }}">
+                    <span class="bg-white-200 px-3 py-2 text-black-700">/</span>
+                </div>
             </div>
-        </div>
+            <div>
+                <label class="block text-white text-sm font-bold mb-2" for="tensi_darah_diastolik">Tensi Darah</label>
+                <div class="flex items-center">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah_diastolik" id="tensi_darah_diastolik" type="number" step="any" value="{{ $lansia->tensi_darah_diastolik }}">
+                    <span class="bg-white-200 px-3 py-2 text-white-700">mmHg</span>
+                </div>
+            </div>
     </div>
     <br>
     <div class="mb-4">

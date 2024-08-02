@@ -186,10 +186,10 @@
                         {{ $remaja->tinggi_badan }} cm
                     </td>
                     <td class="px-6 py-4">
-                        {{ $remaja->tensi_darah }} mmHg
+                        {{ $remaja->tensi_darah_sistolik }}/{{ $remaja->tensi_darah_diastolik }} mmHg
                     </td>
                     <td class="px-6 py-4">
-                        {{ \Carbon\Carbon::parse($remaja->tanggal)->format('d F Y') }}
+                        {{ \Carbon\Carbon::parse($remaja->tanggal)->locale('id')->isoFormat('D MMMM Y') }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $remaja->keterangan_lain }}
@@ -214,6 +214,7 @@
             @endforeach
         </tbody>
     </table>
+    @include('posyandu.components.paginationremaja')
 
 
     <!-- Modal konfirmasi -->

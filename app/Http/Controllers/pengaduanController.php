@@ -60,7 +60,18 @@ class pengaduanController extends Controller
             'title' => 'required|string|max:255',
             'file_input.*' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'message' => 'required|string',
+            'g-recaptcha-response' => 'required',
         ]);
+
+        $recaptchaSecret = config('services.recaptcha.secret');
+        $recaptchaResponse = $request->input('g-recaptcha-response');
+    
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecret}&response={$recaptchaResponse}");
+        $responseKeys = json_decode($response, true);
+    
+        if (!$responseKeys['success']) {
+            return redirect()->back()->withErrors(['captcha' => 'CAPTCHA verification failed, please try again.']);
+        }
 
         $filePaths = [];
         if ($request->hasFile('file_input')) {
@@ -80,6 +91,7 @@ class pengaduanController extends Controller
             'file_paths' => json_encode($filePaths),
             'message' => $validatedData['message'],
         ]);
+
         return redirect('/pengaduan')->with('success', 'Pengaduan berhasil dikirim!');
     }
 
