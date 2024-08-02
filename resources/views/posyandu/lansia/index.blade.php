@@ -175,7 +175,7 @@
                         {{ $lansia->nama }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->umur_tahun }} Tahun {{ $lansia->umur_bulan }} Bulan
+                        {{ $lansia->umur_tahun }} Tahun
                     </td>
                     <td class="px-6 py-4">
                         {{ $lansia->berat_badan }} kg
