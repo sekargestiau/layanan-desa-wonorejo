@@ -47,11 +47,15 @@ class petaController extends Controller
     }
 
 
-    public function map()
+    public function map(Request $request)
     {
+        $origin = $request->query('origin');
         $title = 'Peta Desa Wonorejo';
         $data = Peta::all();
-        return view('map.index', compact('title', 'data'));
+        if($origin == null){
+            $origin = '';
+        }
+        return view('map.index', compact('title', 'data', 'origin'));
     }
 
     public function create()

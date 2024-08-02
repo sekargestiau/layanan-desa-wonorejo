@@ -36,7 +36,7 @@
                     <option value="{{ $peta->destinasi }}">Dusun {{ $peta->dusun }}, RW {{ $peta->rw }}, RT {{ $peta->rt }}</option>
                 @endforeach
             </select>
-            <a id="lihatPeta" href="https://www.google.com/maps/dir/?api=1&destination="
+            <a id="lihatPeta" href="https://www.google.com/maps/dir/?api=1&origin={{ $origin }}&destination="
                 class="text-white sm:w-80 bg-gradient-to-r text-center from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 py-2 px-4 rounded-md w-3/4 mx-auto mt-4 font-semibold">
                 Lihat Peta
             </a>
@@ -47,7 +47,7 @@
         document.getElementById('lokasi').addEventListener('change', function () {
             var selectedValue = this.value;
             var lihatPetaLink = document.getElementById('lihatPeta');
-            lihatPetaLink.href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(selectedValue);
+            lihatPetaLink.href = 'https://www.google.com/maps/dir/?api=1&origin={{ $origin }}&destination=' + encodeURIComponent(selectedValue);
         });
     </script>
 </body>
