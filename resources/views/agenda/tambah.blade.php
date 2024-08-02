@@ -1,4 +1,3 @@
-
 @extends('agenda.components.main')
 
 @section('content')
@@ -6,6 +5,51 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        .modal-content {
+            border-radius: 0.5rem;
+            border: 1px solid #dee2e6;
+        }
+
+        .modal-header {
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-primary:hover, .btn-danger:hover {
+            opacity: 0.8;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+    </style>
 
     <!-- FullCalendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
@@ -29,7 +73,7 @@
 
     <!-- Event Modal -->
     <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="eventModalLabel">Add Event</h5>
@@ -61,8 +105,33 @@
                             <label for="eventLocation">Location</label>
                             <input type="text" class="form-control" id="eventLocation" name="location">
                         </div>
-                        <button type="submit" class="btn btn-primary">Save Event</button>
+                        <button type="submit" class="btn btn-primary btn-block">Save Event</button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div class="modal fade" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventDetailsModalLabel">Event Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Title:</strong> <span id="eventDetailsTitle"></span></p>
+                    <p><strong>Start:</strong> <span id="eventDetailsStart"></span></p>
+                    <p><strong>End:</strong> <span id="eventDetailsEnd"></span></p>
+                    <p><strong>All Day:</strong> <span id="eventDetailsAllDay"></span></p>
+                    <p><strong>Location:</strong> <span id="eventDetailsLocation"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="deleteEventButton">Delete Event</button>
                 </div>
             </div>
         </div>
@@ -133,7 +202,17 @@
                 });
             },
             eventClick: function(arg) {
-                if (confirm('Are you sure you want to delete this event?')) {
+                // Update the details modal with event information
+                $('#eventDetailsTitle').text(arg.event.title);
+                $('#eventDetailsStart').text(formatDate(arg.event.start));
+                $('#eventDetailsEnd').text(arg.event.end ? formatDate(arg.event.end) : 'N/A');
+                $('#eventDetailsAllDay').text(arg.event.allDay ? 'Yes' : 'No');
+                $('#eventDetailsLocation').text(arg.event.extendedProps.location || 'N/A');
+                
+                $('#eventDetailsModal').modal('show');
+
+                // Handle delete button click
+                $('#deleteEventButton').off('click').on('click', function() {
                     fetch('{{ route('agenda.events.destroy', ':id') }}'.replace(':id', arg.event.id), {
                         method: 'POST',
                         headers: {
@@ -150,21 +229,21 @@
                         if (data.errors) {
                             alert('Error deleting event: ' + JSON.stringify(data.errors));
                         } else {
-                            arg.event.remove();
-                            alert('Event deleted successfully.');
+                            calendar.getEventById(arg.event.id).remove();
+                            $('#eventDetailsModal').modal('hide');
                         }
                     })
                     .catch(error => {
                         alert('Error deleting event: ' + error.message);
                     });
-                }
+                });
             }
         });
 
         calendar.render();
 
         function formatDate(date) {
-            return date.toISOString().slice(0, 19).replace('T', ' ');
+            return date.toISOString().slice(0, 16);
         }
     });
     </script>
