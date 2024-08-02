@@ -88,7 +88,6 @@ Route::group(['prefix' => 'pengaduan'], function () {
 
 // Agenda Routes
 Route::prefix('agenda')->group(function () {
-    // Route to display the agenda index page
     Route::get('/', function () {
         $title = 'Agenda';
         return view('agenda.index', compact('title'));

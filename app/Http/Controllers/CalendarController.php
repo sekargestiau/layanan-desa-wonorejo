@@ -45,18 +45,18 @@ class CalendarController extends Controller
         // Validate the request data
         $validatedData = $request->validate([
             'eventName' => 'required|string|max:255',
-            'eventDate' => 'required|date|date_format:Y-m-d',
+            'eventDate' => 'required|date|date_format:d-m-y',
             'eventTime' => 'required|date_format:H:i',
-            'eventEndDate' => 'required|date|date_format:Y-m-d',
+            'eventEndDate' => 'required|date|date_format:d-m-y',
             'eventEndTime' => 'required|date_format:H:i',
             'eventLocation' => 'required|string|max:255',
         ]);
-
+    
         try {
             // Combine date and time to create datetime values
             $startDateTime = $validatedData['eventDate'] . ' ' . $validatedData['eventTime'];
             $endDateTime = $validatedData['eventEndDate'] . ' ' . $validatedData['eventEndTime'];
-
+    
             // Store event details in the database
             $event = new Event();
             $event->name = $validatedData['eventName'];
@@ -64,19 +64,22 @@ class CalendarController extends Controller
             $event->end_datetime = $endDateTime;
             $event->location = $validatedData['eventLocation'];
             $event->save();
-
+    
             return response()->json([
                 'id' => $event->id,
                 'eventName' => $event->name,
                 'start' => $event->start_datetime,
                 'end' => $event->end_datetime,
                 'eventLocation' => $event->location
-            ]);
+            ], 201); // HTTP status code 201 for a successful creation
         } catch (\Exception $e) {
             \Log::error('Failed to save event details: ' . $e->getMessage());
+    
+            // Return a JSON response with an appropriate error message and status code
             return response()->json(['error' => 'Failed to save event details. Please try again later.'], 500);
         }
     }
+    
 
     /**
      * Fetch events for the calendar.

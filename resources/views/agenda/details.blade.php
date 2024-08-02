@@ -168,9 +168,10 @@
                         createEventForm.addEventListener('submit', function(e) {
                             e.preventDefault();
                             var formData = new FormData(createEventForm);
+                            console.log(formData)
                             fetch('{{ route('agenda.storeDetails') }}', {
                                 method: 'POST',
-                                body: formData,
+                                body: JSON.parse(formData),
                                 headers: {
                                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                                 }
@@ -219,6 +220,7 @@
 
                 document.getElementById('submitEventBtn').addEventListener('click', function() {
                     var formData = new FormData(eventForm);
+                    alert(formData)
                     fetch('{{ route('agenda.storeDetails') }}', {
                         method: 'POST',
                         body: formData,
