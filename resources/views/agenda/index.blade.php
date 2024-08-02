@@ -27,92 +27,24 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-    
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            events: '{{ route('events.get') }}', // Fetch events from server
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            navLinks: true, // Click day/week names to navigate views
-            businessHours: true, // Display business hours
-            editable: true,
-            selectable: true,
-            selectMirror: true,
-            select: function(arg) {
-                var title = prompt('Event Title:');
-                if (title) {
-                    fetch('{{ route('events.store') }}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({
-                            title: title,
-                            start: formatDate(arg.start),
-                            end: arg.end ? formatDate(arg.end) : null,
-                            all_day: arg.allDay
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.errors) {
-                            alert('Error adding event: ' + JSON.stringify(data.errors));
-                        } else {
-                            calendar.addEvent({
-                                id: data.id,
-                                title: data.title,
-                                start: data.start,
-                                end: data.end,
-                                allDay: data.all_day
-                            });
-                            calendar.unselect();
-                        }
-                    })
-                    .catch(error => {
-                        alert('Error adding event: ' + error.message);
-                    });
-                }
-            },
-            eventClick: function(arg) {
-                if (confirm('Are you sure you want to delete this event?')) {
-                    fetch('{{ route('events.destroy', ':id') }}'.replace(':id', arg.event.id), {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({
-                            _method: 'DELETE',
-                            id: arg.event.id
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.errors) {
-                            alert('Error deleting event: ' + JSON.stringify(data.errors));
-                        } else {
-                            arg.event.remove();
-                            alert('Event deleted successfully.');
-                        }
-                    })
-                    .catch(error => {
-                        alert('Error deleting event: ' + error.message);
-                    });
-                }
-            }
-        });
-    
-        calendar.render();
-    
-        function formatDate(date) {
-            return date.toISOString().slice(0, 19).replace('T', ' ');
-        }
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: '{{ route('agenda.events.get') }}', // Fetch events from server
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        navLinks: true, // Click day/week names to navigate views
+        businessHours: true, // Display business hours
+        editable: false, // Disable editing events
+        selectable: false, // Disable selecting dates
     });
+
+    calendar.render();
+});
     </script>
     
 @endsection

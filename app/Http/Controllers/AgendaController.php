@@ -20,6 +20,12 @@ class AgendaController extends Controller
         return response()->json($events);
     }
 
+    public function create()
+{
+    $title = 'Tambah Agenda'; // Define the title
+    return view('agenda.tambah', compact('title')); // Pass the title to the view
+}
+
     /**
      * Store a new event.
      *

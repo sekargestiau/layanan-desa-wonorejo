@@ -86,20 +86,19 @@ Route::group(['prefix' => 'pengaduan'], function () {
     });
 });
 
-// Agenda Routes
-Route::prefix('agenda')->group(function () {
+Route::prefix('agenda')->name('agenda.')->group(function () {
+    // Route to display the calendar view
     Route::get('/', function () {
         $title = 'Agenda';
         return view('agenda.index', compact('title'));
-    })->name('agenda.index');
+    })->name('index');
 
-    
-    
+    Route::get('/tambah', [AgendaController::class, 'create'])->name('tambah');
+    Route::get('/events', [AgendaController::class, 'getEvents'])->name('events.get');
+    Route::post('/events', [AgendaController::class, 'storeEvent'])->name('events.store');
+    Route::delete('/events/{id}', [AgendaController::class, 'destroy'])->name('events.destroy');
 });
-Route::get('/events', [AgendaController::class, 'getEvents'])->name('events.get');
-Route::post('/events', [AgendaController::class, 'storeEvent'])->name('events.store');
-Route::delete('/events/{id}', [AgendaController::class, 'destroy'])->name('events.destroy');
-    
+
 Route::group(['prefix' => 'superadmin', 'middleware' => ['isLogin','superadmin']], function(){
     Route::get('/', [superAdminController::class,'index'])->name('superadmin');
     Route::patch('/updateStatus/{id}', [superAdminController::class,'updateStatus'])->name('superadmin.updateStatus');
