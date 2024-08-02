@@ -27,39 +27,38 @@ class AgendaController extends Controller
      * @return JsonResponse
      */
     public function storeEvent(Request $request): JsonResponse
-    {
-        // Validate the request
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'start' => 'required|date',
-            'end' => 'nullable|date|after_or_equal:start',
-            'all_day' => 'required|boolean',
+{
+    // Validate the request
+    $validator = Validator::make($request->all(), [
+        'title' => 'required|string|max:255',
+        'start' => 'required|date',
+        'end' => 'nullable|date|after_or_equal:start',
+        'all_day' => 'required|boolean',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'errors' => $validator->errors()
+        ], 422); // Unprocessable Entity
+    }
+
+    // Create the event
+    try {
+        $event = Event::create([
+            'title' => $request->input('title'),
+            'start' => $request->input('start'),
+            'end' => $request->input('end'),
+            'all_day' => $request->input('all_day'),
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 422); // Unprocessable Entity
-        }
-
-        // Create the event
-        try {
-            $event = Event::create([
-                'title' => $request->input('title'),
-                'start' => $request->input('start'),
-                'end' => $request->input('end'),
-                'all_day' => $request->input('all_day', true),
-            ]);
-
-            return response()->json($event, 201); // Created
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'An error occurred while creating the event.',
-                'message' => $e->getMessage()
-            ], 500); // Internal Server Error
-        }
-        
+        return response()->json($event, 201); // Created
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'An error occurred while creating the event.',
+            'message' => $e->getMessage()
+        ], 500); // Internal Server Error
     }
+}
 
     public function destroy(Request $request): JsonResponse
     {
