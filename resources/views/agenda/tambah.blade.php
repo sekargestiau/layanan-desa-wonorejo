@@ -1,3 +1,5 @@
+<!-- resources/views/agenda/index.blade.php -->
+
 @extends('agenda.components.main')
 
 @section('content')
@@ -13,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <!-- Calendar View -->
     <nav class="justify-between px-4 py-3 text-black border border-gray-200 rounded-lg sm:flex sm:px-5 bg-gradient-to-r from-cyan-500 to-blue-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 dark:border-gray-700 text-lg" aria-label="Breadcrumb">
         <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-2 rtl:space-x-reverse sm:mb-0">
             <li>
@@ -25,10 +28,47 @@
 
     <div id="calendar" style="max-width: 1200px; margin: 20px auto;"></div>
 
+    <!-- Event Modal -->
+    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventModalLabel">Add Event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="eventForm">
+                        <div class="form-group">
+                            <label for="eventTitle">Title</label>
+                            <input type="text" class="form-control" id="eventTitle" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventStart">Start</label>
+                            <input type="datetime-local" class="form-control" id="eventStart" name="start" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventEnd">End</label>
+                            <input type="datetime-local" class="form-control" id="eventEnd" name="end">
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="eventAllDay" name="all_day">
+                                <label class="form-check-label" for="eventAllDay">All Day</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Event</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-    
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             events: '{{ route('agenda.events.get') }}', // Fetch events from server
@@ -43,8 +83,15 @@
             selectable: true,
             selectMirror: true,
             select: function(arg) {
-                var title = prompt('Event Title:');
-                if (title) {
+                // Open the modal when a date is selected
+                $('#eventStart').val(formatDate(arg.start));
+                $('#eventEnd').val(arg.end ? formatDate(arg.end) : '');
+                $('#eventAllDay').prop('checked', arg.allDay);
+                $('#eventModal').modal('show');
+
+                // Handle form submission
+                $('#eventForm').off('submit').on('submit', function(e) {
+                    e.preventDefault();
                     fetch('{{ route('agenda.events.store') }}', {
                         method: 'POST',
                         headers: {
@@ -52,10 +99,10 @@
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
                         body: JSON.stringify({
-                            title: title,
-                            start: formatDate(arg.start),
-                            end: arg.end ? formatDate(arg.end) : null,
-                            all_day: arg.allDay
+                            title: $('#eventTitle').val(),
+                            start: $('#eventStart').val(),
+                            end: $('#eventEnd').val(),
+                            all_day: $('#eventAllDay').is(':checked')
                         })
                     })
                     .then(response => response.json())
@@ -70,13 +117,13 @@
                                 end: data.end,
                                 allDay: data.all_day
                             });
-                            calendar.unselect();
+                            $('#eventModal').modal('hide');
                         }
                     })
                     .catch(error => {
                         alert('Error adding event: ' + error.message);
                     });
-                }
+                });
             },
             eventClick: function(arg) {
                 if (confirm('Are you sure you want to delete this event?')) {
@@ -106,13 +153,12 @@
                 }
             }
         });
-    
+
         calendar.render();
-    
+
         function formatDate(date) {
             return date.toISOString().slice(0, 19).replace('T', ' ');
         }
     });
     </script>
-    
 @endsection
