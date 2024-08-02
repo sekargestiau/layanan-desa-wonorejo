@@ -19,9 +19,13 @@
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="#" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Peta</a>
-                    <a href="#" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Pengaduan</a>                    
-                    <a href="#" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Login</a>
+                    <a href="{{ route('peta.map') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Peta</a>
+                    <a href="{{ route('pengaduan') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Pengaduan</a>
+                    @if (Auth::check())
+                    <a href="{{ route('logout') }} " class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Logout</a>
+                    @else
+                    <a href="{{ route('loginPage') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Login</a>
+                    @endif
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">

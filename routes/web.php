@@ -18,11 +18,11 @@ Route::get('/example', function () {
 Route::get('/', function () {
     $title = 'Layanan Desa Wonorejo';
     return view('landing', compact('title'));
-});
+})->name('home');
 
 //Route Peta
-Route::group(['prefix' => 'peta'], function () {
-    Route::get('/', [petaController::class, 'map'])->name('peta.map');
+Route::get('peta/', [petaController::class, 'map'])->name('peta.map');
+Route::group(['prefix' => 'peta', 'middleware' => ['isLogin', 'adminPeta']], function () {
     Route::get('/admin', [petaController::class, 'index'])->name('peta.admin');
     Route::get('/admin/export', [petaController::class, 'export'])->name('peta.export');
     Route::get('/admin/filter', [petaController::class, 'export_filtered'])->name('peta.filter');
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'peta'], function () {
 
 // Route Posyandu
 // Route::group(['prefix' => 'posyandu', 'middleware' => 'auth'], function () {
-Route::group(['prefix' => 'posyandu'], function () {
+Route::group(['prefix' => 'posyandu', 'middleware' => ['isLogin','adminPosyandu']], function () {
     Route::get('/', [PosyanduController::class, 'index_balita'])->name('posyandu.admin');
     Route::get('/balita', [PosyanduController::class, 'index_balita'])->name('posyandu.admin');
     Route::get('/balita/create', [PosyanduController::class, 'create_balita']);
@@ -73,14 +73,16 @@ Route::group(['prefix' => 'posyandu'], function () {
 });
 
 Route::group(['prefix' => 'pengaduan'], function () {
-    Route::get('/', [PengaduanController::class, 'index']);
+    Route::get('/', [PengaduanController::class, 'index'])->name('pengaduan');
     Route::post('/', [PengaduanController::class, 'store']);
-    Route::get('/admin', [PengaduanController::class, 'show_all'])->name('pengaduan.admin');
-    Route::get('/admin/stats', [PengaduanController::class, 'stats']);
-    Route::get('/admin/export', [PengaduanController::class, 'export_data'])->name('pengaduan.export');
-    Route::get('/isu/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
-    Route::get('/isu/{id}/delete', [PengaduanController::class, 'destroy'])->name('pengaduan.delete');
-    Route::patch('/isu/{id}/status', [PengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
+    Route::group(['middleware' => ['isLogin', 'adminPengaduan']], function () {
+        Route::get('/admin', [PengaduanController::class, 'show_all'])->name('pengaduan.admin');
+        Route::get('/admin/stats', [PengaduanController::class, 'stats']);
+        Route::get('/admin/export', [PengaduanController::class, 'export_data'])->name('pengaduan.export');
+        Route::get('/isu/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
+        Route::get('/isu/{id}/delete', [PengaduanController::class, 'destroy'])->name('pengaduan.delete');
+        Route::patch('/isu/{id}/status', [PengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
+    });
 });
 
 Route::get('/agenda', function () {
@@ -88,7 +90,7 @@ Route::get('/agenda', function () {
     return view('agenda.index', compact('title'));
 });
 
-Route::group(['prefix' => 'superadmin', 'middleware' => 'superadmin'], function(){
+Route::group(['prefix' => 'superadmin', 'middleware' => ['isLogin','superadmin']], function(){
     Route::get('/', [superAdminController::class,'index'])->name('superadmin');
     Route::patch('/updateStatus/{id}', [superAdminController::class,'updateStatus'])->name('superadmin.updateStatus');
     Route::get('/create', [superAdminController::class,'create'])->name('superadmin.create');
@@ -98,8 +100,10 @@ Route::group(['prefix' => 'superadmin', 'middleware' => 'superadmin'], function(
     Route::delete('/delete/{id}', [superAdminController::class,'delete'])->name('superadmin.delete');
 });
 
-Route::get('/login', [sessionController::class,'index'])->name('loginPage');
-Route::post('/login', [sessionController::class,'login'])->name('login');
+Route::group(['middleware' => 'notLogin'], function(){
+    Route::get('/login', [sessionController::class,'index'])->name('loginPage');
+    Route::post('/login', [sessionController::class,'login'])->name('login');
+});
 Route::get('/logout',[sessionController::class,'logout'])->name('logout');
 
 Route::get('/landing', function () {

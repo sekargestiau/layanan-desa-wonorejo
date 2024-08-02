@@ -32,6 +32,9 @@ class sessionController extends Controller
                 case 'admin_pengaduan':
                     return redirect()->route('pengaduan.admin');
                     // break; 
+                case 'superadmin':
+                    return redirect()->route('superadmin');
+                    // break;
                 default: // added default case
                     return back()->withErrors('Role not recognized');
             }
