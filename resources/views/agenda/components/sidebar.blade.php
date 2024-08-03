@@ -16,7 +16,7 @@
                </div>
             </div>
          </li>
-         <!-- Show Login button if user is a guest -->
+
          @guest
          <li>
             <a href="{{ route('login') }}" class="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-green-300 dark:hover:bg-green-700 group">
@@ -27,7 +27,7 @@
             </a>
          </li>
          @else
-         <!-- Show sidebar options if user is logged in -->
+
          <li>
             <a href="{{ route('agenda.tambah') }}" class="flex items-center p-2 text-white rounded-lg hover:text-black hover:bg-green-300 dark:hover:bg-green-700 group {{ request()->routeIs('agenda.tambah') ? 'bg-green-400' : '' }}">
                <svg class="w-6 h-6 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

@@ -92,7 +92,6 @@ Route::prefix('agenda')->name('agenda.')->group(function () {
         return view('agenda.index', compact('title'));
     })->name('index');
 
-    // Allow guests to access the events
     Route::get('/events', [AgendaController::class, 'getEvents'])->name('events.get');
 
     Route::middleware('auth')->group(function () {
