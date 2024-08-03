@@ -86,7 +86,7 @@ Route::group(['prefix' => 'pengaduan'], function () {
     });
 });
 
-Route::prefix('agenda')->name('agenda.')->group(function () {
+Route::prefix('agenda')->name('agenda.')->middleware(['adminAgenda','isLogin'])->group(function () {
     // Route to display the calendar view
     Route::get('/', function () {
         $title = 'Agenda';

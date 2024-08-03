@@ -17,5 +17,7 @@ class Event extends Model
         'end',
         'all_day',
         'location',
+        'latitude',    // Add this
+        'longitude',   // Add this
     ];
 }

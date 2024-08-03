@@ -31,8 +31,11 @@ class sessionController extends Controller
                     // break; 
                 case 'admin_pengaduan':
                     return redirect()->route('pengaduan.admin');
-                    // break; 
-                case 'superadmin':
+                        // break; 
+                case 'admin_agenda':
+                    return redirect()->route('agenda.index');
+                        // break; 
+                 case 'superadmin':
                     return redirect()->route('superadmin');
                     // break;
                 default: // added default case

@@ -105,6 +105,9 @@
                                         <option value="admin_pengaduan"
                                             {{ $item->role == 'admin_pengaduan' ? 'selected' : '' }}>Pengaduan
                                         </option>
+                                        <option value="admin_agenda"
+                                            {{ $item->role == 'admin_agenda' ? 'selected' : '' }}>Agenda
+                                        </option>
                                     </select>
                                 </form>
                             </td>

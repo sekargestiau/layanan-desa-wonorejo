@@ -37,7 +37,7 @@
                         <option value="admin_peta">Peta</option>
                         <option value="admin_posyandu">Posyandu</option>
                         <option value="admin_pengaduan">Pengaduan</option>
-                    </select>
+                        <option value="admin_agenda">Agenda</option>
                 </div>
                 <button type="submit"
                     class="text-blue-600 bg-blue-300 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-indigo-700">Tambah Data</button>

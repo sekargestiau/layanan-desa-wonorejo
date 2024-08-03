@@ -62,6 +62,8 @@ public function update(Request $request, $id)
         'end' => 'nullable|date|after_or_equal:start',
         'all_day' => 'required|boolean',
         'location' => 'nullable|string|max:255',
+        'latitude' => 'nullable|numeric',
+        'longitude' => 'nullable|numeric',
     ]);
 
     if ($validator->fails()) {
@@ -78,6 +80,8 @@ public function update(Request $request, $id)
             'end' => $request->input('end'),
             'all_day' => $request->input('all_day'),
             'location' => $request->input('location'),
+            'latitude' => $request->input('latitude'),
+            'longitude' => $request->input('longitude'),
         ]);
 
         return response()->json($event, 201); // Created
@@ -88,6 +92,7 @@ public function update(Request $request, $id)
         ], 500); // Internal Server Error
     }
 }
+
     public function showDetailAgenda()
     {
         // Fetch the events or any necessary data
