@@ -63,7 +63,7 @@
         <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-2 rtl:space-x-reverse sm:mb-0">
             <li>
                 <div class="flex items-center">
-                    <a href="{{ route('agenda.index') }}" class="ms-1 text-2xl font-semibold text-white">Tambah Agenda</a>
+                    <a href="{{ route('agenda.tambah') }}" class="ms-1 text-2xl font-semibold text-white">Tambah Agenda</a>
                 </div>
             </li>
         </ol>
@@ -96,12 +96,6 @@
                             <input type="datetime-local" class="form-control" id="eventEnd" name="end">
                         </div>
                         <div class="form-group">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="eventAllDay" name="all_day">
-                                <label class="form-check-label" for="eventAllDay">Seharian</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="eventLocation">Lokasi</label>
                             <input type="text" class="form-control" id="eventLocation" name="location">
                         </div>
@@ -111,6 +105,8 @@
             </div>
         </div>
     </div>
+
+    
 
     <!-- Custom Modal for Messages -->
     <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
@@ -144,7 +140,6 @@
                     <p><strong>Judul:</strong> <span id="eventDetailsTitle"></span></p>
                     <p><strong>Mulai:</strong> <span id="eventDetailsStart"></span></p>
                     <p><strong>Selesai:</strong> <span id="eventDetailsEnd"></span></p>
-                    <p><strong>Seharian:</strong> <span id="eventDetailsAllDay"></span></p>
                     <p><strong>Lokasi:</strong> <span id="eventDetailsLocation"></span></p>
                 </div>
                 <div class="modal-footer">

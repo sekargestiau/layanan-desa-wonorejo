@@ -8,7 +8,7 @@
         <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-2 rtl:space-x-reverse sm:mb-0">
             <li>
                 <div class="flex items-center">
-                    <a href="{{ route('agenda.index') }}" class="ms-1 text-2xl font-semibold text-white">{{ $title }}</a>
+                    <a href="{{ route('agenda.detail_agenda.index') }}" class="ms-1 text-2xl font-semibold text-white">{{ $title }}</a>
                 </div>
             </li>
         </ol>
@@ -84,12 +84,6 @@
                         <div class="form-group">
                             <label for="editEventEnd">Selesai</label>
                             <input type="datetime-local" class="form-control" id="editEventEnd" name="end">
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="editEventAllDay" name="all_day">
-                                <label class="form-check-label" for="editEventAllDay">Seharian</label>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label for="editEventLocation">Lokasi</label>
