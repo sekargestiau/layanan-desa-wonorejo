@@ -76,36 +76,36 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="eventModalLabel">Add Event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="eventModalLabel">Tambah Kegiatan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form id="eventForm">
                         <div class="form-group">
-                            <label for="eventTitle">Title</label>
+                            <label for="eventTitle">Judul</label>
                             <input type="text" class="form-control" id="eventTitle" name="title" required>
                         </div>
                         <div class="form-group">
-                            <label for="eventStart">Start</label>
+                            <label for="eventStart">Mulai</label>
                             <input type="datetime-local" class="form-control" id="eventStart" name="start" required>
                         </div>
                         <div class="form-group">
-                            <label for="eventEnd">End</label>
+                            <label for="eventEnd">Selesai</label>
                             <input type="datetime-local" class="form-control" id="eventEnd" name="end">
                         </div>
                         <div class="form-group">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="eventAllDay" name="all_day">
-                                <label class="form-check-label" for="eventAllDay">All Day</label>
+                                <label class="form-check-label" for="eventAllDay">Seharian</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="eventLocation">Location</label>
+                            <label for="eventLocation">Lokasi</label>
                             <input type="text" class="form-control" id="eventLocation" name="location">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Save Event</button>
+                        <button type="submit" class="btn btn-primary btn-block">Simpan Kegiatan</button>
                     </form>
                 </div>
             </div>
@@ -118,13 +118,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="messageModalLabel"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="messageModalBody"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -135,21 +135,21 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="eventDetailsModalLabel">Event Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="eventDetailsModalLabel">Detail Kegiatan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Title:</strong> <span id="eventDetailsTitle"></span></p>
-                    <p><strong>Start:</strong> <span id="eventDetailsStart"></span></p>
-                    <p><strong>End:</strong> <span id="eventDetailsEnd"></span></p>
-                    <p><strong>All Day:</strong> <span id="eventDetailsAllDay"></span></p>
-                    <p><strong>Location:</strong> <span id="eventDetailsLocation"></span></p>
+                    <p><strong>Judul:</strong> <span id="eventDetailsTitle"></span></p>
+                    <p><strong>Mulai:</strong> <span id="eventDetailsStart"></span></p>
+                    <p><strong>Selesai:</strong> <span id="eventDetailsEnd"></span></p>
+                    <p><strong>Seharian:</strong> <span id="eventDetailsAllDay"></span></p>
+                    <p><strong>Lokasi:</strong> <span id="eventDetailsLocation"></span></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" id="deleteEventButton">Delete Event</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-danger" id="deleteEventButton">Hapus Kegiatan</button>
                 </div>
             </div>
         </div>
@@ -201,7 +201,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.errors) {
-                        showMessageModal('Error', 'Error adding event: ' + JSON.stringify(data.errors));
+                        showMessageModal('Error', 'Terjadi kesalahan saat menambah kegiatan: ' + JSON.stringify(data.errors));
                     } else {
                         calendar.addEvent({
                             id: data.id,
@@ -212,11 +212,11 @@
                             location: data.location
                         });
                         $('#eventModal').modal('hide');
-                        showMessageModal('Success', 'Event added successfully.');
+                        showMessageModal('Sukses', 'Kegiatan berhasil ditambahkan.');
                     }
                 })
                 .catch(error => {
-                    showMessageModal('Error', 'Error adding event: ' + error.message);
+                    showMessageModal('Error', 'Terjadi kesalahan saat menambah kegiatan: ' + error.message);
                 });
             });
         },
@@ -225,7 +225,7 @@
             $('#eventDetailsTitle').text(arg.event.title);
             $('#eventDetailsStart').text(formatDateForDisplay(arg.event.start));
             $('#eventDetailsEnd').text(arg.event.end ? formatDateForDisplay(arg.event.end) : 'N/A');
-            $('#eventDetailsAllDay').text(arg.event.allDay ? 'Yes' : 'No');
+            $('#eventDetailsAllDay').text(arg.event.allDay ? 'Ya' : 'Tidak');
             $('#eventDetailsLocation').text(arg.event.extendedProps.location || 'N/A');
             
             $('#eventDetailsModal').modal('show');
@@ -246,15 +246,15 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.errors) {
-                        showMessageModal('Error', 'Error deleting event: ' + JSON.stringify(data.errors));
+                        showMessageModal('Error', 'Terjadi kesalahan saat menghapus kegiatan: ' + JSON.stringify(data.errors));
                     } else {
                         calendar.getEventById(arg.event.id).remove();
                         $('#eventDetailsModal').modal('hide');
-                        showMessageModal('Success', 'Event deleted successfully.');
+                        showMessageModal('Sukses', 'Kegiatan berhasil dihapus.');
                     }
                 })
                 .catch(error => {
-                    showMessageModal('Error', 'Error deleting event: ' + error.message);
+                    showMessageModal('Error', 'Terjadi kesalahan saat menghapus kegiatan: ' + error.message);
                 });
             });
         },
@@ -279,14 +279,14 @@
             .then(response => response.json())
             .then(data => {
                 if (data.errors) {
-                    showMessageModal('Error', 'Error updating event: ' + JSON.stringify(data.errors));
+                    showMessageModal('Error', 'Terjadi kesalahan saat memperbarui kegiatan: ' + JSON.stringify(data.errors));
                     info.revert();
                 } else {
-                    showMessageModal('Success', 'Event updated successfully.');
+                    showMessageModal('Sukses', 'Kegiatan berhasil diperbarui.');
                 }
             })
             .catch(error => {
-                showMessageModal('Error', 'Error updating event: ' + error.message);
+                showMessageModal('Error', 'Terjadi kesalahan saat memperbarui kegiatan: ' + error.message);
                 info.revert();
             });
         },
@@ -311,14 +311,14 @@
             .then(response => response.json())
             .then(data => {
                 if (data.errors) {
-                    showMessageModal('Error', 'Error updating event: ' + JSON.stringify(data.errors));
+                    showMessageModal('Error', 'Terjadi kesalahan saat memperbarui kegiatan: ' + JSON.stringify(data.errors));
                     info.revert();
                 } else {
-                    showMessageModal('Success', 'Event updated successfully.');
+                    showMessageModal('Sukses', 'Kegiatan berhasil diperbarui.');
                 }
             })
             .catch(error => {
-                showMessageModal('Error', 'Error updating event: ' + error.message);
+                showMessageModal('Error', 'Terjadi kesalahan saat memperbarui kegiatan: ' + error.message);
                 info.revert();
             });
         }
@@ -352,8 +352,6 @@
         $('#messageModal').modal('show');
     }
 });
-
-
     </script>
 
 @endsection

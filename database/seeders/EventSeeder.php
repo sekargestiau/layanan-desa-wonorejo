@@ -17,22 +17,46 @@ class EventSeeder extends Seeder
         // Define some sample events
         $events = [
             [
-                'title' => 'Meeting with the mayor',
+                'title' => 'Rapat dengan Walikota',
                 'start' => '2024-08-10 10:00:00',
                 'end' => '2024-08-10 12:00:00',
                 'all_day' => false,
+                'location' => 'Kantor Walikota',
             ],
             [
-                'title' => 'Community Festival',
+                'title' => 'Festival Komunitas',
                 'start' => '2024-08-15 09:00:00',
                 'end' => '2024-08-15 17:00:00',
                 'all_day' => true,
+                'location' => 'Lapangan Desa',
             ],
             [
-                'title' => 'Monthly Village Meeting',
+                'title' => 'Pertemuan Bulanan Desa',
                 'start' => '2024-08-20 14:00:00',
                 'end' => '2024-08-20 16:00:00',
                 'all_day' => false,
+                'location' => 'Balai Desa',
+            ],
+            [
+                'title' => 'Pelatihan Teknologi',
+                'start' => '2024-08-25 09:00:00',
+                'end' => '2024-08-25 12:00:00',
+                'all_day' => false,
+                'location' => 'Ruang Serbaguna',
+            ],
+            [
+                'title' => 'Peringatan Hari Kemerdekaan',
+                'start' => '2024-08-17 08:00:00',
+                'end' => '2024-08-17 14:00:00',
+                'all_day' => true,
+                'location' => 'Lapangan Desa',
+            ],
+            [
+                'title' => 'Pendaftaran Program KKN',
+                'start' => '2024-08-30 10:00:00',
+                'end' => '2024-08-30 15:00:00',
+                'all_day' => false,
+                'location' => 'Kantor Desa',
             ],
         ];
 

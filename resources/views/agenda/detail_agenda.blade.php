@@ -20,11 +20,11 @@
         <table class="table table-striped table-bordered text-center">
             <thead class="thead-light">
                 <tr>
-                    <th>Title</th>
-                    <th>Start</th>
-                    <th>End</th>
-                    <th>Location</th>
-                    <th>Actions</th>
+                    <th>Judul</th>
+                    <th>Mulai</th>
+                    <th>Selesai</th>
+                    <th>Lokasi</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +36,7 @@
                         <td class="align-middle">{{ $event->location }}</td>
                         <td class="align-middle">
                             <button class="btn btn-primary btn-sm edit-btn" data-id="{{ $event->id }}" data-title="{{ $event->title }}" data-start="{{ $event->start }}" data-end="{{ $event->end }}" data-all-day="{{ $event->all_day }}" data-location="{{ $event->location }}">Edit</button>
-                            <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $event->id }}">Delete</button>
+                            <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $event->id }}">Hapus</button>
                         </td>
                     </tr>
                 @endforeach
@@ -65,8 +65,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editEventModalLabel">Edit Event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="editEventModalLabel">Edit Kegiatan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -74,28 +74,28 @@
                     <form id="editEventForm">
                         <input type="hidden" id="editEventId">
                         <div class="form-group">
-                            <label for="editEventTitle">Title</label>
+                            <label for="editEventTitle">Judul</label>
                             <input type="text" class="form-control" id="editEventTitle" name="title" required>
                         </div>
                         <div class="form-group">
-                            <label for="editEventStart">Start</label>
+                            <label for="editEventStart">Mulai</label>
                             <input type="datetime-local" class="form-control" id="editEventStart" name="start" required>
                         </div>
                         <div class="form-group">
-                            <label for="editEventEnd">End</label>
+                            <label for="editEventEnd">Selesai</label>
                             <input type="datetime-local" class="form-control" id="editEventEnd" name="end">
                         </div>
                         <div class="form-group">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="editEventAllDay" name="all_day">
-                                <label class="form-check-label" for="editEventAllDay">All Day</label>
+                                <label class="form-check-label" for="editEventAllDay">Seharian</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="editEventLocation">Location</label>
+                            <label for="editEventLocation">Lokasi</label>
                             <input type="text" class="form-control" id="editEventLocation" name="location">
                         </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </form>
                 </div>
             </div>
@@ -107,17 +107,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteEventModalLabel">Delete Event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="deleteEventModalLabel">Hapus Kegiatan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete this event?</p>
+                    <p>Anda yakin ingin menghapus kegiatan ini?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Hapus</button>
                 </div>
             </div>
         </div>
@@ -132,82 +132,82 @@
     let deleteId;
 
     document.addEventListener('DOMContentLoaded', function() {
-    // Handle Edit Button Click
-    document.querySelectorAll('.edit-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            $('#editEventId').val(this.getAttribute('data-id'));
-            $('#editEventTitle').val(this.getAttribute('data-title'));
-            $('#editEventStart').val(this.getAttribute('data-start'));
-            $('#editEventEnd').val(this.getAttribute('data-end'));
-            $('#editEventAllDay').prop('checked', this.getAttribute('data-all-day') === '1');
-            $('#editEventLocation').val(this.getAttribute('data-location'));
-            $('#editEventModal').modal('show');
+        // Handle Edit Button Click
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                $('#editEventId').val(this.getAttribute('data-id'));
+                $('#editEventTitle').val(this.getAttribute('data-title'));
+                $('#editEventStart').val(this.getAttribute('data-start'));
+                $('#editEventEnd').val(this.getAttribute('data-end'));
+                $('#editEventAllDay').prop('checked', this.getAttribute('data-all-day') === '1');
+                $('#editEventLocation').val(this.getAttribute('data-location'));
+                $('#editEventModal').modal('show');
+            });
         });
-    });
 
-    // Handle Edit Event Form Submission
-    $('#editEventForm').on('submit', function(e) {
-        e.preventDefault();
-        const eventId = $('#editEventId').val();
-        fetch(`{{ route('agenda.events.update', '') }}/${eventId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({
-                title: $('#editEventTitle').val(),
-                start: $('#editEventStart').val(),
-                end: $('#editEventEnd').val(),
-                all_day: $('#editEventAllDay').is(':checked'),
-                location: $('#editEventLocation').val()
+        // Handle Edit Event Form Submission
+        $('#editEventForm').on('submit', function(e) {
+            e.preventDefault();
+            const eventId = $('#editEventId').val();
+            fetch(`{{ route('agenda.events.update', '') }}/${eventId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    title: $('#editEventTitle').val(),
+                    start: $('#editEventStart').val(),
+                    end: $('#editEventEnd').val(),
+                    all_day: $('#editEventAllDay').is(':checked'),
+                    location: $('#editEventLocation').val()
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.errors) {
-                alert('Error updating event: ' + JSON.stringify(data.errors));
-            } else {
-                location.reload(); // Reload the page to reflect changes
-            }
-        })
-        .catch(error => {
-            alert('Error updating event: ' + error.message);
+            .then(response => response.json())
+            .then(data => {
+                if (data.errors) {
+                    alert('Terjadi kesalahan saat memperbarui kegiatan: ' + JSON.stringify(data.errors));
+                } else {
+                    location.reload(); // Reload the page to reflect changes
+                }
+            })
+            .catch(error => {
+                alert('Terjadi kesalahan saat memperbarui kegiatan: ' + error.message);
+            });
+        });
+
+        // Handle Delete Button Click
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                deleteId = this.getAttribute('data-id');
+                $('#deleteEventModal').modal('show');
+            });
+        });
+
+        // Handle Confirm Delete
+        $('#confirmDelete').on('click', function() {
+            fetch(`{{ route('agenda.events.destroy', '') }}/${deleteId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    id: deleteId // Include the id field
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.errors) {
+                    alert('Terjadi kesalahan saat menghapus kegiatan: ' + JSON.stringify(data.errors));
+                } else {
+                    location.reload(); // Reload the page to reflect changes
+                }
+            })
+            .catch(error => {
+                alert('Terjadi kesalahan saat menghapus kegiatan: ' + error.message);
+            });
         });
     });
-
-    // Handle Delete Button Click
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            deleteId = this.getAttribute('data-id');
-            $('#deleteEventModal').modal('show');
-        });
-    });
-
-    // Handle Confirm Delete
-    $('#confirmDelete').on('click', function() {
-    fetch(`{{ route('agenda.events.destroy', '') }}/${deleteId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({
-            id: deleteId // Include the id field
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.errors) {
-            alert('Error deleting event: ' + JSON.stringify(data.errors));
-        } else {
-            location.reload(); // Reload the page to reflect changes
-        }
-    })
-    .catch(error => {
-        alert('Error deleting event: ' + error.message);
-    });
-});
-});
     </script>
 @endsection
