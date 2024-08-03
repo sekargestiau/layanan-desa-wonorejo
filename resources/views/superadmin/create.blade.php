@@ -34,6 +34,7 @@
                 <div class="mb-5">
                     <label for="role" class="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">Role</label>
                     <select name="role" id="role" class="bg-gray-100 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-3 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 dark:text-gray-300 dark:focus:ring-indigo-500 dark:focus:border-indigo-500">
+                        <option value="admin_peta">Agenda</option>
                         <option value="admin_peta">Peta</option>
                         <option value="admin_posyandu">Posyandu</option>
                         <option value="admin_pengaduan">Pengaduan</option>
