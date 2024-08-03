@@ -12,7 +12,7 @@
             <div class="flex justify-between">
                 <div class="flex space-x-7">
                     <div>
-                        <a href="#" class="flex items-center py-4 px-2">
+                        <a href="http://wonorejo.id/" class="flex items-center py-4 px-2">
                             <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-10 w-8 mr-4">
                             <span class="font-semibold text-gray-500 text-lg">Layanan Desa Wonorejo</span>
                         </a>
