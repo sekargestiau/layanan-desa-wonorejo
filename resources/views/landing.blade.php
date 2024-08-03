@@ -13,7 +13,7 @@
                 <div class="flex space-x-7">
                     <div>
                         <a href="#" class="flex items-center py-4 px-2">
-                            <img src="logo.png" alt="Logo" class="h-8 w-8 mr-2">
+                            <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-10 w-8 mr-4">
                             <span class="font-semibold text-gray-500 text-lg">Layanan Desa Wonorejo</span>
                         </a>
                     </div>
@@ -21,6 +21,7 @@
                 <div class="hidden md:flex items-center space-x-1">
                     <a href="{{ route('peta.map') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Peta</a>
                     <a href="{{ route('pengaduan') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Pengaduan</a>
+                    <a href="{{ route('agenda.index') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Agenda</a>
                     @if (Auth::check())
                     <a href="{{ route('logout') }} " class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Logout</a>
                     @else
@@ -61,7 +62,7 @@
     <div class="container mx-auto px-4 py-8">
         <div class="bg-white rounded-lg shadow-xl overflow-hidden">
             <div class="p-8 bg-gradient-to-b from-cyan-500 to-green-500 text-center">
-                <img src="logo.png" alt="Logo Sukoharjo" class="w-24 h-32 mx-auto">
+                <img src="{{ asset('Logo.png') }}" alt="Logo" class="w-24 h-32 mx-auto">
                 <h2 class="text-2xl font-semibold text-white mt-4">Wonorejo Religius dan Berbudaya</h2>
                 <h1 class="text-4xl font-bold text-white mt-2">Desa Wonorejo</h1>
             </div>
