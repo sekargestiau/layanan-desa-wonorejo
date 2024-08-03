@@ -112,6 +112,24 @@
         </div>
     </div>
 
+    <!-- Custom Modal for Messages -->
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="messageModalBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Event Details Modal -->
     <div class="modal fade" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -139,112 +157,203 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
+    var calendarEl = document.getElementById('calendar');
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            events: '{{ route('agenda.events.get') }}', // Fetch events from server
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            navLinks: true, // Click day/week names to navigate views
-            businessHours: true, // Display business hours
-            editable: true,
-            selectable: true,
-            selectMirror: true,
-            select: function(arg) {
-                // Open the modal when a date is selected
-                $('#eventTitle').val('');
-                $('#eventStart').val(formatDate(arg.start));
-                $('#eventEnd').val(arg.end ? formatDate(arg.end) : '');
-                $('#eventAllDay').prop('checked', arg.allDay);
-                $('#eventLocation').val('');
-                $('#eventModal').modal('show');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: '{{ route('agenda.events.get') }}', // Fetch events from server
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        navLinks: true, // Click day/week names to navigate views
+        businessHours: true, // Display business hours
+        editable: true,
+        selectable: true,
+        selectMirror: true,
+        select: function(arg) {
+            // Open the modal when a date is selected
+            $('#eventTitle').val('');
+            $('#eventStart').val(formatDateForInput(arg.start));
+            $('#eventEnd').val(arg.end ? formatDateForInput(arg.end) : '');
+            $('#eventAllDay').prop('checked', arg.allDay);
+            $('#eventLocation').val('');
+            $('#eventModal').modal('show');
 
-                // Handle form submission
-                $('#eventForm').off('submit').on('submit', function(e) {
-                    e.preventDefault();
-                    fetch('{{ route('agenda.events.store') }}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({
-                            title: $('#eventTitle').val(),
-                            start: $('#eventStart').val(),
-                            end: $('#eventEnd').val(),
-                            all_day: $('#eventAllDay').is(':checked'),
-                            location: $('#eventLocation').val()
-                        })
+            // Handle form submission
+            $('#eventForm').off('submit').on('submit', function(e) {
+                e.preventDefault();
+                fetch('{{ route('agenda.events.store') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        title: $('#eventTitle').val(),
+                        start: formatDateForDatabase($('#eventStart').val()),
+                        end: $('#eventEnd').val() ? formatDateForDatabase($('#eventEnd').val()) : null,
+                        all_day: $('#eventAllDay').is(':checked'),
+                        location: $('#eventLocation').val()
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.errors) {
-                            alert('Error adding event: ' + JSON.stringify(data.errors));
-                        } else {
-                            calendar.addEvent({
-                                id: data.id,
-                                title: data.title,
-                                start: data.start,
-                                end: data.end,
-                                allDay: data.all_day,
-                                location: data.location
-                            });
-                            $('#eventModal').modal('hide');
-                        }
-                    })
-                    .catch(error => {
-                        alert('Error adding event: ' + error.message);
-                    });
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.errors) {
+                        showMessageModal('Error', 'Error adding event: ' + JSON.stringify(data.errors));
+                    } else {
+                        calendar.addEvent({
+                            id: data.id,
+                            title: data.title,
+                            start: data.start,
+                            end: data.end,
+                            allDay: data.all_day,
+                            location: data.location
+                        });
+                        $('#eventModal').modal('hide');
+                        showMessageModal('Success', 'Event added successfully.');
+                    }
+                })
+                .catch(error => {
+                    showMessageModal('Error', 'Error adding event: ' + error.message);
                 });
-            },
-            eventClick: function(arg) {
-                // Update the details modal with event information
-                $('#eventDetailsTitle').text(arg.event.title);
-                $('#eventDetailsStart').text(formatDate(arg.event.start));
-                $('#eventDetailsEnd').text(arg.event.end ? formatDate(arg.event.end) : 'N/A');
-                $('#eventDetailsAllDay').text(arg.event.allDay ? 'Yes' : 'No');
-                $('#eventDetailsLocation').text(arg.event.extendedProps.location || 'N/A');
-                
-                $('#eventDetailsModal').modal('show');
+            });
+        },
+        eventClick: function(arg) {
+            // Update the details modal with event information
+            $('#eventDetailsTitle').text(arg.event.title);
+            $('#eventDetailsStart').text(formatDateForDisplay(arg.event.start));
+            $('#eventDetailsEnd').text(arg.event.end ? formatDateForDisplay(arg.event.end) : 'N/A');
+            $('#eventDetailsAllDay').text(arg.event.allDay ? 'Yes' : 'No');
+            $('#eventDetailsLocation').text(arg.event.extendedProps.location || 'N/A');
+            
+            $('#eventDetailsModal').modal('show');
 
-                // Handle delete button click
-                $('#deleteEventButton').off('click').on('click', function() {
-                    fetch('{{ route('agenda.events.destroy', ':id') }}'.replace(':id', arg.event.id), {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({
-                            _method: 'DELETE',
-                            id: arg.event.id
-                        })
+            // Handle delete button click
+            $('#deleteEventButton').off('click').on('click', function() {
+                fetch('{{ route('agenda.events.destroy', ':id') }}'.replace(':id', arg.event.id), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        _method: 'DELETE',
+                        id: arg.event.id
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.errors) {
-                            alert('Error deleting event: ' + JSON.stringify(data.errors));
-                        } else {
-                            calendar.getEventById(arg.event.id).remove();
-                            $('#eventDetailsModal').modal('hide');
-                        }
-                    })
-                    .catch(error => {
-                        alert('Error deleting event: ' + error.message);
-                    });
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.errors) {
+                        showMessageModal('Error', 'Error deleting event: ' + JSON.stringify(data.errors));
+                    } else {
+                        calendar.getEventById(arg.event.id).remove();
+                        $('#eventDetailsModal').modal('hide');
+                        showMessageModal('Success', 'Event deleted successfully.');
+                    }
+                })
+                .catch(error => {
+                    showMessageModal('Error', 'Error deleting event: ' + error.message);
                 });
-            }
-        });
-
-        calendar.render();
-
-        function formatDate(date) {
-            return date.toISOString().slice(0, 16);
+            });
+        },
+        eventDrop: function(info) {
+            // Handle event drop
+            fetch('{{ route('agenda.events.update', ':id') }}'.replace(':id', info.event.id), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    _method: 'PUT',
+                    id: info.event.id,
+                    title: info.event.title,
+                    start: formatDateForDatabase(info.event.start),
+                    end: info.event.end ? formatDateForDatabase(info.event.end) : null,
+                    all_day: info.event.allDay,
+                    location: info.event.extendedProps.location
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.errors) {
+                    showMessageModal('Error', 'Error updating event: ' + JSON.stringify(data.errors));
+                    info.revert();
+                } else {
+                    showMessageModal('Success', 'Event updated successfully.');
+                }
+            })
+            .catch(error => {
+                showMessageModal('Error', 'Error updating event: ' + error.message);
+                info.revert();
+            });
+        },
+        eventResize: function(info) {
+            // Handle event resize
+            fetch('{{ route('agenda.events.update', ':id') }}'.replace(':id', info.event.id), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    _method: 'PUT',
+                    id: info.event.id,
+                    title: info.event.title,
+                    start: formatDateForDatabase(info.event.start),
+                    end: info.event.end ? formatDateForDatabase(info.event.end) : null,
+                    all_day: info.event.allDay,
+                    location: info.event.extendedProps.location
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.errors) {
+                    showMessageModal('Error', 'Error updating event: ' + JSON.stringify(data.errors));
+                    info.revert();
+                } else {
+                    showMessageModal('Success', 'Event updated successfully.');
+                }
+            })
+            .catch(error => {
+                showMessageModal('Error', 'Error updating event: ' + error.message);
+                info.revert();
+            });
         }
     });
+
+    calendar.render();
+
+    function formatDateForInput(date) {
+        let d = new Date(date);
+        return d.toISOString().slice(0, 16);
+    }
+
+    function formatDateForDatabase(date) {
+        let d = new Date(date);
+        return d.getFullYear() + '-' +
+               ('0' + (d.getMonth() + 1)).slice(-2) + '-' +
+               ('0' + d.getDate()).slice(-2) + ' ' +
+               ('0' + d.getHours()).slice(-2) + ':' +
+               ('0' + d.getMinutes()).slice(-2) + ':' +
+               ('0' + d.getSeconds()).slice(-2);
+    }
+
+    function formatDateForDisplay(date) {
+        let d = new Date(date);
+        return d.toLocaleString();
+    }
+
+    function showMessageModal(title, message) {
+        $('#messageModalLabel').text(title);
+        $('#messageModalBody').text(message);
+        $('#messageModal').modal('show');
+    }
+});
+
+
     </script>
+
 @endsection

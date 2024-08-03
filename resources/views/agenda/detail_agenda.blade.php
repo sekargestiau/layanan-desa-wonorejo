@@ -15,15 +15,14 @@
     </nav>
 
     <div class="container mt-4">
-        <h2 class="mb-4">Events</h2>
+        <h2 class="mb-4 text-center">Kegiatan</h2>
         
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-striped table-bordered text-center">
+            <thead class="thead-light">
                 <tr>
                     <th>Title</th>
                     <th>Start</th>
                     <th>End</th>
-                    <th>All Day</th>
                     <th>Location</th>
                     <th>Actions</th>
                 </tr>
@@ -31,12 +30,11 @@
             <tbody>
                 @foreach($events as $event)
                     <tr>
-                        <td>{{ $event->title }}</td>
-                        <td>{{ $event->start }}</td>
-                        <td>{{ $event->end }}</td>
-                        <td>{{ $event->all_day ? 'Yes' : 'No' }}</td>
-                        <td>{{ $event->location }}</td>
-                        <td>
+                        <td class="align-middle">{{ $event->title }}</td>
+                        <td class="align-middle">{{ $event->start }}</td>
+                        <td class="align-middle">{{ $event->end }}</td>
+                        <td class="align-middle">{{ $event->location }}</td>
+                        <td class="align-middle">
                             <button class="btn btn-primary btn-sm edit-btn" data-id="{{ $event->id }}" data-title="{{ $event->title }}" data-start="{{ $event->start }}" data-end="{{ $event->end }}" data-all-day="{{ $event->all_day }}" data-location="{{ $event->location }}">Edit</button>
                             <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $event->id }}">Delete</button>
                         </td>
@@ -45,6 +43,22 @@
             </tbody>
         </table>
     </div>
+    
+    <style>
+        .table thead th {
+            background-color: #f8f9fa; /* Light background for the header */
+            color: #343a40; /* Dark text color for the header */
+        }
+        .table tbody tr:nth-child(odd) {
+            background-color: #f2f2f2; /* Light grey background for odd rows */
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #ffffff; /* White background for even rows */
+        }
+        .table tbody tr:hover {
+            background-color: #e9ecef; /* Light grey background on hover */
+        }
+    </style>
 
     <!-- Edit Modal -->
     <div class="modal fade" id="editEventModal" tabindex="-1" role="dialog" aria-labelledby="editEventModalLabel" aria-hidden="true">
