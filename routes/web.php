@@ -87,19 +87,25 @@ Route::group(['prefix' => 'pengaduan'], function () {
 });
 
 Route::prefix('agenda')->name('agenda.')->group(function () {
-    // Route to display the calendar view
     Route::get('/', function () {
         $title = 'Agenda';
         return view('agenda.index', compact('title'));
     })->name('index');
 
-    Route::get('/tambah', [AgendaController::class, 'create'])->name('tambah');
+    // Allow guests to access the events
     Route::get('/events', [AgendaController::class, 'getEvents'])->name('events.get');
-    Route::post('/events', [AgendaController::class, 'storeEvent'])->name('events.store');
-    Route::delete('/events/{id}', [AgendaController::class, 'destroy'])->name('events.destroy');
-    Route::get('/detail-agenda', [AgendaController::class, 'showDetailAgenda'])->name('detail_agenda.index');
-    Route::put('/events/{id}', [AgendaController::class, 'update'])->name('events.update');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/tambah', [AgendaController::class, 'create'])->name('tambah');
+        Route::post('/events', [AgendaController::class, 'storeEvent'])->name('events.store');
+        Route::delete('/events/{id}', [AgendaController::class, 'destroy'])->name('events.destroy');
+        Route::get('/detail-agenda', [AgendaController::class, 'showDetailAgenda'])->name('detail_agenda.index');
+        Route::put('/events/{id}', [AgendaController::class, 'update'])->name('events.update');
+    });
 });
+
+Auth::routes();
+
 
 Route::group(['prefix' => 'superadmin', 'middleware' => ['isLogin','superadmin']], function(){
     Route::get('/', [superAdminController::class,'index'])->name('superadmin');

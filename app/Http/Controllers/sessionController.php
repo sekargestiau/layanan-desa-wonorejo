@@ -23,6 +23,9 @@ class sessionController extends Controller
         if(auth()->attempt($request->only('username', 'password'))){ // if the user is authenticated
             //Check Role
             switch (Auth::user()->role){
+                case 'admin_agenda':
+                    return redirect()->route('agenda.tambah');
+                    // break; 
                 case 'admin_peta':
                     return redirect()->route('peta.admin');
                     // break; 
