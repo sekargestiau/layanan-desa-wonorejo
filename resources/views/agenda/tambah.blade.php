@@ -72,12 +72,12 @@
     <div id="calendar" style="max-width: 1200px; margin: 20px auto;"></div>
 
     <!-- Event Modal -->
-    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div id="eventModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="eventModalLabel">Tambah Kegiatan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+                    <h5 class="modal-title">Tambah Kegiatan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -97,14 +97,21 @@
                         </div>
                         <div class="form-group">
                             <label for="eventLocation">Lokasi</label>
-                            <input type="text" class="form-control" id="eventLocation" name="location">
+                            <input type="text" class="form-control" id="eventLocation" name="location" required>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Simpan Kegiatan</button>
+                        <div id="eventMap" style="height: 300px;"></div>
+                        <input type="hidden" id="latitude" name="latitude">
+                        <input type="hidden" id="longitude" name="longitude">
+                        <button type="submit" class="btn btn-primary mt-3">Simpan Kegiatan</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
 
     
 
@@ -127,33 +134,135 @@
     </div>
 
     <!-- Event Details Modal -->
-    <div class="modal fade" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="eventDetailsModalLabel">Detail Kegiatan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Judul:</strong> <span id="eventDetailsTitle"></span></p>
-                    <p><strong>Mulai:</strong> <span id="eventDetailsStart"></span></p>
-                    <p><strong>Selesai:</strong> <span id="eventDetailsEnd"></span></p>
-                    <p><strong>Lokasi:</strong> <span id="eventDetailsLocation"></span></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-danger" id="deleteEventButton">Hapus Kegiatan</button>
-                </div>
+<div class="modal fade" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventDetailsModalLabel">Detail Kegiatan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Judul:</strong> <span id="eventDetailsTitle"></span></p>
+                <p><strong>Mulai:</strong> <span id="eventDetailsStart"></span></p>
+                <p><strong>Selesai:</strong> <span id="eventDetailsEnd"></span></p>
+                <p><strong>Lokasi:</strong> <span id="eventDetailsLocation"></span></p>
+                <input type="hidden" id="eventDetailsLatitude" />
+                <input type="hidden" id="eventDetailsLongitude" />
+                <div id="eventDetailsMap" style="height: 300px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-danger" id="deleteEventButton">Hapus Kegiatan</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
+
+
+  
+    
+    <!-- JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var map, marker, detailsMap, detailsMarker;
+
+    function initializeMap(lat, lng, mapId, draggable = false) {
+        var mapInstance = L.map(mapId).setView([lat, lng], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mapInstance);
+
+        var markerVar = L.marker([lat, lng], {
+            draggable: draggable
+        }).addTo(mapInstance);
+
+        if (draggable) {
+            markerVar.on('dragend', function(event) {
+                var position = markerVar.getLatLng();
+                document.getElementById('latitude').value = position.lat;
+                document.getElementById('longitude').value = position.lng;
+                mapInstance.setView(position); // Keep map centered on the marker
+            });
+        }
+
+        return { mapInstance, markerVar };
+    }
+
+    $('#eventModal').on('shown.bs.modal', function() {
+        var defaultLat = -7.6227;
+        var defaultLng = 110.8889;
+
+        if (!map) {
+            var mapData = initializeMap(defaultLat, defaultLng, 'eventMap', true);
+            map = mapData.mapInstance;
+            marker = mapData.markerVar;
+        } else {
+            map.setView([defaultLat, defaultLng], 13);
+            marker.setLatLng([defaultLat, defaultLng]);
+        }
+
+        document.getElementById('latitude').value = defaultLat;
+        document.getElementById('longitude').value = defaultLng;
+    });
+
+    $('#eventDetailsModal').on('shown.bs.modal', function() {
+        var lat = parseFloat($('#eventDetailsLatitude').val());
+        var lng = parseFloat($('#eventDetailsLongitude').val());
+
+        // Ensure valid lat and lng values
+        if (isNaN(lat) || isNaN(lng)) {
+            lat = -7.5481; // Default latitude
+            lng = 110.7220; // Default longitude
+        }
+
+        if (!detailsMap) {
+            var mapData = initializeMap(lat, lng, 'eventDetailsMap');
+            detailsMap = mapData.mapInstance;
+            detailsMarker = mapData.markerVar;
+        } else {
+            detailsMap.setView([lat, lng], 13);
+            detailsMarker.setLatLng([lat, lng]);
+        }
+    });
+
+    $('#eventForm').on('submit', function(event) {
+        event.preventDefault();
+
+        // Capture form data
+        var formData = {
+            title: $('#eventTitle').val(),
+            start: $('#eventStart').val(),
+            end: $('#eventEnd').val(),
+            location: $('#eventLocation').val(),
+            latitude: $('#latitude').val(),
+            longitude: $('#longitude').val(),
+            all_day: 0
+        };
+
+        // AJAX request to store event
+        $.ajax({
+            url: '{{ route('agenda.events.store') }}',
+            method: 'POST',
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                // Close modal and refresh calendar
+                $('#eventModal').modal('hide');
+                calendar.refetchEvents();
+                showMessageModal('Sukses', 'Kegiatan berhasil disimpan.');
+            },
+            error: function(xhr) {
+                showMessageModal('Error', 'Terjadi kesalahan saat menyimpan kegiatan: ' + JSON.stringify(xhr.responseJSON.errors));
+            }
+        });
+    });
+
     var calendarEl = document.getElementById('calendar');
-
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         events: '{{ route('agenda.events.get') }}', // Fetch events from server
@@ -168,61 +277,20 @@
         selectable: true,
         selectMirror: true,
         select: function(arg) {
-            // Open the modal when a date is selected
             $('#eventTitle').val('');
             $('#eventStart').val(formatDateForInput(arg.start));
             $('#eventEnd').val(arg.end ? formatDateForInput(arg.end) : '');
-            $('#eventAllDay').prop('checked', arg.allDay);
             $('#eventLocation').val('');
             $('#eventModal').modal('show');
-
-            // Handle form submission
-            $('#eventForm').off('submit').on('submit', function(e) {
-                e.preventDefault();
-                fetch('{{ route('agenda.events.store') }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        title: $('#eventTitle').val(),
-                        start: formatDateForDatabase($('#eventStart').val()),
-                        end: $('#eventEnd').val() ? formatDateForDatabase($('#eventEnd').val()) : null,
-                        all_day: $('#eventAllDay').is(':checked'),
-                        location: $('#eventLocation').val()
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.errors) {
-                        showMessageModal('Error', 'Terjadi kesalahan saat menambah kegiatan: ' + JSON.stringify(data.errors));
-                    } else {
-                        calendar.addEvent({
-                            id: data.id,
-                            title: data.title,
-                            start: data.start,
-                            end: data.end,
-                            allDay: data.all_day,
-                            location: data.location
-                        });
-                        $('#eventModal').modal('hide');
-                        showMessageModal('Sukses', 'Kegiatan berhasil ditambahkan.');
-                    }
-                })
-                .catch(error => {
-                    showMessageModal('Error', 'Terjadi kesalahan saat menambah kegiatan: ' + error.message);
-                });
-            });
         },
         eventClick: function(arg) {
             // Update the details modal with event information
             $('#eventDetailsTitle').text(arg.event.title);
             $('#eventDetailsStart').text(formatDateForDisplay(arg.event.start));
             $('#eventDetailsEnd').text(arg.event.end ? formatDateForDisplay(arg.event.end) : 'N/A');
-            $('#eventDetailsAllDay').text(arg.event.allDay ? 'Ya' : 'Tidak');
             $('#eventDetailsLocation').text(arg.event.extendedProps.location || 'N/A');
-            
+            $('#eventDetailsLatitude').val(arg.event.extendedProps.latitude || 'N/A');
+            $('#eventDetailsLongitude').val(arg.event.extendedProps.longitude || 'N/A');
             $('#eventDetailsModal').modal('show');
 
             // Handle delete button click
@@ -268,7 +336,9 @@
                     start: formatDateForDatabase(info.event.start),
                     end: info.event.end ? formatDateForDatabase(info.event.end) : null,
                     all_day: info.event.allDay,
-                    location: info.event.extendedProps.location
+                    location: info.event.extendedProps.location,
+                    latitude: info.event.extendedProps.latitude,
+                    longitude: info.event.extendedProps.longitude
                 })
             })
             .then(response => response.json())
@@ -300,7 +370,9 @@
                     start: formatDateForDatabase(info.event.start),
                     end: info.event.end ? formatDateForDatabase(info.event.end) : null,
                     all_day: info.event.allDay,
-                    location: info.event.extendedProps.location
+                    location: info.event.extendedProps.location,
+                    latitude: info.event.extendedProps.latitude,
+                    longitude: info.event.extendedProps.longitude
                 })
             })
             .then(response => response.json())
@@ -347,6 +419,9 @@
         $('#messageModal').modal('show');
     }
 });
-    </script>
+
+</script>
+
+
 
 @endsection
