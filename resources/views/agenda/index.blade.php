@@ -87,8 +87,8 @@
 
         // Ensure valid lat and lng values
         if (isNaN(lat) || isNaN(lng)) {
-            lat = -7.5481; // Default latitude
-            lng = 110.7220; // Default longitude
+            lat = -7.6227; 
+            lng = 110.8889; 
         }
 
         if (!detailsMap) {

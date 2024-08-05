@@ -192,8 +192,8 @@
     }
 
     $('#eventModal').on('shown.bs.modal', function() {
-        var defaultLat = -7.5481;
-        var defaultLng = 110.7220;
+        var defaultLat = -7.6227;
+        var defaultLng = 110.8889;
 
         if (!map) {
             var mapData = initializeMap(defaultLat, defaultLng, 'eventMap', true);
