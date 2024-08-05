@@ -1,6 +1,5 @@
 <?php
 
-// app/Models/Event.php
 
 namespace App\Models;
 
@@ -17,5 +16,7 @@ class Event extends Model
         'end',
         'all_day',
         'location',
+        'latitude',
+        'longitude',
     ];
 }

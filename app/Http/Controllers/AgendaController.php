@@ -21,31 +21,31 @@ class AgendaController extends Controller
     }
 
     public function create()
-{
-    $title = 'Tambah Agenda'; // Define the title
-    return view('agenda.tambah', compact('title')); // Pass the title to the view
-}
+    {
+        $title = 'Tambah Agenda'; // Define the title
+        return view('agenda.tambah', compact('title')); // Pass the title to the view
+    }
 
+    public function update(Request $request, $id)
+    {
+        // Validate the request
+        $title = 'Detail Agenda';
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'start' => 'required|date',
+            'end' => 'nullable|date',
+            'all_day' => 'boolean',
+            'location' => 'nullable|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+        ]);
 
+        // Find the event by ID and update it
+        $event = Event::findOrFail($id);
+        $event->update($validated);
 
-public function update(Request $request, $id)
-{
-    // Validate the request
-    $title = 'Detail Agenda'; 
-    $validated = $request->validate([
-        'title' => 'required|string|max:255',
-        'start' => 'required|date',
-        'end' => 'nullable|date',
-        'all_day' => 'boolean',
-        'location' => 'nullable|string|max:255',
-    ]);
-
-    // Find the event by ID and update it
-    $event = Event::findOrFail($id);
-    $event->update($validated);
-
-    return response()->json($event);
-}
+        return response()->json($event);
+    }
 
     /**
      * Store a new event.
@@ -54,46 +54,52 @@ public function update(Request $request, $id)
      * @return JsonResponse
      */
     public function storeEvent(Request $request): JsonResponse
-{
-    // Validate the request
-    $validator = Validator::make($request->all(), [
-        'title' => 'required|string|max:255',
-        'start' => 'required|date',
-        'end' => 'nullable|date|after_or_equal:start',
-        'all_day' => 'required|boolean',
-        'location' => 'nullable|string|max:255',
-    ]);
-
-    if ($validator->fails()) {
-        return response()->json([
-            'errors' => $validator->errors()
-        ], 422); // Unprocessable Entity
-    }
-
-    // Create the event
-    try {
-        $event = Event::create([
-            'title' => $request->input('title'),
-            'start' => $request->input('start'),
-            'end' => $request->input('end'),
-            'all_day' => $request->input('all_day'),
-            'location' => $request->input('location'),
+    {
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'start' => 'required|date',
+            'end' => 'nullable|date|after_or_equal:start',
+            'all_day' => 'required|boolean',
+            'location' => 'nullable|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
         ]);
 
-        return response()->json($event, 201); // Created
-    } catch (\Exception $e) {
-        return response()->json([
-            'error' => 'An error occurred while creating the event.',
-            'message' => $e->getMessage()
-        ], 500); // Internal Server Error
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422); // Unprocessable Entity
+        }
+
+        // Create the event
+        try {
+            $event = Event::create([
+                'title' => $request->input('title'),
+                'start' => $request->input('start'),
+                'end' => $request->input('end'),
+                'all_day' => $request->input('all_day'),
+                'location' => $request->input('location'),
+                'latitude' => $request->input('latitude'),
+                'longitude' => $request->input('longitude'),
+            ]);
+
+            return response()->json($event, 201); // Created
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'An error occurred while creating the event.',
+                'message' => $e->getMessage()
+            ], 500); // Internal Server Error
+        }
     }
-}
+
     public function showDetailAgenda()
     {
         // Fetch the events or any necessary data
         $events = Event::all(); // Adjust this based on your actual data source
         $title = 'Detail Agenda';
-        return view('agenda.detail_agenda', compact('title', 'events'));    }
+        return view('agenda.detail_agenda', compact('title', 'events'));
+    }
 
     public function destroy(Request $request): JsonResponse
     {
@@ -122,10 +128,7 @@ public function update(Request $request, $id)
             ], 500); // Internal Server Error
         }
     }
-
 }
-
-
 
 
 
