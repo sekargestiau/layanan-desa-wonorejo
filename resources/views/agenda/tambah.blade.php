@@ -134,60 +134,71 @@
     </div>
 
     <!-- Event Details Modal -->
-    <div class="modal fade" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="eventDetailsModalLabel">Detail Kegiatan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Judul:</strong> <span id="eventDetailsTitle"></span></p>
-                    <p><strong>Mulai:</strong> <span id="eventDetailsStart"></span></p>
-                    <p><strong>Selesai:</strong> <span id="eventDetailsEnd"></span></p>
-                    <p><strong>Lokasi:</strong> <span id="eventDetailsLocation"></span></p>
-                    <div id="eventMap" style="height: 300px;"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-danger" id="deleteEventButton">Hapus Kegiatan</button>
-                </div>
+<div class="modal fade" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventDetailsModalLabel">Detail Kegiatan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Judul:</strong> <span id="eventDetailsTitle"></span></p>
+                <p><strong>Mulai:</strong> <span id="eventDetailsStart"></span></p>
+                <p><strong>Selesai:</strong> <span id="eventDetailsEnd"></span></p>
+                <p><strong>Lokasi:</strong> <span id="eventDetailsLocation"></span></p>
+                <input type="hidden" id="eventDetailsLatitude" />
+                <input type="hidden" id="eventDetailsLongitude" />
+                <div id="eventDetailsMap" style="height: 300px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-danger" id="deleteEventButton">Hapus Kegiatan</button>
             </div>
         </div>
     </div>
+</div>
+
+
 
   
     
     <!-- JavaScript -->
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-    var map, marker;
+  document.addEventListener('DOMContentLoaded', function() {
+    var map, marker, detailsMap, detailsMarker;
 
-    function initializeMap(lat, lng) {
-        map = L.map('eventMap').setView([lat, lng], 13);
+    function initializeMap(lat, lng, mapId, draggable = false) {
+        var mapInstance = L.map(mapId).setView([lat, lng], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        }).addTo(mapInstance);
 
-        marker = L.marker([lat, lng], {
-            draggable: true
-        }).addTo(map);
+        var markerVar = L.marker([lat, lng], {
+            draggable: draggable
+        }).addTo(mapInstance);
 
-        marker.on('dragend', function(event) {
-            var position = marker.getLatLng();
-            document.getElementById('latitude').value = position.lat;
-            document.getElementById('longitude').value = position.lng;
-        });
+        if (draggable) {
+            markerVar.on('dragend', function(event) {
+                var position = markerVar.getLatLng();
+                document.getElementById('latitude').value = position.lat;
+                document.getElementById('longitude').value = position.lng;
+                mapInstance.setView(position); // Keep map centered on the marker
+            });
+        }
+
+        return { mapInstance, markerVar };
     }
 
     $('#eventModal').on('shown.bs.modal', function() {
-        var defaultLat = -7.6227
-        var defaultLng = 110.8889;
+        var defaultLat = -7.5481;
+        var defaultLng = 110.7220;
 
         if (!map) {
-            initializeMap(defaultLat, defaultLng);
+            var mapData = initializeMap(defaultLat, defaultLng, 'eventMap', true);
+            map = mapData.mapInstance;
+            marker = mapData.markerVar;
         } else {
             map.setView([defaultLat, defaultLng], 13);
             marker.setLatLng([defaultLat, defaultLng]);
@@ -195,6 +206,26 @@
 
         document.getElementById('latitude').value = defaultLat;
         document.getElementById('longitude').value = defaultLng;
+    });
+
+    $('#eventDetailsModal').on('shown.bs.modal', function() {
+        var lat = parseFloat($('#eventDetailsLatitude').val());
+        var lng = parseFloat($('#eventDetailsLongitude').val());
+
+        // Ensure valid lat and lng values
+        if (isNaN(lat) || isNaN(lng)) {
+            lat = -7.5481; // Default latitude
+            lng = 110.7220; // Default longitude
+        }
+
+        if (!detailsMap) {
+            var mapData = initializeMap(lat, lng, 'eventDetailsMap');
+            detailsMap = mapData.mapInstance;
+            detailsMarker = mapData.markerVar;
+        } else {
+            detailsMap.setView([lat, lng], 13);
+            detailsMarker.setLatLng([lat, lng]);
+        }
     });
 
     $('#eventForm').on('submit', function(event) {
@@ -208,7 +239,7 @@
             location: $('#eventLocation').val(),
             latitude: $('#latitude').val(),
             longitude: $('#longitude').val(),
-            all_day: 0 
+            all_day: 0
         };
 
         // AJAX request to store event
@@ -257,8 +288,9 @@
             $('#eventDetailsTitle').text(arg.event.title);
             $('#eventDetailsStart').text(formatDateForDisplay(arg.event.start));
             $('#eventDetailsEnd').text(arg.event.end ? formatDateForDisplay(arg.event.end) : 'N/A');
-            $('#eventDetailsAllDay').text(arg.event.allDay ? 'Ya' : 'Tidak');
             $('#eventDetailsLocation').text(arg.event.extendedProps.location || 'N/A');
+            $('#eventDetailsLatitude').val(arg.event.extendedProps.latitude || 'N/A');
+            $('#eventDetailsLongitude').val(arg.event.extendedProps.longitude || 'N/A');
             $('#eventDetailsModal').modal('show');
 
             // Handle delete button click
@@ -387,7 +419,6 @@
         $('#messageModal').modal('show');
     }
 });
-
 
 </script>
 
