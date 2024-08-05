@@ -1,34 +1,37 @@
 {
     "version": 2,
-    "framework": null,
-    "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.6.0" }
-    },
-    "routes": [
-        { "src": "/build/(.*)", "dest": "/public/build/$1" },
-        { "src": "/(.*)", "dest": "/api/index.php" }
-    ],
     "public": true,
+    "builds": [
+      { "src": "api/index.php", "use": "@vercel/php" }
+    ],
+    "routes": [
+      { "src": "/build/(.*)", "dest": "/public/build/$1" },
+      { "src": "/(.*)", "dest": "/api/index.php" }
+    ],
+    "functions": {
+      "api/index.php": { "runtime": "vercel-php@0.6.0" }
+    },
     "buildCommand": "vite build",
     "outputDirectory": "public",
     "env": {
-        "APP_ENV": "production",
-        "APP_DEBUG": "false",
-        "APP_URL": "https://example-wonorejo.com",
-        "APP_KEY": "base64:ow9ntZFAgYMJXkqLi1wvntNeWS7dYeBT0ex0wFWIIjU=",
-        "APP_CONFIG_CACHE": "/tmp/config.php",
-        "APP_EVENTS_CACHE": "/tmp/events.php",
-        "APP_PACKAGES_CACHE": "/tmp/packages.php",
-        "APP_ROUTES_CACHE": "/tmp/routes.php",
-        "APP_SERVICES_CACHE": "/tmp/services.php",
-        "VIEW_COMPILED_PATH": "/tmp",
-        "CACHE_DRIVER": "array",
-        "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie",
-        "DB_CONNECTION": "mysql",
-        "DB_HOST": "usr.h.filess.io",
-        "DB_PORT": "3307",
-        "DB_DATABASE": "wonorejo_fiercetank",
-        "DB_USERNAME": "wonorejo_fiercetank"
+      "APP_ENV": "production",
+      "APP_DEBUG": "false",
+      "APP_URL": "https://example-wonorejo.com",
+      "APP_KEY": "base64:ow9ntZFAgYMJXkqLi1wvntNeWS7dYeBT0ex0wFWIIjU=",
+      "APP_CONFIG_CACHE": "/tmp/config.php",
+      "APP_EVENTS_CACHE": "/tmp/events.php",
+      "APP_PACKAGES_CACHE": "/tmp/packages.php",
+      "APP_ROUTES_CACHE": "/tmp/routes.php",
+      "APP_SERVICES_CACHE": "/tmp",
+      "VIEW_COMPILED_PATH": "/tmp",
+      "CACHE_DRIVER": "array",
+      "LOG_CHANNEL": "stderr",
+      "SESSION_DRIVER": "cookie",
+      "DB_CONNECTION": "mysql",
+      "DB_HOST": "usr.h.filess.io",
+      "DB_PORT": "3307",
+      "DB_DATABASE": "wonorejo_fiercetank",
+      "DB_USERNAME": "wonorejo_fiercetank"
     }
-}
+  }
+  
