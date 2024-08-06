@@ -27,7 +27,7 @@
         </ol>
     </nav>
 
-    <div id="calendar" style="max-width: 1200px; margin: 20px auto;"></div>
+    <div id="calendar" style="max-width: 1500px; margin: 20px auto;"></div>
     
     <!-- Modal -->
     <div class="modal fade" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">

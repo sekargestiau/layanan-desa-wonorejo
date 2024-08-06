@@ -69,7 +69,7 @@
         </ol>
     </nav>
 
-    <div id="calendar" style="max-width: 1200px; margin: 20px auto;"></div>
+    <div id="calendar" style="max-width: 1500px; margin: 20px auto;"></div>
 
     <!-- Event Modal -->
     <div id="eventModal" class="modal fade" tabindex="-1" role="dialog">
