@@ -49,9 +49,10 @@
         <!-- Mobile menu -->
         <div class="hidden mobile-menu">
             <ul class="">
-                <li><a href="#" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Peta</a></li>
-                <li><a href="#" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Pengaduan</a></li>
-                <li><a href="#" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Login</a></li>
+                <li><a href="{{ route('peta.map') }}" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Peta</a></li>
+                <li><a href="{{ route('pengaduan') }}" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Pengaduan</a></li>
+                <li><a href="{{ route('agenda.index') }}" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Agenda</a></li>           
+                <li><a href="{{ route('loginPage') }}" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Login</a></li>
             </ul>
         </div>
     </nav>

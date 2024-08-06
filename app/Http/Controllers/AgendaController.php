@@ -22,8 +22,8 @@ class AgendaController extends Controller
 
     public function create()
     {
-        $title = 'Tambah Agenda'; // Define the title
-        return view('agenda.tambah', compact('title')); // Pass the title to the view
+        $title = 'Tambah Agenda';
+        return view('agenda.tambah', compact('title')); 
     }
 
     public function update(Request $request, $id)
@@ -84,19 +84,19 @@ class AgendaController extends Controller
                 'longitude' => $request->input('longitude'),
             ]);
 
-            return response()->json($event, 201); // Created
+            return response()->json($event, 201); 
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'An error occurred while creating the event.',
                 'message' => $e->getMessage()
-            ], 500); // Internal Server Error
+            ], 500); 
         }
     }
 
     public function showDetailAgenda()
     {
         // Fetch the events or any necessary data
-        $events = Event::all(); // Adjust this based on your actual data source
+        $events = Event::all(); 
         $title = 'Detail Agenda';
         return view('agenda.detail_agenda', compact('title', 'events'));
     }
@@ -129,7 +129,3 @@ class AgendaController extends Controller
         }
     }
 }
-
-
-
-
