@@ -10,11 +10,11 @@
 
     <style>
         .sidebar-expanded {
-            margin-left: 16rem; /* 64px */
+            margin-left: 16rem; 
         }
 
         .sidebar-collapsed {
-            margin-left: 0rem; /* Adjust this value as needed */
+            margin-left: 0rem; 
         }
 
         .-translate-x-full {
@@ -40,7 +40,7 @@
 <body>
 
     @include('agenda.components.sidebar')
-    <div class="p-4 content-container sidebar-collapsed"> <!-- Default state with collapsed sidebar -->
+    <div class="p-4 content-container sidebar-collapsed"> 
         @include('agenda.components.notification')
         @yield('content')
     </div>

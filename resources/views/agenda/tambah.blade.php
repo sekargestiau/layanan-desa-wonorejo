@@ -265,14 +265,14 @@
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: '{{ route('agenda.events.get') }}', // Fetch events from server
+        events: '{{ route('agenda.events.get') }}',
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        navLinks: true, // Click day/week names to navigate views
-        businessHours: true, // Display business hours
+        navLinks: true,
+        businessHours: true, 
         editable: true,
         selectable: true,
         selectMirror: true,

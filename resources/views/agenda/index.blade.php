@@ -85,7 +85,6 @@
         var lat = parseFloat($('#eventDetailsLatitude').val());
         var lng = parseFloat($('#eventDetailsLongitude').val());
 
-        // Ensure valid lat and lng values
         if (isNaN(lat) || isNaN(lng)) {
             lat = -7.6227; 
             lng = 110.8889; 
@@ -104,14 +103,14 @@
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: '{{ route('agenda.events.get') }}', // Fetch events from server
+        events: '{{ route('agenda.events.get') }}', 
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        navLinks: true, // Click day/week names to navigate views
-        businessHours: true, // Display business hours
+        navLinks: true, 
+        businessHours: true, 
         editable: true,
         selectable: true,
         selectMirror: true,
@@ -123,7 +122,7 @@
             $('#eventModal').modal('show');
         },
         eventClick: function(arg) {
-            // Update the details modal with event information
+
             $('#eventDetailsTitle').text(arg.event.title);
             $('#eventDetailsStart').text(formatDateForDisplay(arg.event.start));
             $('#eventDetailsEnd').text(arg.event.end ? formatDateForDisplay(arg.event.end) : 'N/A');
@@ -133,7 +132,7 @@
             $('#eventDetailsModal').modal('show');
         },
         eventDrop: function(info) {
-            // Handle event drop
+
             fetch('{{ route('agenda.events.update', ':id') }}'.replace(':id', info.event.id), {
                 method: 'POST',
                 headers: {
