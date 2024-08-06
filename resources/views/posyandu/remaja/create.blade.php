@@ -52,6 +52,15 @@
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
+    </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nik">NIK</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nik" id="nik" type="text" value="{{ old('nik') }}" required>
+                @error('nik')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+    <div class="mb-4"> 
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="umur_tahun">Umur</label>
@@ -93,7 +102,22 @@
             </div>
         </div>
     </div>
-
+    <div class="mb-4">
+        <p class="text-gray-700 text-sm font-bold mb-2">Dukuh</p>
+        <select name="dukuh" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dukuh" required>
+            <option value="">Pilih Dukuh</option>
+            <option value="Jetis" {{ old('dukuh') == 'Jetis' ? 'selected' : '' }}>Jetis</option>
+            <option value="Sayangan" {{ old('dukuh') == 'Sayangan' ? 'selected' : '' }}>Sayangan</option>
+            <option value="Wonorejo" {{ old('dukuh') == 'Wonorejo' ? 'selected' : '' }}>Wonorejo</option>
+            <option value="Blimbing" {{ old('dukuh') == 'Blimbing' ? 'selected' : '' }}>Blimbing</option>
+            <option value="Bangunrejo" {{ old('dukuh') == 'Bangunrejo' ? 'selected' : '' }}>Bangunrejo</option>
+            <option value="Bancakan" {{ old('dukuh') == 'Bancakan' ? 'selected' : '' }}>Bancakan</option>
+            <option value="Tegalan" {{ old('dukuh') == 'Tegalan' ? 'selected' : '' }}>Tegalan</option>
+        </select>
+        @error('dukuh')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+        @enderror
+    </div>
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal">Tanggal</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tanggal" id="tanggal" type="date" value="{{ old('tanggal') }}" required>
@@ -130,6 +154,32 @@
     <br>
     <div class="grid grid-cols-2 gap-4">
         <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_perut">Lingkar Perut</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_perut" id="lingkar_perut" type="number" step="any" value="{{ old('lingkar_perut') }}" required>
+                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+            </div>
+            @error('lingkar_perut')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+    <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_lengan">Lingkar Lengan</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_lengan" id="lingkar_lengan" type="number" step="any" value="{{ old('lingkar_lengan') }}" required>
+                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+            </div>
+            @error('lingkar_lengan')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+    <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah_sistolik">Tensi Darah</label>
                 <div class="flex items-center">
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah_sistolik" id="tensi_darah_sistolik" type="number" step="any" value="{{ old('tensi_darah_sistolik') }}" required>
@@ -151,6 +201,30 @@
             </div>
     </div>
     <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="hb">Hemoglobin (Hb)</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="hb" id="hb" type="number" step="any" value="{{ old('hb') }}" required>
+                <span class="bg-white-200 px-3 py-2 text-black-700">g/dL</span>
+            </div>
+            @error('hb')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+    <br>
+    <div class="mb-4">
+        <p class="text-gray-700 text-sm font-bold mb-2">Status Anemia</p>
+        <select name="status_anemia" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status_anemia" required>
+            <option value="">Pilih Status Anemia</option>
+            <option value="Anemia" {{ old('status_anemia') == 'Anemia' ? 'selected' : '' }}>Anemia</option>
+            <option value="Tidak Anemia" {{ old('status_anemia') == 'Tidak Anemia' ? 'selected' : '' }}>Tidak Anemia</option>
+        </select>
+        @error('status_anemia')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+        @enderror
+    </div>
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="keterangan_lain">Keterangan Lain</label>
         <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="keterangan_lain" id="keterangan_lain" required>{{ old('keterangan_lain') }}</textarea>

@@ -66,10 +66,10 @@
                 <path
                     d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" />
             </svg>
-            <span class="hidden sm:inline-block ms-2">Export CSV</span>
+            <span class="hidden sm:inline-block ms-2">Unduh CSV</span>
         </a>
         <a href="{{ route('remaja.filter') }}"
-            class="bg-green-200 hover:bg-green-300 font-bold text-green-600 px-3 py-2 rounded-md flex items-center">
+            class="bg-gray-200 hover:bg-gray-300 font-bold text-gray-600 px-3 py-2 rounded-md flex items-center">
             <!-- Icon download -->
             <svg class="flex-shrink-0 w-5 h-5 text-gray transition duration-75 group-hover:text-gray dark:group-hover:text-gray"
                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 25 25">
@@ -79,7 +79,7 @@
                 <path
                     d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" />
             </svg>
-            <span class="hidden sm:inline-block ms-2">Export Filtered CSV</span>
+            <span class="hidden sm:inline-block ms-2">Unduh Hasil Filter CSV</span>
         </a>
 
     </div>
@@ -135,10 +135,19 @@
                     RT/RW
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Dukuh
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    NIK
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Nama
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Umur
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tanggal Lahir
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Berat Badan
@@ -147,7 +156,19 @@
                     Tinggi Badan
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Lingkar Perut
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Lingkar Lengan
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Tensi Darah
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Hemoglobin (Hb)
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status Anemia
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Tanggal
@@ -174,10 +195,19 @@
                         {{ $remaja->rt }}/{{ $remaja->rw }}
                     </td>
                     <td class="px-6 py-4">
+                        {{ $remaja->dukuh }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $remaja->nik }}
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $remaja->nama }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $remaja->umur_tahun }} Tahun {{ $remaja->umur_bulan }} Bulan
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ \Carbon\Carbon::parse($remaja->tanggal_lahir)->locale('id')->isoFormat('D MMMM Y') }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $remaja->berat_badan }} kg
@@ -186,7 +216,19 @@
                         {{ $remaja->tinggi_badan }} cm
                     </td>
                     <td class="px-6 py-4">
+                        {{ $remaja->lingkar_perut }} cm
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $remaja->lingkar_lengan }} cm
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $remaja->tensi_darah_sistolik }}/{{ $remaja->tensi_darah_diastolik }} mmHg
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $remaja->hb }} g/dL
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $remaja->status_anemia }}
                     </td>
                     <td class="px-6 py-4">
                         {{ \Carbon\Carbon::parse($remaja->tanggal)->locale('id')->isoFormat('D MMMM Y') }}

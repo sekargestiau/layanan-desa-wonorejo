@@ -44,6 +44,12 @@
         <label class="block text-gray-700 text-sm font-bold mb-2" for="nama">Nama</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nama" id="nama" type="text" value="{{ $remaja->nama }}">
       </div>
+    </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nik">NIK</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nik" id="nik" type="text" value="{{ $remaja->nik }}" required>
+            </div>
+    <div class="mb-4">   
       <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="umur_tahun">Umur</label>
@@ -73,12 +79,20 @@
         </div>
     </div>
     <br>
+    <div class="mb-4">
+        <p class="text-gray-700 text-sm font-bold mb-2">Dukuh</p>
+        <select name="dukuh" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dukuh">
+            <option value="">Pilih Dukuh</option>
+            @foreach($dukuhOptions as $option)
+                <option value="{{ $option }}" {{ $option === $remaja->dukuh ? 'selected' : '' }}>{{ $option }}</option>
+            @endforeach
+        </select>
+    </div>
 
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal">Tanggal</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tanggal" id="tanggal" type="date" value="{{ date('Y-m-d', strtotime($remaja->tanggal)) }}">
     </div>
-    <br>
     <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="berat_badan">Berat Badan</label>
@@ -102,6 +116,27 @@
     <br>
     <div class="grid grid-cols-2 gap-4">
         <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_perut">Lingkar Perut</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_perut" id="lingkar_perut" type="number" step="any" value="{{ $remaja->lingkar_perut }}">
+                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_lengan">Lingkar Lengan</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_lengan" id="lingkar_lengan" type="number" step="any" value="{{ $remaja->lingkar_lengan }}">
+                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="grid grid-cols-2 gap-4">
+        <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah_sistolik">Tensi Darah</label>
                 <div class="flex items-center">
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah_sistolik" id="tensi_darah_sistolik" type="number" step="any" value="{{ $remaja->tensi_darah_sistolik }}">
@@ -116,7 +151,26 @@
                 </div>
             </div>
     </div>
-    <br>    
+    <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="hb">Hemoglobin (Hb)</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="hb" id="hb" type="number" step="any" value="{{ $remaja->hb }}">
+                <span class="bg-white-200 px-3 py-2 text-black-700">g/dL</span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="mb-4">
+        <h3 class="text-gray-700 text-sm font-bold mb-2">Status Anemia</h3>
+        <select name="status_anemia" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="status_anemia">
+            <option value="">Pilih Status Anemia</option>
+            @foreach($anemiaOptions as $option2)
+                <option value="{{ $option2 }}" {{ $option2 === $remaja->status_anemia ? 'selected' : '' }}>{{ $option2 }}</option>
+            @endforeach
+        </select>
+    </div>      
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="keterangan_lain">Keterangan lain</label>
       <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="keterangan_lain" id="keterangan_lain" rows="4">{{ $remaja->keterangan_lain }}</textarea>

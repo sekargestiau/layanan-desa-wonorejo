@@ -392,22 +392,39 @@ class PosyanduController extends Controller
                 'required',
                 'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
+            'nik' => ['required', 'string'],
             'nama' => ['required', 'string'],
             'umur_tahun' => ['required', 'integer', 'min:0'],
             'umur_bulan' => ['required', 'integer', 'min:0', 'max:11'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
+            'dukuh' => [
+                'required',
+                'in:Jetis,Sayangan,Wonorejo,Blimbing,Bangunrejo,Bancakan,Tegalan'
+            ],
             'berat_badan' => ['required', 'numeric', 'min:0'],
             'tinggi_badan' => ['required', 'numeric', 'min:0'],
+            'lingkar_perut' => ['required', 'numeric', 'min:0'],
+            'lingkar_lengan' => ['required', 'numeric', 'min:0'],
             'tensi_darah_sistolik' => ['required', 'numeric', 'min:0'],
             'tensi_darah_diastolik' => ['required', 'numeric', 'min:0'],
             'tanggal' => ['required', 'date'],
+            'hb' => ['required', 'numeric', 'min:0'],
+            'status_anemia' => ['required', 'in:Anemia,Tidak Anemia'],
             'keterangan_lain' => ['nullable', 'string'],
         ]);
 
+        // Hitung tanggal lahir
+        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
+        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun'])->subMonths($validatedData['umur_bulan']);
+
+        // Tambahkan tanggal lahir ke data yang akan disimpan
+        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+
+
         // Membuat instance model
-        $balita = new PosyanduRemaja($validatedData);
-        $balita->save();
+        $remaja = new PosyanduRemaja($validatedData);
+        $remaja->save();
 
         return redirect('/posyandu/remaja')->with('success', 'Data remaja berhasil ditambahkan.');
     }
@@ -433,10 +450,24 @@ class PosyanduController extends Controller
             'Posyandu 6 Mawar - Blimbing 6',
             'Posyandu 7 Cempaka - Perum Persada Hijau'
         ];
+
+        $anemiaOptions = [
+            'Anemia',
+            'Tidak Anemia'
+        ];
+        $dukuhOptions = [
+            'Jetis',
+            'Sayangan',
+            'Wonorejo',
+            'Blimbing',
+            'Bangunrejo',
+            'Bancakan',
+            'Tegalan'
+        ];
         
         
         // Kembalikan tampilan dengan data yang diperlukan
-        return view('posyandu.remaja.edit', compact('remaja', 'posyanduOptions', 'title'));
+        return view('posyandu.remaja.edit', compact('remaja', 'posyanduOptions','anemiaOptions','dukuhOptions', 'title'));
     }
 
     // Mengupdate data balita
@@ -466,20 +497,28 @@ class PosyanduController extends Controller
 
         $fileName = 'data_posyandu_remaja_' . date('Y-m-d_H-i-s') . '.csv';
         $handle = fopen($fileName, 'w+');
-        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan', 'Tensi Darah', 'tanggal','keterangan_lain'));
+        fputcsv($handle, array('Nama Posyandu', 'NIK','nama','umur (tahun)', 'umur (bulan)', 'Tanggal Lahir','RT', 'RW', 'Dukuh','Berat Badan', 'Tinggi Badan', 'Lingkar Perut','Lingkar Lengan', 'Tensi Darah','Hemoglobin (Hb)','Status Anemia', 'tanggal','keterangan_lain'));
 
         foreach ($data as $row) {
         $formattedDate = \Carbon\Carbon::parse($row['tanggal'])->format('d/m/Y');
+        $formattedDate2 = \Carbon\Carbon::parse($row['tanggal_lahir'])->format('d/m/Y');
         fputcsv($handle, array(
                 $row['nama_posyandu'],
+                $row['nik'],
                 $row['nama'],
                 $row['umur_tahun'],
                 $row['umur_bulan'],
+                $formattedDate2,
                 $row['rt'],
                 $row['rw'],
+                $row['dukuh'],
                 $row['berat_badan'],
                 $row['tinggi_badan'],
+                $row['lingkar_perut'],
+                $row['lingkar_lengan'],
                 $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],
+                $row['hb'],
+                $row['status_anemia'],
                 $formattedDate,
                 $row['keterangan_lain']
             ));        
@@ -499,24 +538,32 @@ class PosyanduController extends Controller
     $filteredData = Session::get('filtered_data', PosyanduRemaja::all());
     $fileName = 'filtered_data_posyandu_remaja_' . date('Y-m-d_H-i-s') . '.csv';
     $handle = fopen($fileName, 'w+');
-    fputcsv($handle, array('Nama Posyandu', 'Nama', 'Umur (tahun)', 'Umur (bulan)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan', 'Tensi Darah', 'Tanggal', 'Keterangan Lain'));
+    fputcsv($handle, array('Nama Posyandu', 'NIK','nama','umur (tahun)', 'umur (bulan)', 'Tanggal Lahir','RT', 'RW', 'Dukuh','Berat Badan', 'Tinggi Badan', 'Lingkar Perut','Lingkar Lengan', 'Tensi Darah','Hemoglobin (Hb)','Status Anemia', 'tanggal','keterangan_lain'));
 
-    foreach ($filteredData as $row) {
+        foreach ($filteredData as $row) {
         $formattedDate = \Carbon\Carbon::parse($row['tanggal'])->format('d/m/Y');
+        $formattedDate2 = \Carbon\Carbon::parse($row['tanggal_lahir'])->format('d/m/Y');
         fputcsv($handle, array(
-            $row['nama_posyandu'],
-            $row['nama'],
-            $row['umur_tahun'],
-            $row['umur_bulan'],
-            $row['rt'],
-            $row['rw'],
-            $row['berat_badan'],
-            $row['tinggi_badan'],
-            $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],
-            $formattedDate,
-            $row['keterangan_lain']
-        ));
-    }
+                $row['nama_posyandu'],
+                $row['nik'],
+                $row['nama'],
+                $row['umur_tahun'],
+                $row['umur_bulan'],
+                $formattedDate2,
+                $row['rt'],
+                $row['rw'],
+                $row['dukuh'],
+                $row['berat_badan'],
+                $row['tinggi_badan'],
+                $row['lingkar_perut'],
+                $row['lingkar_lengan'],
+                $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],
+                $row['hb'],
+                $row['status_anemia'],
+                $formattedDate,
+                $row['keterangan_lain']
+            ));        
+        }
 
     fclose($handle);
     $headers = array('Content-Type' => 'text/csv');
