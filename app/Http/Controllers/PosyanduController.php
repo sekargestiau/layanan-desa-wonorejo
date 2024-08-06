@@ -202,8 +202,7 @@ class PosyanduController extends Controller
             ],
             'nik' => ['required', 'string', 'min:16', 'max:16'],
             'nama' => ['required', 'string'],
-            'umur_tahun' => ['required', 'integer', 'min:0'],
-            'umur_bulan' => ['required', 'integer', 'min:0', 'max:11'],
+            'tanggal_lahir' => ['required', 'date'],
             'nama_ortu' => ['required', 'string'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
@@ -219,13 +218,21 @@ class PosyanduController extends Controller
             'status_stunting' => ['required', 'in:Stunting,Tidak Stunting'],
             'keterangan_lain' => ['nullable', 'string'],
         ]);
+        
+        // Menghitung umur
+        $tanggal_lahir = Carbon::parse($validatedData['tanggal_lahir']);
+        $now = Carbon::now();
+        
+        // Menghitung total bulan umur
+        $umur_bulan_total = $tanggal_lahir->diffInMonths($now);
 
-        // Hitung tanggal lahir
-        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
-        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun'])->subMonths($validatedData['umur_bulan']);
+        // Menghitung tahun dan bulan dari total bulan
+        $umur_tahun = floor($umur_bulan_total / 12);
+        $umur_bulan = $umur_bulan_total % 12;
 
-        // Tambahkan tanggal lahir ke data yang akan disimpan
-        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+        // Menambahkan data umur ke array validatedData
+        $validatedData['umur_tahun'] = $umur_tahun;
+        $validatedData['umur_bulan'] = $umur_bulan;
 
         // Membuat instance model dan menyimpan data
         $balita = new PosyanduBalita($validatedData);
@@ -285,10 +292,9 @@ class PosyanduController extends Controller
                 'required',
                 'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
-            'nik' => ['required', 'string','min:16', 'max:16'],
+            'nik' => ['required', 'string', 'min:16', 'max:16'],
             'nama' => ['required', 'string'],
-            'umur_tahun' => ['required', 'integer', 'min:0'],
-            'umur_bulan' => ['required', 'integer', 'min:0', 'max:11'],
+            'tanggal_lahir' => ['required', 'date'],
             'nama_ortu' => ['required', 'string'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
@@ -305,12 +311,20 @@ class PosyanduController extends Controller
             'keterangan_lain' => ['nullable', 'string'],
         ]);
 
-        // Hitung tanggal lahir berdasarkan umur yang baru
-        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
-        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun'])->subMonths($validatedData['umur_bulan']);
+        // Menghitung umur berdasarkan tanggal lahir yang diupdate
+        $tanggal_lahir = Carbon::parse($validatedData['tanggal_lahir']);
+        $now = Carbon::now();
 
-        // Tambahkan tanggal lahir ke data yang akan diupdate
-        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+        // Menghitung total bulan umur
+        $umur_bulan_total = $tanggal_lahir->diffInMonths($now);
+
+        // Menghitung tahun dan bulan dari total bulan
+        $umur_tahun = floor($umur_bulan_total / 12);
+        $umur_bulan = $umur_bulan_total % 12;
+
+        // Menambahkan data umur ke array validatedData
+        $validatedData['umur_tahun'] = $umur_tahun;
+        $validatedData['umur_bulan'] = $umur_bulan;
 
         // Cari balita berdasarkan ID
         $balita = PosyanduBalita::findOrFail($id);
@@ -432,8 +446,7 @@ class PosyanduController extends Controller
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
-            'umur_tahun' => ['required', 'integer', 'min:0'],
-            'umur_bulan' => ['required', 'integer', 'min:0', 'max:11'],
+            'tanggal_lahir' => ['required', 'date'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
             'dukuh' => [
@@ -452,13 +465,20 @@ class PosyanduController extends Controller
             'keterangan_lain' => ['nullable', 'string'],
         ]);
 
-        // Hitung tanggal lahir
-        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
-        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun'])->subMonths($validatedData['umur_bulan']);
+        // Menghitung umur
+        $tanggal_lahir = Carbon::parse($validatedData['tanggal_lahir']);
+        $now = Carbon::now();
+        
+        // Menghitung total bulan umur
+        $umur_bulan_total = $tanggal_lahir->diffInMonths($now);
 
-        // Tambahkan tanggal lahir ke data yang akan disimpan
-        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+        // Menghitung tahun dan bulan dari total bulan
+        $umur_tahun = floor($umur_bulan_total / 12);
+        $umur_bulan = $umur_bulan_total % 12;
 
+        // Menambahkan data umur ke array validatedData
+        $validatedData['umur_tahun'] = $umur_tahun;
+        $validatedData['umur_bulan'] = $umur_bulan;
 
         // Membuat instance model
         $remaja = new PosyanduRemaja($validatedData);
@@ -519,8 +539,7 @@ class PosyanduController extends Controller
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
-            'umur_tahun' => ['required', 'integer', 'min:0'],
-            'umur_bulan' => ['required', 'integer', 'min:0', 'max:11'],
+            'tanggal_lahir' => ['required', 'date'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
             'dukuh' => [
@@ -539,12 +558,20 @@ class PosyanduController extends Controller
             'keterangan_lain' => ['nullable', 'string'],
         ]);
 
-        // Hitung tanggal lahir berdasarkan umur yang baru
-        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
-        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun'])->subMonths($validatedData['umur_bulan']);
+        // Menghitung umur berdasarkan tanggal lahir yang diupdate
+        $tanggal_lahir = Carbon::parse($validatedData['tanggal_lahir']);
+        $now = Carbon::now();
 
-        // Tambahkan tanggal lahir ke data yang akan diupdate
-        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+        // Menghitung total bulan umur
+        $umur_bulan_total = $tanggal_lahir->diffInMonths($now);
+
+        // Menghitung tahun dan bulan dari total bulan
+        $umur_tahun = floor($umur_bulan_total / 12);
+        $umur_bulan = $umur_bulan_total % 12;
+
+        // Menambahkan data umur ke array validatedData
+        $validatedData['umur_tahun'] = $umur_tahun;
+        $validatedData['umur_bulan'] = $umur_bulan;
 
         // Cari remaja berdasarkan ID
         $remaja = PosyanduRemaja::findOrFail($id);
@@ -666,7 +693,7 @@ class PosyanduController extends Controller
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
-            'umur_tahun' => ['required', 'integer', 'min:0'],
+            'tanggal_lahir' => ['required', 'date'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
             'dukuh' => [
@@ -683,13 +710,19 @@ class PosyanduController extends Controller
             'aktivitas_olahraga' => ['required', 'in:Sering,Kadang-kadang'],
             'keterangan_lain' => ['nullable', 'string'],
         ]);
-        // Hitung tanggal lahir
-        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
-        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun']);
+        // Menghitung umur
+        $tanggal_lahir = Carbon::parse($validatedData['tanggal_lahir']);
+        $now = Carbon::now();
+        
+        // Menghitung total bulan umur
+        $umur_bulan_total = $tanggal_lahir->diffInMonths($now);
 
-        // Tambahkan tanggal lahir ke data yang akan disimpan
-        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+        // Menghitung tahun dan bulan dari total bulan
+        $umur_tahun = floor($umur_bulan_total / 12);
 
+        // Menambahkan data umur ke array validatedData
+        $validatedData['umur_tahun'] = $umur_tahun;
+        
         // Membuat instance model
         $lansia = new PosyanduLansia($validatedData);
         $lansia->save();
@@ -749,7 +782,7 @@ class PosyanduController extends Controller
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
-            'umur_tahun' => ['required', 'integer', 'min:0'],
+            'tanggal_lahir' => ['required', 'date'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
             'dukuh' => [
@@ -767,12 +800,18 @@ class PosyanduController extends Controller
             'keterangan_lain' => ['nullable', 'string'],
         ]);
 
-        // Hitung tanggal lahir berdasarkan umur yang baru
-        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
-        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun']);
+        // Menghitung umur berdasarkan tanggal lahir yang diupdate
+        $tanggal_lahir = Carbon::parse($validatedData['tanggal_lahir']);
+        $now = Carbon::now();
 
-        // Tambahkan tanggal lahir ke data yang akan diupdate
-        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+        // Menghitung total bulan umur
+        $umur_bulan_total = $tanggal_lahir->diffInMonths($now);
+
+        // Menghitung tahun dan bulan dari total bulan
+        $umur_tahun = floor($umur_bulan_total / 12);
+
+        // Menambahkan data umur ke array validatedData
+        $validatedData['umur_tahun'] = $umur_tahun;
 
         // Cari lansia berdasarkan ID
         $lansia = PosyanduLansia::findOrFail($id);
@@ -892,7 +931,7 @@ class PosyanduController extends Controller
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
-            'umur_tahun' => ['required', 'integer', 'min:0'],
+            'tanggal_lahir' => ['required', 'date'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
             'dukuh' => [
@@ -913,12 +952,18 @@ class PosyanduController extends Controller
             'riwayat_penyakit' => ['nullable', 'string'],
         ]);
 
-        // Hitung tanggal lahir
-        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
-        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun']);
+        // Menghitung umur
+        $tanggal_lahir = Carbon::parse($validatedData['tanggal_lahir']);
+        $now = Carbon::now();
+        
+        // Menghitung total bulan umur
+        $umur_bulan_total = $tanggal_lahir->diffInMonths($now);
 
-        // Tambahkan tanggal lahir ke data yang akan disimpan
-        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+        // Menghitung tahun dan bulan dari total bulan
+        $umur_tahun = floor($umur_bulan_total / 12);
+
+        // Menambahkan data umur ke array validatedData
+        $validatedData['umur_tahun'] = $umur_tahun;
         
         // Membuat instance model
         $posbindu = new Posbindu($validatedData);
@@ -981,7 +1026,7 @@ class PosyanduController extends Controller
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
-            'umur_tahun' => ['required', 'integer', 'min:0'],
+            'tanggal_lahir' => ['required', 'date'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
             'dukuh' => [
@@ -1002,12 +1047,18 @@ class PosyanduController extends Controller
             'riwayat_penyakit' => ['nullable', 'string'],
         ]);
 
-        // Hitung tanggal lahir berdasarkan umur yang baru
-        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
-        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun']);
+        // Menghitung umur berdasarkan tanggal lahir yang diupdate
+        $tanggal_lahir = Carbon::parse($validatedData['tanggal_lahir']);
+        $now = Carbon::now();
 
-        // Tambahkan tanggal lahir ke data yang akan diupdate
-        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+        // Menghitung total bulan umur
+        $umur_bulan_total = $tanggal_lahir->diffInMonths($now);
+
+        // Menghitung tahun dan bulan dari total bulan
+        $umur_tahun = floor($umur_bulan_total / 12);
+
+        // Menambahkan data umur ke array validatedData
+        $validatedData['umur_tahun'] = $umur_tahun;
 
         // Cari lansia berdasarkan ID
         $posbindu = Posbindu::findOrFail($id);

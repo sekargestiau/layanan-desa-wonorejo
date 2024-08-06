@@ -49,17 +49,12 @@
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="nik">NIK</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nik" id="nik" type="text" value="{{ $lansia->nik }}" required>
             </div>
-    <div class="mb-4"> 
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="umur_tahun">Umur</label>
-            <div class="flex items-center">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="umur_tahun" id="umur_tahun" type="number" value="{{ $lansia->umur_tahun }}">
-                <span class="bg-white-200 px-3 py-2 text-black-700">tahun</span>
-            </div>
-        </div>
-        </div>
-        <br>
+    <div class="mb-4">   
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal_lahir">Tanggal Lahir</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tanggal_lahir" id="tanggal_lahir" type="date" value="{{ $lansia->tanggal_lahir }}" required>
+    </div>
+    </div>
         <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="rt">RT</label>
@@ -86,7 +81,7 @@
     </div>
 
     <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal">Tanggal</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal">Tanggal Pemeriksaan</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tanggal" id="tanggal" type="date" value="{{ date('Y-m-d', strtotime($lansia->tanggal)) }}">
     </div>
     <div class="grid grid-cols-2 gap-4">

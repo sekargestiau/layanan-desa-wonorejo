@@ -166,7 +166,7 @@
                     Kolesterol
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Tanggal
+                    Tanggal Pemeriksaan
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Aktivitas Olahraga

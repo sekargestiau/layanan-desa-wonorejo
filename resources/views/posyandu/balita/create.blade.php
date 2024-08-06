@@ -60,29 +60,13 @@
                 @enderror
             </div>
     <div class="mb-4">    
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="umur_tahun">Umur</label>
-                <div class="flex items-center">
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="umur_tahun" id="umur_tahun" type="number" value="{{ old('umur_tahun') }}" required>
-                    <span class="bg-white-200 px-3 py-2 text-black-700">tahun</span>
-                </div>
-                @error('umur_tahun')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
-            <div>
-                <label class="block text-white text-sm font-bold mb-2" for="umur_bulan">Umur</label>
-                <div class="flex items-center">
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="umur_bulan" id="umur_bulan" type="number" value="{{ old('umur_bulan') }}" required>
-                    <span class="bg-white-200 px-3 py-2 text-black-700">bulan</span>
-                </div>
-                @error('umur_bulan')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
-        </div>
-        <br>
+       <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal_lahir">Tanggal Lahir</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tanggal_lahir" id="tanggal_lahir" type="date" value="{{ old('tanggal_lahir') }}" required>
+        @error('tanggal_lahir')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+        @enderror
+    </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="nama_ortu">Nama Orang Tua</label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nama_ortu" id="nama_ortu" type="text" value="{{ old('nama_ortu') }}" required>
@@ -128,7 +112,7 @@
         @enderror
     </div>
     <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal">Tanggal</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal">Tanggal Pemeriksaan</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tanggal" id="tanggal" type="date" value="{{ old('tanggal') }}" required>
         @error('tanggal')
             <span class="text-red-500 text-sm">{{ $message }}</span>

@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-           #petaSeeder::class,
-            #UserSeeder::class,
+            petaSeeder::class,
+            UserSeeder::class,
             EventSeeder::class
         ]);
     }
