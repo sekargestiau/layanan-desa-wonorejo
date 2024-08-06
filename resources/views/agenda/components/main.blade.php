@@ -14,7 +14,7 @@
         }
 
         .sidebar-collapsed {
-            margin-left: 4rem; /* Adjust this value as needed */
+            margin-left: 0rem; /* Adjust this value as needed */
         }
 
         .-translate-x-full {
