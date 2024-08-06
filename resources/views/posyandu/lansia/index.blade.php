@@ -66,7 +66,7 @@
                 <path
                     d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" />
             </svg>
-            <span class="hidden sm:inline-block ms-2">Export CSV</span>
+            <span class="hidden sm:inline-block ms-2">Unduh CSV</span>
         </a>
         <a href="{{ route('lansia.filter') }}"
             class="bg-green-200 hover:bg-green-300 font-bold text-green-600 px-3 py-2 rounded-md flex items-center">
@@ -79,7 +79,7 @@
                 <path
                     d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" />
             </svg>
-            <span class="hidden sm:inline-block ms-2">Export Filtered CSV</span>
+            <span class="hidden sm:inline-block ms-2">Unduh Hasil Filter CSV</span>
         </a>
 
     </div>
@@ -136,19 +136,40 @@
                     RT/RW
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Dukuh
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    NIK
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Nama
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Umur
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Tanggal Lahir
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Berat Badan
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tinggi Badan
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Tensi Darah
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Gula Darah
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Kolesterol
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Tanggal
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Aktivitas Olahraga
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Keterangan Lain
@@ -172,19 +193,40 @@
                         {{ $lansia->rt }}/{{ $lansia->rw }}
                     </td>
                     <td class="px-6 py-4">
+                        {{ $lansia->dukuh }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $lansia->nik }}
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $lansia->nama }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $lansia->umur_tahun }} Tahun
                     </td>
                     <td class="px-6 py-4">
+                        {{ \Carbon\Carbon::parse($lansia->tanggal_lahir)->locale('id')->isoFormat('D MMMM Y') }}
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $lansia->berat_badan }} kg
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $lansia->tinggi_badan }} kg
                     </td>
                     <td class="px-6 py-4">
                         {{ $lansia->tensi_darah_sistolik }}/{{ $lansia->tensi_darah_diastolik }} mmHg
                     </td>
                     <td class="px-6 py-4">
+                        {{ $lansia->gula_darah }} mg/dL
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $lansia->kolesterol }} mg/dL
+                    </td>
+                    <td class="px-6 py-4">
                         {{ \Carbon\Carbon::parse($lansia->tanggal)->locale('id')->isoFormat('D MMMM Y') }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $lansia->aktivitas_olahraga }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $lansia->keterangan_lain }}

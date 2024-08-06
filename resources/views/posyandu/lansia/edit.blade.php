@@ -44,6 +44,12 @@
         <label class="block text-gray-700 text-sm font-bold mb-2" for="nama">Nama</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nama" id="nama" type="text" value="{{ $lansia->nama }}">
       </div>
+    </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nik">NIK</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nik" id="nik" type="text" value="{{ $lansia->nik }}" required>
+            </div>
+    <div class="mb-4"> 
       <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="umur_tahun">Umur</label>
@@ -69,13 +75,20 @@
         </div>
         </div>
     </div>
-    <br>
+    <div class="mb-4">
+        <p class="text-gray-700 text-sm font-bold mb-2">Dukuh</p>
+        <select name="dukuh" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dukuh">
+            <option value="">Pilih Dukuh</option>
+            @foreach($dukuhOptions as $option)
+                <option value="{{ $option }}" {{ $option === $lansia->dukuh ? 'selected' : '' }}>{{ $option }}</option>
+            @endforeach
+        </select>
+    </div>
 
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal">Tanggal</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tanggal" id="tanggal" type="date" value="{{ date('Y-m-d', strtotime($lansia->tanggal)) }}">
     </div>
-    <br>
     <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="berat_badan">Berat Badan</label>
@@ -86,7 +99,16 @@
         </div>
     </div>
     <br>
-    
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="tinggi_badan">Tinggi Badan</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tinggi_badan" id="tinggi_badan" type="number" step="any" value="{{ $lansia->tinggi_badan }}">
+                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+            </div>
+        </div>
+    </div>
+    <br>
     <div class="grid grid-cols-2 gap-4">
         <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah_sistolik">Tensi Darah</label>
@@ -103,7 +125,36 @@
                 </div>
             </div>
     </div>
+    <br>    
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="gula_darah">Gula Darah</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="gula_darah" id="gula_darah" type="number" step="any" value="{{ $lansia->gula_darah }}">
+                <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
+            </div>
+        </div>
+    </div>
     <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="kolesterol">Kolesterol</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="kolesterol" id="kolesterol" type="number" step="any" value="{{ $lansia->kolesterol }}">
+                <span class="bg-white-200 px-3 py-2 text-black-700">mg/dL</span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="mb-4">
+        <h3 class="text-gray-700 text-sm font-bold mb-2">Aktivitas Olahraga</h3>
+        <select name="aktivitas_olahraga" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="aktivitas_olahraga">
+            <option value="">Pilih Aktivitas Olahraga</option>
+            @foreach($aktivitasOptions as $option2)
+                <option value="{{ $option2 }}" {{ $option2 === $lansia->aktivitas_olahraga ? 'selected' : '' }}>{{ $option2 }}</option>
+            @endforeach
+        </select>
+    </div>
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="keterangan_lain">Keterangan lain</label>
       <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="keterangan_lain" id="keterangan_lain" rows="4">{{ $lansia->keterangan_lain }}</textarea>
