@@ -66,7 +66,7 @@
                 <path
                     d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" />
             </svg>
-            <span class="hidden sm:inline-block ms-2">Export CSV</span>
+            <span class="hidden sm:inline-block ms-2">Unduh CSV</span>
         </a>
         <a href="{{ route('balita.filter') }}"
             class="bg-green-200 hover:bg-green-300 font-bold text-green-600 px-3 py-2 rounded-md flex items-center">
@@ -79,7 +79,7 @@
                 <path
                     d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" />
             </svg>
-            <span class="hidden sm:inline-block ms-2">Export Filtered CSV</span>
+            <span class="hidden sm:inline-block ms-2">Unduh Hasil Filter CSV</span>
         </a>
 
     </div>
@@ -136,10 +136,22 @@
                     RT/RW
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Dukuh
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    NIK
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Nama
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Umur
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tanggal Lahir
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Orang Tua
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Berat Badan
@@ -181,10 +193,22 @@
                         {{ $balita->rt }}/{{ $balita->rw }}
                     </td>
                     <td class="px-6 py-4">
+                        {{ $balita->dukuh }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $balita->nik }}
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $balita->nama }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $balita->umur_tahun }} Tahun {{ $balita->umur_bulan }} Bulan
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ \Carbon\Carbon::parse($balita->tanggal_lahir)->locale('id')->isoFormat('D MMMM Y') }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $balita->nama_ortu }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $balita->berat_badan }} kg

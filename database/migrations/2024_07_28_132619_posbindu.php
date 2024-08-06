@@ -22,8 +22,19 @@ return new class extends Migration
                 'Posyandu 6 Mawar - Blimbing 6',
                 'Posyandu 7 Cempaka - Perum Persada Hijau'
             ]);
+            $table->enum('dukuh', [
+                'Jetis',
+                'Sayangan',
+                'Wonorejo',
+                'Blimbing',
+                'Bangunrejo',
+                'Bancakan',
+                'Tegalan'
+            ]);
+            $table->string('nik');
             $table->string('nama');
             $table->integer('umur_tahun');
+            $table->date('tanggal_lahir');
             $table->integer('rt');
             $table->integer('rw');
             $table->float('berat_badan');
@@ -34,6 +45,7 @@ return new class extends Migration
             $table->float('gula_darah');
             $table->float('kolesterol');
             $table->float('asam_urat');
+            $table->float('lingkar_perut');
             $table->enum('status_perokok', ['Perokok Aktif', 'Perokok Pasif', 'Bukan Perokok']);
             $table->string('riwayat_penyakit');
             $table->date('tanggal');

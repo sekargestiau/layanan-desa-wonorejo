@@ -14,11 +14,18 @@ class PosyanduBalita extends Model
 
     protected $dates = ['tanggal'];
     // Atribut yang dapat diisi (mass assignable)
+    protected $casts = [
+        'nik' => 'string',
+    ];
     protected $fillable = [
         'nama_posyandu',
         'nama',
+        'nik',
         'umur_tahun',
         'umur_bulan',
+        'nama_ortu',
+        'tanggal_lahir',
+        'dukuh',
         'rt',
         'rw',
         'berat_badan',

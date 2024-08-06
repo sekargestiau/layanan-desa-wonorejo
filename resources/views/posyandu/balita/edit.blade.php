@@ -44,6 +44,12 @@
         <label class="block text-gray-700 text-sm font-bold mb-2" for="nama">Nama</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nama" id="nama" type="text" value="{{ $balita->nama }}">
       </div>
+      </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="nik">NIK</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nik" id="nik" type="text" value="{{ $balita->nik }}" required>
+            </div>
+    <div class="mb-4">   
       <div class="grid grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="umur_tahun">Umur</label>
@@ -59,6 +65,13 @@
                 <span class="bg-white-200 px-3 py-2 text-black-700">bulan</span>
             </div>
         </div>
+    </div>
+    <br>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="nama_ortu">Nama Orang Tua</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nama_ortu" id="nama_ortu" type="text" value="{{ $balita->nama_ortu }}">
+      </div>
+      <div class="grid grid-cols-2 gap-4">    
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2" for="rt">RT</label>
             <div class="flex items-center">
@@ -73,7 +86,15 @@
         </div>
     </div>
     <br>
-
+    <div class="mb-4">
+        <p class="text-gray-700 text-sm font-bold mb-2">Dukuh</p>
+        <select name="dukuh" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="dukuh">
+            <option value="">Pilih Dukuh</option>
+            @foreach($dukuhOptions as $option)
+                <option value="{{ $option }}" {{ $option === $balita->dukuh ? 'selected' : '' }}>{{ $option }}</option>
+            @endforeach
+        </select>
+    </div>
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="tanggal">Tanggal</label>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tanggal" id="tanggal" type="date" value="{{ date('Y-m-d', strtotime($balita->tanggal)) }}">

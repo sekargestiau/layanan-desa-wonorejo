@@ -22,9 +22,21 @@ return new class extends Migration
                 'Posyandu 6 Mawar - Blimbing 6',
                 'Posyandu 7 Cempaka - Perum Persada Hijau'
             ]);
+            $table->enum('dukuh', [
+                'Jetis',
+                'Sayangan',
+                'Wonorejo',
+                'Blimbing',
+                'Bangunrejo',
+                'Bancakan',
+                'Tegalan'
+            ]);
+            $table->string('nik');
             $table->string('nama');
+            $table->string('nama_ortu');
             $table->integer('umur_tahun');
             $table->integer('umur_bulan');
+            $table->date('tanggal_lahir');
             $table->integer('rt');
             $table->integer('rw');
             $table->float('berat_badan');
