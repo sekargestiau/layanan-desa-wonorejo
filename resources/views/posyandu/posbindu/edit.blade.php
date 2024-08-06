@@ -108,6 +108,16 @@
     <br>
     <div class="grid grid-cols-2 gap-4">
         <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lingkar_perut">Lingkar Perut</label>
+            <div class="flex items-center">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="lingkar_perut" id="lingkar_perut" type="number" step="any" value="{{ $posbindu->lingkar_perut }}">
+                <span class="bg-white-200 px-3 py-2 text-black-700">cm</span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="tensi_darah_sistolik">Tensi Darah</label>
                 <div class="flex items-center">
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="tensi_darah_sistolik" id="tensi_darah_sistolik" type="number" step="any" value="{{ $posbindu->tensi_darah_sistolik }}">

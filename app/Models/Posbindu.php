@@ -9,13 +9,20 @@ class Posbindu extends Model
 {
     use HasFactory;
 
+    // Nama tabel yang terkait dengan model
     protected $table = 'posbindu';
-
+    protected $dates = ['tanggal', 'tanggal_lahir'];
+    protected $casts = [
+        'nik' => 'string',
+    ];
+    // Atribut yang dapat diisi (mass assignable)
     protected $fillable = [
         'nama_posyandu',
+        'dukuh',
+        'nik',
         'nama',
         'umur_tahun',
-        'umur_bulan',
+        'tanggal_lahir',
         'rt',
         'rw',
         'berat_badan',
@@ -26,6 +33,7 @@ class Posbindu extends Model
         'gula_darah',
         'kolesterol',
         'asam_urat',
+        'lingkar_perut',
         'status_perokok',
         'riwayat_penyakit',
         'tanggal',

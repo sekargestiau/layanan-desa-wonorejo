@@ -504,7 +504,7 @@ class PosyanduController extends Controller
         $formattedDate2 = \Carbon\Carbon::parse($row['tanggal_lahir'])->format('d/m/Y');
         fputcsv($handle, array(
                 $row['nama_posyandu'],
-                $row['nik'],
+                '="' . $row['nik'] . '"',
                 $row['nama'],
                 $row['umur_tahun'],
                 $row['umur_bulan'],
@@ -545,7 +545,7 @@ class PosyanduController extends Controller
         $formattedDate2 = \Carbon\Carbon::parse($row['tanggal_lahir'])->format('d/m/Y');
         fputcsv($handle, array(
                 $row['nama_posyandu'],
-                $row['nik'],
+                '="' . $row['nik'] . '"',
                 $row['nama'],
                 $row['umur_tahun'],
                 $row['umur_bulan'],
@@ -775,16 +775,22 @@ class PosyanduController extends Controller
                 'required',
                 'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
+            'nik' => ['required', 'string'],
             'nama' => ['required', 'string'],
             'umur_tahun' => ['required', 'integer', 'min:0'],
             'rt' => ['required', 'integer', 'min:1'],
             'rw' => ['required', 'integer', 'min:1'],
+            'dukuh' => [
+                'required',
+                'in:Jetis,Sayangan,Wonorejo,Blimbing,Bangunrejo,Bancakan,Tegalan'
+            ],
             'berat_badan' => ['required', 'numeric', 'min:0'],
             'tinggi_badan' => ['required', 'numeric', 'min:0'],
             'tensi_darah_sistolik' => ['required', 'numeric', 'min:0'],
             'tensi_darah_diastolik' => ['required', 'numeric', 'min:0'],
             'gula_darah' => ['required', 'numeric', 'min:0'],
             'lemak_perut' => ['required', 'numeric', 'min:0'],
+            'lingkar_perut' => ['required', 'numeric', 'min:0'],
             'kolesterol' => ['required', 'numeric', 'min:0'],
             'asam_urat' => ['required', 'numeric', 'min:0'],
             'tanggal' => ['required', 'date'],
@@ -792,9 +798,16 @@ class PosyanduController extends Controller
             'riwayat_penyakit' => ['nullable', 'string'],
         ]);
 
+        // Hitung tanggal lahir
+        $tanggal_periksa = Carbon::parse($validatedData['tanggal']);
+        $tanggal_lahir = $tanggal_periksa->copy()->subYears($validatedData['umur_tahun']);
+
+        // Tambahkan tanggal lahir ke data yang akan disimpan
+        $validatedData['tanggal_lahir'] = $tanggal_lahir->toDateString();
+        
         // Membuat instance model
-        $balita = new Posbindu($validatedData);
-        $balita->save();
+        $posbindu = new Posbindu($validatedData);
+        $posbindu->save();
 
         return redirect('/posyandu/posbindu')->with('success', 'Data posbindu berhasil ditambahkan.');
     }
@@ -826,9 +839,20 @@ class PosyanduController extends Controller
             'Perokok Pasif',
             'Bukan Perokok'
         ];
+
+        
+        $dukuhOptions = [
+            'Jetis',
+            'Sayangan',
+            'Wonorejo',
+            'Blimbing',
+            'Bangunrejo',
+            'Bancakan',
+            'Tegalan'
+        ];
         
         // Kembalikan tampilan dengan data yang diperlukan
-        return view('posyandu.posbindu.edit', compact('posbindu', 'posyanduOptions', 'perokokOptions', 'title'));
+        return view('posyandu.posbindu.edit', compact('posbindu', 'posyanduOptions', 'perokokOptions','dukuhOptions', 'title'));
     }
 
     // Mengupdate data balita
@@ -858,19 +882,25 @@ class PosyanduController extends Controller
 
         $fileName = 'data_posbindu_' . date('Y-m-d_H-i-s') . '.csv';
         $handle = fopen($fileName, 'w+');
-        fputcsv($handle, array('Nama Posyandu', 'nama','umur (tahun)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan','Lemak Perut', 'Tensi Darah','Gula Darah','Kolesterol', 'Asam Urat','Tanggal','Status Perokok', 'Riwayat Penyakit'));
+        fputcsv($handle, array('Nama Posyandu', 'NIK','nama','umur (tahun)', 'Tanggal Lahir','RT', 'RW','Dukuh', 'Berat Badan', 'Tinggi Badan','Lemak Perut','Lingkar Perut', 'Tensi Darah','Gula Darah','Kolesterol', 'Asam Urat','Tanggal','Status Perokok', 'Riwayat Penyakit'));
 
         foreach ($data as $row) {
         $formattedDate = \Carbon\Carbon::parse($row['tanggal'])->format('d/m/Y');
+        $formattedDate2 = \Carbon\Carbon::parse($row['tanggal_lahir'])->format('d/m/Y');
+
         fputcsv($handle, array(
                 $row['nama_posyandu'],
+                '="' . $row['nik'] . '"',
                 $row['nama'],
                 $row['umur_tahun'],
+                $formattedDate2,
                 $row['rt'],
                 $row['rw'],
+                $row['dukuh'],
                 $row['berat_badan'],
                 $row['tinggi_badan'],
                 $row['lemak_perut'],
+                $row['lingkar_perut'],
                 $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],                
                 $row['gula_darah'],
                 $row['kolesterol'],
@@ -895,28 +925,33 @@ class PosyanduController extends Controller
         $filteredData = Session::get('filtered_data', Posbindu::all());
         $fileName = 'filtered_data_posbindu_' . date('Y-m-d_H-i-s') . '.csv';
         $handle = fopen($fileName, 'w+');
-        fputcsv($handle, array('Nama Posyandu', 'Nama', 'Umur (tahun)', 'RT', 'RW', 'Berat Badan', 'Tinggi Badan','Lemak Perut', 'Tensi Darah','Gula Darah','Kolesterol','Asam Urat', 'Tanggal','Status Perokok', 'Riwayat Penyakit'));
+        fputcsv($handle, array('Nama Posyandu', 'NIK','nama','umur (tahun)', 'Tanggal Lahir','RT', 'RW','Dukuh', 'Berat Badan', 'Tinggi Badan','Lemak Perut','Lingkar Perut', 'Tensi Darah','Gula Darah','Kolesterol', 'Asam Urat','Tanggal','Status Perokok', 'Riwayat Penyakit'));
 
         foreach ($filteredData as $row) {
-            $formattedDate = \Carbon\Carbon::parse($row['tanggal'])->format('d/m/Y');
+        $formattedDate = \Carbon\Carbon::parse($row['tanggal'])->format('d/m/Y');
+        $formattedDate2 = \Carbon\Carbon::parse($row['tanggal_lahir'])->format('d/m/Y');
 
-            fputcsv($handle, array(
+        fputcsv($handle, array(
                 $row['nama_posyandu'],
+                '="' . $row['nik'] . '"',
                 $row['nama'],
                 $row['umur_tahun'],
+                $formattedDate2,
                 $row['rt'],
                 $row['rw'],
+                $row['dukuh'],
                 $row['berat_badan'],
                 $row['tinggi_badan'],
                 $row['lemak_perut'],
-                $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],
+                $row['lingkar_perut'],
+                $row['tensi_darah_sistolik'] . '/' . $row['tensi_darah_diastolik'],                
                 $row['gula_darah'],
                 $row['kolesterol'],
                 $row['asam_urat'],
                 $formattedDate,
                 $row['status_perokok'],
                 $row['riwayat_penyakit']
-            ));
+            ));        
         }
 
         fclose($handle);
