@@ -22,6 +22,7 @@
                     <a href="{{ route('peta.map') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Peta</a>
                     <a href="{{ route('pengaduan') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Pengaduan</a>
                     <a href="{{ route('agenda.index') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Agenda</a>
+                    <a href="{{ route('posyandu.admin') }}" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Posyandu</a>
                     @if (Auth::check())
                     <a href="{{ route('logout') }} " class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Logout</a>
                     @else
@@ -52,6 +53,7 @@
                 <li><a href="{{ route('peta.map') }}" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Peta</a></li>
                 <li><a href="{{ route('pengaduan') }}" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Pengaduan</a></li>
                 <li><a href="{{ route('agenda.index') }}" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Agenda</a></li>           
+                <li><a href="{{ route('posyandu.admin') }}" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Posyandu</a></li>           
                 <li><a href="{{ route('loginPage') }}" class="block text-sm px-2 py-4 text-gray-500 hover:bg-green-500 hover:text-white transition duration-300">Login</a></li>
             </ul>
         </div>
