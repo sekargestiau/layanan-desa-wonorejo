@@ -28,7 +28,7 @@
         <h3 class="text-lg font-semibold mb-2">Pemeriksaan dilakukan di: </h3>
         <select name="nama_posyandu" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nama_posyandu" required>
             <option value="">Pilih Posyandu</option>
-            <option value="Posyandu 1 Anggrek - Njetis" {{ old('nama_posyandu') == 'Posyandu 1 Anggrek - Njetis' ? 'selected' : '' }}>Posyandu 1 Anggrek - Njetis</option>
+            <option value="Posyandu 1 Anggrek - Jetis" {{ old('nama_posyandu') == 'Posyandu 1 Anggrek - Jetis' ? 'selected' : '' }}>Posyandu 1 Anggrek - Jetis</option>
             <option value="Posyandu 2 Flamboyan - Sayangan" {{ old('nama_posyandu') == 'Posyandu 2 Flamboyan - Sayangan' ? 'selected' : '' }}>Posyandu 2 Flamboyan - Sayangan</option>
             <option value="Posyandu 3 Riya - Wonorejo" {{ old('nama_posyandu') == 'Posyandu 3 Riya - Wonorejo' ? 'selected' : '' }}>Posyandu 3 Riya - Wonorejo</option>
             <option value="Posyandu 4 Melati - Blimbing 4" {{ old('nama_posyandu') == 'Posyandu 4 Melati - Blimbing 4' ? 'selected' : '' }}>Posyandu 4 Melati - Blimbing 4</option>

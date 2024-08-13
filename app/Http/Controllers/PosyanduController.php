@@ -198,7 +198,7 @@ class PosyanduController extends Controller
         $validatedData = $request->validate([
             'nama_posyandu' => [
                 'required',
-                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+                'in:Posyandu 1 Anggrek - Jetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
             'nik' => ['required', 'string', 'min:16', 'max:16'],
             'nama' => ['required', 'string'],
@@ -255,7 +255,7 @@ class PosyanduController extends Controller
 
         // Daftar opsi posyandu sesuai dengan enum di database
         $posyanduOptions = [
-            'Posyandu 1 Anggrek - Njetis',
+            'Posyandu 1 Anggrek - Jetis',
             'Posyandu 2 Flamboyan - Sayangan',
             'Posyandu 3 Riya - Wonorejo',
             'Posyandu 4 Melati - Blimbing 4',
@@ -290,7 +290,7 @@ class PosyanduController extends Controller
         $validatedData = $request->validate([
             'nama_posyandu' => [
                 'required',
-                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+                'in:Posyandu 1 Anggrek - Jetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
             'nik' => ['required', 'string', 'min:16', 'max:16'],
             'nama' => ['required', 'string'],
@@ -442,7 +442,7 @@ class PosyanduController extends Controller
         $validatedData = $request->validate([
             'nama_posyandu' => [
                 'required',
-                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+                'in:Posyandu 1 Anggrek - Jetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
@@ -500,7 +500,7 @@ class PosyanduController extends Controller
 
         // Daftar opsi posyandu sesuai dengan enum di database
         $posyanduOptions = [
-            'Posyandu 1 Anggrek - Njetis',
+            'Posyandu 1 Anggrek - Jetis',
             'Posyandu 2 Flamboyan - Sayangan',
             'Posyandu 3 Riya - Wonorejo',
             'Posyandu 4 Melati - Blimbing 4',
@@ -535,7 +535,7 @@ class PosyanduController extends Controller
         $validatedData = $request->validate([
             'nama_posyandu' => [
                 'required',
-                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+                'in:Posyandu 1 Anggrek - Jetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
@@ -689,7 +689,7 @@ class PosyanduController extends Controller
         $validatedData = $request->validate([
             'nama_posyandu' => [
                 'required',
-                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+                'in:Posyandu 1 Anggrek - Jetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
@@ -744,7 +744,7 @@ class PosyanduController extends Controller
 
         // Daftar opsi posyandu sesuai dengan enum di database
         $posyanduOptions = [
-            'Posyandu 1 Anggrek - Njetis',
+            'Posyandu 1 Anggrek - Jetis',
             'Posyandu 2 Flamboyan - Sayangan',
             'Posyandu 3 Riya - Wonorejo',
             'Posyandu 4 Melati - Blimbing 4',
@@ -778,7 +778,7 @@ class PosyanduController extends Controller
         $validatedData = $request->validate([
             'nama_posyandu' => [
                 'required',
-                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+                'in:Posyandu 1 Anggrek - Jetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
@@ -927,7 +927,7 @@ class PosyanduController extends Controller
         $validatedData = $request->validate([
             'nama_posyandu' => [
                 'required',
-                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+                'in:Posyandu 1 Anggrek - Jetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],
@@ -985,7 +985,7 @@ class PosyanduController extends Controller
 
         // Daftar opsi posyandu sesuai dengan enum di database
         $posyanduOptions = [
-            'Posyandu 1 Anggrek - Njetis',
+            'Posyandu 1 Anggrek - Jetis',
             'Posyandu 2 Flamboyan - Sayangan',
             'Posyandu 3 Riya - Wonorejo',
             'Posyandu 4 Melati - Blimbing 4',
@@ -1022,7 +1022,7 @@ class PosyanduController extends Controller
         $validatedData = $request->validate([
             'nama_posyandu' => [
                 'required',
-                'in:Posyandu 1 Anggrek - Njetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
+                'in:Posyandu 1 Anggrek - Jetis,Posyandu 2 Flamboyan - Sayangan,Posyandu 3 Riya - Wonorejo,Posyandu 4 Melati - Blimbing 4,Posyandu 5 Dahlia - Blimbing 5,Posyandu 6 Mawar - Blimbing 6,Posyandu 7 Cempaka - Perum Persada Hijau'
             ],
             'nik' => ['required', 'string','min:16', 'max:16'],
             'nama' => ['required', 'string'],

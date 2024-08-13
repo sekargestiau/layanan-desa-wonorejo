@@ -211,7 +211,7 @@
                         {{ $lansia->berat_badan }} kg
                     </td>
                     <td class="px-6 py-4">
-                        {{ $lansia->tinggi_badan }} kg
+                        {{ $lansia->tinggi_badan }} cm
                     </td>
                     <td class="px-6 py-4">
                         {{ $lansia->tensi_darah_sistolik }}/{{ $lansia->tensi_darah_diastolik }} mmHg
