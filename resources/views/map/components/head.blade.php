@@ -7,4 +7,3 @@
 
 <title>{{ $title }}</title>
 @vite(['resources/css/app.css','resources/js/app.js'])
-<script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
