@@ -103,7 +103,6 @@ Route::prefix('agenda')->name('agenda.')->group(function () {
     });
 });
 
-Auth::routes();
 
 
 Route::group(['prefix' => 'superadmin', 'middleware' => ['isLogin','superadmin']], function(){
