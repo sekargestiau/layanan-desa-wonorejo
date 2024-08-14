@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posyandu_remaja', function (Blueprint $table) {
             $table->id();
             $table->enum('nama_posyandu', [
-                'Posyandu 1 Anggrek - Njetis',
+                'Posyandu 1 Anggrek - Jetis',
                 'Posyandu 2 Flamboyan - Sayangan',
                 'Posyandu 3 Riya - Wonorejo',
                 'Posyandu 4 Melati - Blimbing 4',

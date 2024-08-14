@@ -15,7 +15,7 @@ class PosbinduSeeder extends Seeder
     {
         DB::table('posbindu')->insert([
             [
-                'nama_posyandu' => 'Posyandu 1 Anggrek - Njetis',
+                'nama_posyandu' => 'Posyandu 1 Anggrek - Jetis',
                 'dukuh' => 'Jetis',
                 'nik' => rand(1000000000000000, 9999999999999999),
                 'nama' => 'Rudi',
