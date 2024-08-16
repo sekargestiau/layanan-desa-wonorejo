@@ -20,6 +20,7 @@
         .-translate-x-full {
             transform: translateX(-100%);
         }
+
     </style>
 
     <script>

@@ -1,5 +1,5 @@
 <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full" aria-label="Sidebar">
-   <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-b from-sky-600 to-green-500">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-b from-sky-600 to-green-500">
        <ul class="space-y-2 font-medium">
            <li>
                <div class="flex items-center space-x-2">
@@ -54,7 +54,7 @@
 </aside>
 
 <button id="sidebar-toggle" class="fixed bottom-4 left-5 z-50 p-2 bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-md shadow-lg hover:from-green-500 hover:to-blue-600 transition duration-300 ease-in-out flex items-center justify-center">
-   <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-       <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
-   </svg>
+    <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
+    </svg>
 </button>
